@@ -1,0 +1,5 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "C:\wamp64\www\blog_with_comments\backend\.htpasswd"
+Require valid-user
+RewriteEngine on
