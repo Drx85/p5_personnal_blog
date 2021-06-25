@@ -7,7 +7,7 @@ class PagesManager extends Manager
     public function countPages()
     {
         $db = $this->dbConnect();
-        $nb = $db->query('SELECT COUNT(*) AS lines_number FROM blog_posts');
+        $nb = $db->query('SELECT COUNT(*) AS lines_number FROM blog_post');
 
         $count_lines_number = $nb->fetch();
 
