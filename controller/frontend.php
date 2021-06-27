@@ -3,6 +3,7 @@
 require_once (__DIR__ . '/../model/frontend/PostManager.php');
 require_once (__DIR__ . '/../model/frontend/CommentManager.php');
 require_once (__DIR__ . '/../model/frontend/PagesManager.php');
+require_once (__DIR__ . '/../model/frontend/AccountManager.php');
 
 function troncate($text, $char_nb, $delim='...')
 {
@@ -48,4 +49,19 @@ function sendComment()
 
     $commentManager->insertComment();
     header('Location: index.php?comment=' . $_GET['send_comment']);
+}
+
+function register()
+{
+	$accountManager = new AccountManager();
+	
+	if ($accountManager->pseudoExists() === true) {
+		return 'pseudoExists';
+	}
+	elseif ($accountManager->emailExists() === true) {
+		return 'emailExists';
+	}
+	else {
+	$accountManager->createAccount();
+	}
 }

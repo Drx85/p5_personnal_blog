@@ -49,6 +49,37 @@ try
             throw new Exception('Il faut rentrer un pseudo et un message.');
         }
     }
+	
+	if (isset($_GET['p']))
+	{
+		switch ($_GET['p']) {
+			case 'register':
+				header('Location: view/frontend/register.php');
+				break;
+		}
+	}
+
+	if (isset($_POST['pseudo']) && isset($_POST['mail']) && isset($_POST['password']))
+	{
+		if (!empty($_POST['pseudo']) && !empty($_POST['mail']) && !empty($_POST['password']))
+		{
+			switch (register()) {
+				case 'pseudoExists':
+					header('Location: view/frontend/register.php?exists=pseudo');
+					break;
+					
+				case 'emailExists':
+					header('Location: view/frontend/register.php?exists=mail');
+					break;
+					
+				default:
+					header('Location: view/frontend/success_register.php');
+			}
+		}
+		else {
+			header('Location: view/frontend/register.php?field=empty');
+		}
+	}
 }
 
 catch(Exception $e)

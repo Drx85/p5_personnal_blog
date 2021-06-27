@@ -14,6 +14,8 @@
 
 <?= $page_content ?>
 
+<a href="/p5_personnal_blog/index.php?p=register">Créer un compte</a>
+
 </body>
 
 </html>
