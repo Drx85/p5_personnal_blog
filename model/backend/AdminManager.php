@@ -34,8 +34,7 @@ class AdminManager extends Manager
     public function editPost()
     {
         $db = $this->dbConnect();
-        $edit_post = $db->prepare('UPDATE blog_post SET title = :title, message = :message, author = :author WHERE id = :id');
-
+        $edit_post = $db->prepare('UPDATE blog_post SET title = :title, message = :message, author = :author, update_date = NOW() WHERE id = :id');
         $edit_post->execute(array(
             'title' => $_POST['edit_title'],
             'message' => $_POST['edit_post_content'],

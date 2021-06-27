@@ -11,7 +11,14 @@
     {
 ?>
         <p><h3>Commentaires du billet : <?= htmlspecialchars($post['title']) ?> </h3>
-               Posté le <?= $post['post_date'] ?> à <?= $post['hour_post_time'] ?>h<?= $post['minute_poste_time'] ?> <br/>
+               Posté le <?= $post['post_date'] ?> à <?= $post['hour_post_time'] ?>h<?= $post['minute_poste_time'] ?>
+				<?php
+				if (isset($post['update_date']))
+				{
+					echo '(dernière modification le ' . $post['update_date'] . '),';
+				}
+				?>
+				par : <?= htmlspecialchars($post['author']) ?><br/>
                <?= nl2br(htmlspecialchars($post['message'])) ?>
         </p>
         <h4>Commentaires :</h4>
@@ -24,7 +31,7 @@
         <p>Commentaire du <?= $blog_comment['comment_date'] ?>, à <?= $blog_comment['hour_comment_time'] ?>h<?=
               $blog_comment['minute_comment_time'] ?> - par <?= htmlspecialchars($blog_comment['author']) ?> :<br/> <?=
               nl2br(htmlspecialchars($blog_comment['text_comment'])) ?> </p>
-        <p><a href="back_index.php?delete_comment=<?=$blog_comment['id']?>">Supprimer ce commentaire</a></p>;
+        <p><a href="back_index.php?delete_comment=<?=$blog_comment['id']?>">Supprimer ce commentaire</a></p>
 <?php
     }
 ?>

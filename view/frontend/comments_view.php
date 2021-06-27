@@ -11,8 +11,15 @@
     {
 ?>
         <p><h3>Commentaires du billet : <?= htmlspecialchars($post['title']) ?> </h3>
-               Posté le <?= $post['post_date'] ?> à <?= $post['hour_post_time'] ?>h<?= $post['minute_poste_time'] ?> <br/>
-               <?= nl2br(htmlspecialchars($post['message'])) ?>
+               Posté le <?= $post['post_date'] ?> à <?= $post['hour_post_time'] ?>h<?= $post['minute_poste_time'] ?>
+				<?php
+				if (isset($post['update_date']))
+				{
+					echo '(dernière modification le ' . $post['update_date'] . '),';
+				}
+				?>
+				par : <?= htmlspecialchars($post['author']) ?><br/>
+                <?= nl2br(htmlspecialchars($post['message'])) ?>
         </p>
         <h4>Commentaires :</h4>
 <?php

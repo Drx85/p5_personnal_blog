@@ -10,8 +10,14 @@
         {
     ?>
             <h3><?= htmlspecialchars($display_blog['title']) ?></h3>
-            <p>Posté le <?= $display_blog['post_date'] ?>,
-				à <?= $display_blog['hour_post_time'] ?>h<?= $display_blog['minute_poste_time'] ?>,
+            <p>Posté le <?= $display_blog['post_date'] ?>
+				à <?= $display_blog['hour_post_time'] ?>h<?= $display_blog['minute_poste_time'] ?>
+				<?php
+				if (isset($display_blog['update_date']))
+				{
+					echo '(dernière modification le ' . $display_blog['update_date'] . '),';
+				}
+				?>
 				par : <?= htmlspecialchars($display_blog['author']) ?><br/>
                 <?= nl2br(htmlspecialchars($display_blog['message'])) ?></p>
 
