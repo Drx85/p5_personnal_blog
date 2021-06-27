@@ -12,7 +12,7 @@
             <h3><?= htmlspecialchars($display_blog['title']) ?></h3>
             <p>Posté le <?= $display_blog['post_date'] ?>,
 				à <?= $display_blog['hour_post_time'] ?>h<?= $display_blog['minute_poste_time'] ?>,
-				par : <?= $display_blog['author'] ?><br/>
+				par : <?= htmlspecialchars($display_blog['author']) ?><br/>
                 <?= nl2br(htmlspecialchars($display_blog['message'])) ?></p>
 
     <?php

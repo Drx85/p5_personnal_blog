@@ -18,13 +18,15 @@ class AdminManager extends Manager
     public function deletePost()
     {
         $db = $this->dbConnect();
-        $db->exec('DELETE FROM blog_post WHERE id = ' . $_GET['delete_post'] . ' ');
+        $q = $db->prepare('DELETE FROM blog_post WHERE id = ?');
+        $q->execute(array($_GET['delete_post']));
     }
 
     public function valuesEditPost()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT title, message, author FROM blog_post WHERE id =' . $_GET['edit_post'] . ' ');
+        $req = $db->prepare('SELECT title, message, author FROM blog_post WHERE id = ?');
+        $req->execute(array($_GET['edit_post']));
         $req = $req->fetch();
         return $req;
     }
@@ -45,6 +47,7 @@ class AdminManager extends Manager
     public function deleteComment()
     {
         $db = $this->dbConnect();
-        $db->exec('DELETE FROM blog_comment WHERE id = ' . $_GET['delete_comment'] . ' ');
+        $q = $db->prepare('DELETE FROM blog_comment WHERE id = ?');
+        $q->execute(array($_GET['delete_comment']));
     }
 }
