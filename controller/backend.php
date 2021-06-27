@@ -40,7 +40,18 @@ function adminDeleteComment()
     header('Location: back_index.php?deleted_comment=true');
 }
 
-//CONTROLLER FRONT
+function troncate($text, $char_nb, $delim='...')
+{
+	$length = $char_nb;
+	if($char_nb<strlen($text)){
+		while (($text{$length} != " ") && ($length > 0)) {
+			$length--;
+		}
+		if ($length == 0) return substr($text, 0, $char_nb) . $delim;
+		else return substr($text, 0, $length) . $delim;
+	}else return $text;
+}
+
 function displayPosts()
 {
     $postManager = new PostManager();

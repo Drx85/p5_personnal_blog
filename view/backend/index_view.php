@@ -19,8 +19,14 @@
 						echo '(dernière modification le ' . $display_blog['update_date'] . '),';
 					}
 					?>
-					par : <?= htmlspecialchars($display_blog['author']) ?><br/>
-                    <?= nl2br(htmlspecialchars($display_blog['message'])) ?></p>
+					par : <?= htmlspecialchars($display_blog['author']) ?>
+				</p>
+				<p>
+					<?php
+					echo troncate(nl2br(htmlspecialchars($display_blog['message'])), 300) .
+						'<a href="back_index.php?comment=' . $display_blog['id'] . '">Lire la suite</a>';
+					?>
+				</p>
 
 
 				<p><a href="back_index.php?delete_post=<?= $display_blog['id'] ?>">Supprimer ce billet</a>

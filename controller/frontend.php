@@ -4,6 +4,18 @@ require_once (__DIR__ . '/../model/frontend/PostManager.php');
 require_once (__DIR__ . '/../model/frontend/CommentManager.php');
 require_once (__DIR__ . '/../model/frontend/PagesManager.php');
 
+function troncate($text, $char_nb, $delim='...')
+{
+	$length = $char_nb;
+	if($char_nb<strlen($text)){
+		while (($text{$length} != " ") && ($length > 0)) {
+			$length--;
+		}
+		if ($length == 0) return substr($text, 0, $char_nb) . $delim;
+		else return substr($text, 0, $length) . $delim;
+	}else return $text;
+}
+
 function displayPosts()
 {
     $postManager = new PostManager();

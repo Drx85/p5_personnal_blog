@@ -18,7 +18,9 @@
 					echo '(dernière modification le ' . $post['update_date'] . '),';
 				}
 				?>
-				par : <?= htmlspecialchars($post['author']) ?><br/>
+				par : <?= htmlspecialchars($post['author']) ?>
+		</p>
+		<p>
                 <?= nl2br(htmlspecialchars($post['message'])) ?>
         </p>
         <h4>Commentaires :</h4>
