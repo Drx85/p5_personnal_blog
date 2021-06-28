@@ -72,6 +72,10 @@ try
 					header('Location: view/frontend/register.php?exists=mail');
 					break;
 					
+				case 'pseudoMailExists':
+					header('Location: view/frontend/register.php?exists=pseudomail');
+					break;
+					
 				default:
 					header('Location: view/frontend/success_register.php');
 			}

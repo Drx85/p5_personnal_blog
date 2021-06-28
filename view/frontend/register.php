@@ -20,18 +20,24 @@ ob_start();
 	</form>
 
 <?php
+
 if (isset ($_GET['field']) && $_GET['field'] === 'empty')
 {
 	echo '<p>Il faut renseigner tous les champs.</p>';
 }
 
-if (isset ($_GET['exists']) && $_GET['exists'] === 'pseudo')
-{
-	echo '<p>Ce pseudo existe déjà.</p>';
-}
-elseif (isset ($_GET['exists']) && $_GET['exists'] === 'mail')
-{
-	echo '<p>Cet email existe déjà.</p>';
+if (isset($_GET['exists'])) {
+	switch ($_GET['exists']) {
+		case 'pseudo':
+			echo '<p>Ce pseudo existe déjà.</p>';
+			break;
+		case 'mail':
+			echo '<p>Cet email existe déjà.</p>';
+			break;
+		case 'pseudomail':
+			echo '<p>Ce pseudo et cet email existent déjà.</p>';
+			break;
+	}
 }
 
 $page_content = ob_get_clean();

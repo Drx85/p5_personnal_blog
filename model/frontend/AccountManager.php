@@ -16,28 +16,24 @@ class AccountManager extends Manager
 		));
 	}
 	
-	public function pseudoExists()
+	public function exists($pseudo, $mail)
 	{
 		$db = $this->dbConnect();
 		$q = $db->prepare('SELECT * FROM user WHERE pseudo= ?');
-		$q->execute(array($_POST['pseudo']));
-		$exists = $q->fetch();
-		if ($exists) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	public function emailExists()
-	{
-		$db = $this->dbConnect();
+		$q->execute(array($pseudo));
+		$pseudoExists = $q->fetch();
 		$q = $db->prepare('SELECT * FROM user WHERE mail= ?');
-		$q->execute(array($_POST['mail']));
-		$exists = $q->fetch();
-		if ($exists) {
-			return true;
+		$q->execute(array($mail));
+		$mailExists = $q->fetch();
+		
+		if($pseudoExists && $mailExists) {
+			return 'pseudoMailExists';
+		}
+		elseif ($pseudoExists) {
+			return 'pseudoExists';
+		}
+		elseif ($mailExists) {
+			return 'emailExists';
 		}
 		else {
 			return false;

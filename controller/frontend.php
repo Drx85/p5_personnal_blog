@@ -55,13 +55,11 @@ function register()
 {
 	$accountManager = new AccountManager();
 	
-	if ($accountManager->pseudoExists() === true) {
-		return 'pseudoExists';
-	}
-	elseif ($accountManager->emailExists() === true) {
-		return 'emailExists';
+	$exists = $accountManager->exists($_POST['pseudo'], $_POST['mail']);
+	if ($exists === false) {
+	$accountManager->createAccount();
 	}
 	else {
-	$accountManager->createAccount();
+		return $exists;
 	}
 }
