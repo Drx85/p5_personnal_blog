@@ -43,13 +43,17 @@ class AccountManager extends Manager
 	public function userConnect($password, $pseudo)
 	{
 		$db = $this->dbConnect();
-		$q = $db->prepare('SELECT id, password FROM user WHERE pseudo= ?');
+		$q = $db->prepare('SELECT user.id as user_id, user.password as password, user_role.role as role
+									FROM user, user_role
+									WHERE user.pseudo= ?
+									AND user.id_role = user_role.id');
 		$q->execute(array($pseudo));
 		$q = $q->fetch();
 		
 		if (password_verify($password, $q['password']) === true) {
-			$_SESSION['id'] = $q['id'];
+			$_SESSION['user_id'] = $q['user_id'];
 			$_SESSION['pseudo'] = $pseudo;
+			$_SESSION['role'] = $q['role'];
 			return true;
 		}
 	}
