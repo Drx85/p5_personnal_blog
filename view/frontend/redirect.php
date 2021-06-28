@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 header ("Refresh: 3;URL=../../index.php");
 
 $page_title = 'Operation effectuée avec succès !';
@@ -8,10 +8,6 @@ ob_start();
 switch ($_GET['redirect']) {
 	case 'register':
 		echo '<p>Votre compte a été créé avec succès !</p>';
-		break;
-		
-	case 'connect':
-		echo '<p>Vous vous êtes connecté avec succès !</p>';
 		break;
 }
 ?>

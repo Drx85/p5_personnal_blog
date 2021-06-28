@@ -1,4 +1,5 @@
 <?php
+	session_start();
     $page_title = 'Bienvenue sur mon blog !';
     ob_start();
 ?>

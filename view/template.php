@@ -1,7 +1,3 @@
-<?php
-	session_start();
-?>
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -20,7 +16,7 @@
 
 <?php
 
-if (! isset($_SESSION['pseudo'])) {
+if (! isset($_SESSION['id'])) {
 	echo '<a href = "/p5_personnal_blog/index.php?p=register"> Créer un compte </a ></br >
 	<a href = "/p5_personnal_blog/index.php?p=connexion"> Se connecter </a>';
 }
