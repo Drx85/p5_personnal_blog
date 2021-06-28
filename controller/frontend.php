@@ -63,3 +63,12 @@ function register()
 		return $exists;
 	}
 }
+
+function UserConnect()
+{
+	$accountManager = new AccountManager();
+	
+	return $accountManager->infoConnexionVerify($_POST['password'], $_POST['username']);
+}
+
+

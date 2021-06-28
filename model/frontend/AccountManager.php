@@ -39,4 +39,13 @@ class AccountManager extends Manager
 			return false;
 		}
 	}
+	
+	public function infoConnexionVerify($password, $pseudo)
+	{
+		$db = $this->dbConnect();
+		$q = $db->prepare('SELECT password FROM user WHERE pseudo= ?');
+		$q->execute(array($pseudo));
+		$q = $q->fetch();
+		return password_verify($password, $q['password']);
+	}
 }

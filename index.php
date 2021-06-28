@@ -56,6 +56,10 @@ try
 			case 'register':
 				header('Location: view/frontend/register.php');
 				break;
+				
+			case 'connexion':
+				header('Location: view/frontend/connexion.php');
+				break;
 		}
 	}
 
@@ -77,11 +81,21 @@ try
 					break;
 					
 				default:
-					header('Location: view/frontend/success_register.php');
+					header('Location: view/frontend/redirect.php?redirect=register');
 			}
 		}
 		else {
 			header('Location: view/frontend/register.php?field=empty');
+		}
+	}
+	
+	if (isset($_POST['username']) && isset($_POST['password']))
+	{
+		if (userConnect() === true) {
+			header('Location: view/frontend/redirect.php?redirect=connect');
+		}
+		else {
+			header('Location: view/frontend/connexion.php?connect=false');
 		}
 	}
 }

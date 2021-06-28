@@ -8,13 +8,14 @@
 
 </head>
 
-<body>
+<br>
 
 <h1><?= $page_title ?></h1>
 
 <?= $page_content ?>
 
-<a href="/p5_personnal_blog/index.php?p=register">Créer un compte</a>
+<a href="/p5_personnal_blog/index.php?p=register">Créer un compte</a></br>
+<a href="/p5_personnal_blog/index.php?p=connexion">Se connecter</a>
 
 </body>
 
