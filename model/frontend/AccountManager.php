@@ -40,12 +40,17 @@ class AccountManager extends Manager
 		}
 	}
 	
-	public function infoConnexionVerify($password, $pseudo)
+	public function userConnect($password, $pseudo)
 	{
 		$db = $this->dbConnect();
-		$q = $db->prepare('SELECT password FROM user WHERE pseudo= ?');
+		$q = $db->prepare('SELECT id, password FROM user WHERE pseudo= ?');
 		$q->execute(array($pseudo));
 		$q = $q->fetch();
-		return password_verify($password, $q['password']);
+		
+		if (password_verify($password, $q['password']) === true) {
+			$_SESSION['id'] = $q['id'];
+			$_SESSION['pseudo'] = $pseudo;
+			return true;
+		}
 	}
 }

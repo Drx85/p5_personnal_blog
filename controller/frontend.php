@@ -46,7 +46,6 @@ function displayComments()
 function sendComment()
 {
     $commentManager = new CommentManager();
-
     $commentManager->insertComment();
     header('Location: index.php?comment=' . $_GET['send_comment']);
 }
@@ -64,11 +63,8 @@ function register()
 	}
 }
 
-function UserConnect()
+function UserConnected()
 {
 	$accountManager = new AccountManager();
-	
-	return $accountManager->infoConnexionVerify($_POST['password'], $_POST['username']);
+	return $accountManager->userConnect($_POST['password'], $_POST['username']);
 }
-
-

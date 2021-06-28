@@ -24,7 +24,7 @@
 				<p>
 					<?php
 					echo troncate(nl2br(htmlspecialchars($display_blog['message'])), 300) .
-						'<a href="back_index.php?comment=' . $display_blog['id'] . '">Lire la suite</a>';
+						'<a href="back_index.php?comment=' . $display_blog['id'] . '"> Lire la suite</a>';
 					?>
 				</p>
 

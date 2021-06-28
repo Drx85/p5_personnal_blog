@@ -91,7 +91,7 @@ try
 	
 	if (isset($_POST['username']) && isset($_POST['password']))
 	{
-		if (userConnect() === true) {
+		if (userConnected() === true) {
 			header('Location: view/frontend/redirect.php?redirect=connect');
 		}
 		else {

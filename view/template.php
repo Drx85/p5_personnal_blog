@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -14,8 +18,18 @@
 
 <?= $page_content ?>
 
-<a href="/p5_personnal_blog/index.php?p=register">Créer un compte</a></br>
-<a href="/p5_personnal_blog/index.php?p=connexion">Se connecter</a>
+<?php
+
+if (! isset($_SESSION['pseudo'])) {
+	echo '<a href = "/p5_personnal_blog/index.php?p=register"> Créer un compte </a ></br >
+	<a href = "/p5_personnal_blog/index.php?p=connexion"> Se connecter </a>';
+}
+else {
+	echo 'Connecté en tant que ' . $_SESSION['pseudo'] . '</br>
+	<a href="/p5_personnal_blog/view/frontend/disconnection.php?p=connexion">Se déconnecter</a>';
+}
+
+?>
 
 </body>
 
