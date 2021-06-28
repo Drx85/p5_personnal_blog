@@ -8,7 +8,7 @@
 
 </head>
 
-<br>
+<body>
 
 <h1><?= $page_title ?></h1>
 
