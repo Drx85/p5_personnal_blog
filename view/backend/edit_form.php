@@ -2,7 +2,7 @@
     $page_title = 'Modifier un billet';
     ob_start();
 ?>
-    <form method="post" action="back_index.php?sent_edit_post=<?= $_GET['edit_post'] ?>">
+    <form method="post" action="index.php?sent_edit_post=<?= $_GET['edit_post'] ?>">
         <p>
             <label for="edit_title">Titre : </label> <input type="text" name="edit_title" value="<?= $edit_values['title'] ?>"/> <br/>
 			<label for="edit_author">Auteur : </label> <input type="text" name="edit_author" value="<?= $edit_values['author'] ?>"/> <br/>

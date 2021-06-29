@@ -4,6 +4,14 @@
     ob_start();
 ?>
 
+<?php
+	if (isset($_SESSION['role'])) {
+		if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'publisher') {
+			echo '<p><a href="view/backend/add_form.php">Ajouter un billet </a></p>';
+		}
+	}
+?>
+
 <h2>Les derniers billets</h2>
 
     <?php
@@ -11,8 +19,7 @@
         {
     ?>
             <h3><?= htmlspecialchars($display_blog['title']) ?></h3>
-            <p>Posté le <?= $display_blog['post_date'] ?>
-				à <?= $display_blog['hour_post_time'] ?>h<?= $display_blog['minute_poste_time'] ?>
+            <p>Posté le <?= $display_blog['post_date'] ?>à <?= $display_blog['hour_post_time'] ?>h<?= $display_blog['minute_poste_time'] ?>
 				<?php
 				if (isset($display_blog['update_date']))
 				{
@@ -27,26 +34,34 @@
 					'<a href="index.php?comment=' . $display_blog['id'] . '"> Lire la suite</a>';
 				?>
 			</p>
+	
+			<?php
+			if (isset($_SESSION['role'])) {
+				if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'publisher') {
+					?><p><a href="index.php?delete_post=<?= $display_blog['id'] ?>">Supprimer ce billet</a>
+					| <a href="index.php?edit_post=<?= $display_blog['id'] ?>">Modifier ce billet</a></p><?php
+				}
+			}
+			?>
+<?php
+	$display_nb = $comments_number[$increment_comments_number++]['number_of_comments'];
 
-    <?php
-            $display_nb = $comments_number[$increment_comments_number++]['number_of_comments'];
+	if (! $display_nb == 0)
+	{
+?>
+		<p><a href="index.php?comment=<?= $display_blog['id'] ?>">Voir les commentaires (<?= $display_nb ?>)</a></p>
+<?php
+	}
 
-            if (! $display_nb == 0)
-            {
-    ?>
-                <p><a href="index.php?comment=<?= $display_blog['id'] ?>">Voir les commentaires (<?= $display_nb ?>)</a></p>
-    <?php
-            }
+	else
+	{
+?>
+		<p><a href="index.php?comment=<?= $display_blog['id'] ?>">Il n'y a pas de commentaire sur ce billet. Cliquez ici pour en ajouter un.</a></p>
+<?php
+	}
 
-            else
-            {
-    ?>
-                <p><a href="index.php?comment=<?= $display_blog['id'] ?>">Il n'y a pas de commentaire sur ce billet. Cliquez ici pour en ajouter un.</a></p>
-    <?php
-            }
-
-            $error_page = false;
-        }
+	$error_page = false;
+}
 
         if ($error_page)
         {

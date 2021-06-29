@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../frontend/Manager.php');
+require_once("Manager.php");
 
 class AdminManager extends Manager
 {

@@ -3,7 +3,7 @@
     ob_start();
 ?>
 
-<form method="post" action="../../backend/back_index.php">
+<form method="post" action="../../index.php">
     <p>
         <label for="title">Titre : </label> <input type="text" name="title" /> <br/>
 		<label for="author">Auteur : </label> <input type="text" name="author" /> <br/>
@@ -19,7 +19,7 @@
     }
 ?>
 
-<p><a href="../../backend/back_index.php">Retour à la page principale</a></p>
+<p><a href="../../index.php">Retour à la page principale</a></p>
 
 <?php
     $page_content = ob_get_clean();

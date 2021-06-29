@@ -1,9 +1,10 @@
 <?php
 
-require_once (__DIR__ . '/../model/frontend/PostManager.php');
-require_once (__DIR__ . '/../model/frontend/CommentManager.php');
-require_once (__DIR__ . '/../model/frontend/PagesManager.php');
-require_once (__DIR__ . '/../model/frontend/AccountManager.php');
+require_once(__DIR__ . '/model/PostManager.php');
+require_once(__DIR__ . '/model/CommentManager.php');
+require_once(__DIR__ . '/model/PagesManager.php');
+require_once(__DIR__ . '/model/AccountManager.php');
+require_once(__DIR__ . '/model/AdminManager.php');
 
 function troncate($text, $char_nb, $delim='...')
 {
@@ -30,7 +31,7 @@ function displayPosts()
 
     $error_page = true;
     $increment_comments_number = 0;
-    require(__DIR__ . '/../view/frontend/index_view.php');
+    require(__DIR__ . '/view/frontend/index_view.php');
 }
 
 function displayComments()
@@ -40,7 +41,7 @@ function displayComments()
 
     $post = $postManager->linkedPost();
     $blog_comments = $commentManager->listComments();
-    require(__DIR__ . '/../view/frontend/comments_view.php');
+    require(__DIR__ . '/view/frontend/comments_view.php');
 }
 
 function sendComment()
@@ -67,4 +68,39 @@ function UserConnected()
 {
 	$accountManager = new AccountManager();
 	return $accountManager->userConnect($_POST['password'], $_POST['username']);
+}
+
+function adminSendPost()
+{
+	$adminManager = new AdminManager();
+	$adminManager->insertPost();
+	header('Location: index.php?send_post=true');
+}
+
+function adminDeletePost()
+{
+	$adminManager = new AdminManager();
+	$adminManager->deletePost();
+	header('Location: index.php?deleted_post=true');
+}
+
+function formEditPost()
+{
+	$adminManager = new AdminManager();
+	$edit_values = $adminManager->valuesEditPost();
+	require(__DIR__ . '/view/backend/edit_form.php');
+}
+
+function adminEditPost()
+{
+	$adminManager = new AdminManager();
+	$adminManager->editPost();
+	header('Location: index.php?edited_post=true');
+}
+
+function adminDeleteComment()
+{
+	$adminManager = new adminManager();
+	$adminManager->deleteComment();
+	header('Location: index.php?deleted_comment=true');
 }
