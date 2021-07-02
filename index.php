@@ -56,7 +56,7 @@ try
 
         else
         {
-            header('Location: index.php?comment=' . $_GET['send_comment'] . '&empty=true');
+			throw new Exception('empty_comment', 1);
         }
     }
 
@@ -68,11 +68,6 @@ try
     else
     {
         displayComments();
-
-        if (isset($_GET['empty']))
-        {
-            throw new Exception('Il faut rentrer un pseudo et un message.');
-        }
     }
 	
 	if (isset($_GET['p']))
@@ -139,7 +134,7 @@ try
 	
 	if(isset($_GET['send_post']) AND ($_GET['send_post']))
 	{
-		header('Location: index.php?notify=added_post');
+		throw new Exception('added_post');
 	}
 	
 	
@@ -149,13 +144,13 @@ try
 			adminDeletePost();
 		}
 		else {
-			header('Location: index.php?notify=privilege');
+			throw new Exception('privilege');
 		}
 	}
 	
 	if(isset($_GET['deleted_post']) AND ($_GET['deleted_post']))
 	{
-		header('Location: index.php?notify=post_deleted');
+		throw new Exception('post_deleted');
 	}
 	
 	
@@ -165,7 +160,7 @@ try
 			formEditPost();
 		}
 		else {
-			header('Location: index.php?notify=privilege');
+			throw new Exception('privilege');
 		}
 	}
 	
@@ -175,13 +170,13 @@ try
 			adminEditPost();
 		}
 		else {
-			header('Location: index.php?notify=privilege');
+			throw new Exception('privilege');
 		}
 	}
 	
 	if(isset($_GET['edited_post']) AND ($_GET['edited_post']))
 	{
-		header('Location: index.php?notify=post_modified');
+		throw new Exception('post_modified');
 	}
 	
 	
@@ -191,17 +186,22 @@ try
 			adminDeleteComment();
 		}
 		else {
-			header('Location: index.php?notify=privilege');
+			throw new Exception('privilege');
 		}
 	}
 	
 	if(isset($_GET['deleted_comment']) AND ($_GET['deleted_comment']))
 	{
-		header('Location: index.php?notify=comment_deleted');
+		throw new Exception('comment_deleted');
 	}
 }
 
 catch(Exception $e)
 {
-    echo 'Erreur : ' . $e->getMessage();
+	if ($e->getCode() === 1) {
+		header('Location: index.php?comment=' . $_GET['send_comment'] . '&notify=' . $e->getMessage() . '');
+	}
+	else {
+		header('Location: index.php?notify=' . $e->getMessage() . '');
+	}
 }

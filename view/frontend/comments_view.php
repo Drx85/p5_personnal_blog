@@ -3,13 +3,14 @@
     $page_title = 'Bienvenue sur mon blog !';
     ob_start();
 
-    if (empty($post))
-    {
+    if (empty($post)) {
         throw new Exception('<p>Oups ! On dirait que cette page n\'existe pas...</p><a href="index.php">Retour à la page principale</a>');
     }
 
-    else
-    {
+if (isset($_GET['notify'])) {
+	echo 'Votre commentaire ne peut pas être vide.';
+}
+
 ?>
 		<p>
 			<h3>Commentaires du billet : <?= htmlspecialchars($post['title']) ?> </h3>
@@ -27,7 +28,6 @@
 		
 		<h4>Commentaires :</h4>
 <?php
-    }
 
     while ($blog_comment = $blog_comments->fetch())
     {
