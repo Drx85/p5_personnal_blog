@@ -1,65 +1,35 @@
 <?php
 
 require('controller.php');
+$user_message = false;
 
 try
 {
-	//BACK
-	if (isset($_POST['title']) AND isset($_POST['post_content']))
-	{
-		if (! empty($_POST['title']) AND ! empty($_POST['post_content']))
-		{
-			adminSendPost();
-		}
-		else
-		{
-			header('Location: ../view/backend/add_form.php?empty_field=true');
-		}
-	}
-	
-	if(isset($_GET['send_post']) AND ($_GET['send_post']))
-	{
-		echo '<p>Le billet a bien été ajouté !</p>';
-	}
-	
-	
-	if (isset($_GET['delete_post']))
-	{
-		adminDeletePost();
-	}
-	
-	if(isset($_GET['deleted_post']) AND ($_GET['deleted_post']))
-	{
-		echo '<p>Le billet a bien été supprimé !</p>';
-	}
-	
-	
-	if(isset($_GET['edit_post']))
-	{
-		formEditPost();
-	}
-	
-	if(isset($_GET['sent_edit_post']))
-	{
-		adminEditPost();
-	}
-	
-	if(isset($_GET['edited_post']) AND ($_GET['edited_post']))
-	{
-		echo '<p>Le billet a bien été modifié !</p>';
-	}
-	
-	
-	if (isset($_GET['delete_comment']))
-	{
-		adminDeleteComment();
-	}
-	
-	if(isset($_GET['deleted_comment']) AND ($_GET['deleted_comment']))
-	{
-		echo '<p>Le commentaire a bien été supprimé !</p>';
-	}
 	//FRONT
+	if(isset ($_GET['notify'])) {
+		switch ($_GET['notify']) {
+			case 'privilege':
+				$user_message = 'Vous n\'avez pas les droits pour effectuer cette action.';
+				break;
+				
+			case 'post_modified':
+				$user_message = 'Le billet a bien été modifié.';
+				break;
+			
+			case 'post_deleted':
+				$user_message = 'Le billet a bien été supprimé.';
+				break;
+				
+			case 'comment_deleted':
+				$user_message = 'Le commentaire a bien été supprimé.';
+				break;
+				
+			case 'added_post':
+				$user_message = 'Le billet a bien été ajouté.';
+				break;
+		}
+	}
+	
     if (! isset($_GET['page']) OR $_GET['page'] > 1000 OR $_GET['page'] < 0)
     {
         $_GET['page'] = 1;
@@ -92,7 +62,7 @@ try
 
     if (! isset($_GET['comment']) OR $_GET['comment'] > 1000 OR $_GET['comment'] <= 0)
     {
-        displayPosts();
+        displayPosts($user_message);
     }
 
     else
@@ -153,8 +123,82 @@ try
 			header('Location: view/frontend/connexion.php?connect=false');
 		}
 	}
-	
 
+//BACK
+	if (isset($_POST['title']) AND isset($_POST['post_content']))
+	{
+		if (! empty($_POST['title']) AND ! empty($_POST['post_content']))
+		{
+			adminSendPost();
+		}
+		else
+		{
+			header('Location: ../view/backend/add_form.php?empty_field=true');
+		}
+	}
+	
+	if(isset($_GET['send_post']) AND ($_GET['send_post']))
+	{
+		header('Location: index.php?notify=added_post');
+	}
+	
+	
+	if (isset($_GET['delete_post']))
+	{
+		if (isset($_SESSION['user_id'])) {
+			adminDeletePost();
+		}
+		else {
+			header('Location: index.php?notify=privilege');
+		}
+	}
+	
+	if(isset($_GET['deleted_post']) AND ($_GET['deleted_post']))
+	{
+		header('Location: index.php?notify=post_deleted');
+	}
+	
+	
+	if(isset($_GET['edit_post']))
+	{
+		if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'publisher') {
+			formEditPost();
+		}
+		else {
+			header('Location: index.php?notify=privilege');
+		}
+	}
+	
+	if(isset($_GET['sent_edit_post']))
+	{
+		if (isset($_SESSION['user_id'])) {
+			adminEditPost();
+		}
+		else {
+			header('Location: index.php?notify=privilege');
+		}
+	}
+	
+	if(isset($_GET['edited_post']) AND ($_GET['edited_post']))
+	{
+		header('Location: index.php?notify=post_modified');
+	}
+	
+	
+	if (isset($_GET['delete_comment']))
+	{
+		if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'publisher') {
+			adminDeleteComment();
+		}
+		else {
+			header('Location: index.php?notify=privilege');
+		}
+	}
+	
+	if(isset($_GET['deleted_comment']) AND ($_GET['deleted_comment']))
+	{
+		header('Location: index.php?notify=comment_deleted');
+	}
 }
 
 catch(Exception $e)

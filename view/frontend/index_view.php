@@ -10,6 +10,10 @@
 			echo '<p><a href="view/backend/add_form.php">Ajouter un billet </a></p>';
 		}
 	}
+
+if (isset($user_message)) {
+	echo $user_message;
+}
 ?>
 
 <h2>Les derniers billets</h2>

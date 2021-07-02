@@ -18,7 +18,7 @@ function troncate($text, $char_nb, $delim='...')
 	}else return $text;
 }
 
-function displayPosts()
+function displayPosts($user_message)
 {
     $postManager = new PostManager();
     $pagesManager = new PagesManager();
@@ -100,7 +100,7 @@ function adminEditPost()
 
 function adminDeleteComment()
 {
-	$adminManager = new adminManager();
+	$adminManager = new AdminManager();
 	$adminManager->deleteComment();
 	header('Location: index.php?deleted_comment=true');
 }
