@@ -13,8 +13,7 @@ class CommentManager extends Manager
 
         while ($display_blog = $blog->fetch())
         {
-            $db = $this->dbConnect();
-            $req = $db->prepare('SELECT COUNT(*) AS number_of_comments FROM blog_comment WHERE id_post= ?');
+            $req = $this->db->prepare('SELECT COUNT(*) AS number_of_comments FROM blog_comment WHERE id_post= ?');
             $req->execute(array($display_blog['id']));
             $comments_number = $req->fetch();
             $array[] = $comments_number;
@@ -24,8 +23,7 @@ class CommentManager extends Manager
 
     public function listComments()
     {
-        $db = $this->dbConnect();
-        $blog_comments = $db->prepare('SELECT id, id_post, author, text_comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date,
+        $blog_comments = $this->db->prepare('SELECT id, id_post, author, text_comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date,
                                       HOUR(comment_time) AS hour_comment_time, MINUTE(comment_time) AS minute_comment_time
 				                      FROM blog_comment WHERE id_post = ? ORDER BY ID');
         $blog_comments->execute(array($_GET['comment']));
@@ -34,8 +32,7 @@ class CommentManager extends Manager
 
     public function insertComment()
     {
-        $db = $this->dbConnect();
-        $sent_comment = $db->prepare('INSERT INTO blog_comment (id_post, author, text_comment, comment_date, comment_time)
+        $sent_comment = $this->db->prepare('INSERT INTO blog_comment (id_post, author, text_comment, comment_date, comment_time)
 												VALUES (:id_post, :author, :text_comment, NOW(), NOW())');
         $sent_comment->execute(array(
             'id_post' => $_GET['send_comment'],

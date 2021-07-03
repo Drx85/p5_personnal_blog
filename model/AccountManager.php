@@ -7,8 +7,7 @@ class AccountManager extends Manager
 	public function createAccount()
 	{
 		$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-		$db = $this->dbConnect();
-		$q = $db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
+		$q = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
 		$q->execute(array(
 			'pseudo' => $_POST['pseudo'],
 			'password' => $password,
@@ -18,11 +17,10 @@ class AccountManager extends Manager
 	
 	public function exists($pseudo, $mail)
 	{
-		$db = $this->dbConnect();
-		$q = $db->prepare('SELECT * FROM user WHERE pseudo= ?');
+		$q = $this->db->prepare('SELECT * FROM user WHERE pseudo= ?');
 		$q->execute(array($pseudo));
 		$pseudoExists = $q->fetch();
-		$q = $db->prepare('SELECT * FROM user WHERE mail= ?');
+		$q = $this->db->prepare('SELECT * FROM user WHERE mail= ?');
 		$q->execute(array($mail));
 		$mailExists = $q->fetch();
 		
@@ -42,8 +40,7 @@ class AccountManager extends Manager
 	
 	public function userConnect($password, $pseudo)
 	{
-		$db = $this->dbConnect();
-		$q = $db->prepare('SELECT user.id as user_id, user.password as password, user_role.role as role
+		$q = $this->db->prepare('SELECT user.id as user_id, user.password as password, user_role.role as role
 									FROM user, user_role
 									WHERE user.pseudo= ?
 									AND user.id_role = user_role.id');
