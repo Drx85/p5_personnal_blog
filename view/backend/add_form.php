@@ -6,7 +6,6 @@
 <form method="post" action="../../index.php">
     <p>
         <label for="title">Titre : </label> <input type="text" name="title" /> <br/>
-		<label for="author">Auteur : </label> <input type="text" name="author" /> <br/>
         <label for="post_content">Contenu du billet : <br/></label> <textarea name="post_content" rows="20" cols="150"></textarea> <br/>
         <input type="submit" name="validate_post"/>
     </p>

@@ -52,7 +52,6 @@ if (isset($_SESSION['user_id'])) {
 	
 	<form method="post" action="index.php?send_comment=<?= $_GET['comment'] ?>">
 		<p>
-			<label for="pseudo">Votre pseudo : </label> <input type="text" name="pseudo"/> <br/>
 			<label for="user_comment">Votre commentaire : <br/></label> <textarea name="user_comment" rows="3" cols="80"></textarea> <br/>
 			<input type="submit" name="validate_comment"/>
 		</p>

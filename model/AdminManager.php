@@ -11,7 +11,7 @@ class AdminManager extends Manager
         $sent_post->execute(array(
             'title' => $_POST['title'],
             'message' => $_POST['post_content'],
-			'author' => $_POST['author']
+			'author' => $_SESSION['pseudo']
         ));
     }
 

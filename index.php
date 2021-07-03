@@ -46,20 +46,6 @@ try
         $_GET['comment'] = (int) $_GET['comment'];
     }
 
-
-    if (isset($_GET['send_comment']))
-    {
-        if (! empty($_POST['pseudo']) AND ! empty($_POST['user_comment']) OR $_POST['user_comment'] === '0')
-        {
-            sendComment();
-        }
-
-        else
-        {
-			throw new Exception('empty_comment', 1);
-        }
-    }
-
     if (! isset($_GET['comment']) OR $_GET['comment'] > 1000 OR $_GET['comment'] <= 0)
     {
         displayPosts($user_message);
@@ -69,6 +55,19 @@ try
     {
         displayComments();
     }
+    
+	if (isset($_GET['send_comment']))
+	{
+		if (! empty($_POST['user_comment']) OR $_POST['user_comment'] === '0')
+		{
+			sendComment();
+		}
+		
+		else
+		{
+			throw new Exception('empty_comment', 1);
+		}
+	}
 	
 	if (isset($_GET['p']))
 	{
