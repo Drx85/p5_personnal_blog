@@ -2,16 +2,16 @@
 
 require_once("Manager.php");
 
-class AccountManager extends Manager
+class Account extends Manager
 {
-	public function createAccount()
+	public function create($pseudo, $password, $mail)
 	{
-		$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+		$password = password_hash($password, PASSWORD_BCRYPT);
 		$q = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
 		$q->execute(array(
-			'pseudo' => $_POST['pseudo'],
+			'pseudo' => $pseudo,
 			'password' => $password,
-			'mail' => $_POST['mail'],
+			'mail' => $mail
 		));
 	}
 	
@@ -38,7 +38,7 @@ class AccountManager extends Manager
 		}
 	}
 	
-	public function userConnect($password, $pseudo)
+	public function connect($password, $pseudo)
 	{
 		$q = $this->db->prepare('SELECT user.id as user_id, user.password as password, user_role.role as role
 									FROM user, user_role

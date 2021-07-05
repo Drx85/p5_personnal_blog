@@ -127,7 +127,7 @@ try
 		}
 		else
 		{
-			header('Location: ../view/backend/add_form.php?empty_field=true');
+			header('Location: view/backend/add_form.php?empty_field=true');
 		}
 	}
 	

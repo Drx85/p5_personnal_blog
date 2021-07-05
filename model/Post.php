@@ -2,34 +2,24 @@
 
 require_once("Manager.php");
 
-class PostManager extends Manager
+class Post extends Manager
 {
-    public function listPosts()
+	protected $table = 'post';
+	
+    public function findAll()
     {
         $limit_page = $this->getLIMIT();
 
         $blog_post = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
                                    HOUR(post_time) AS hour_post_time, 
-                                   MINUTE(post_time) AS minute_poste_time,
+                                   MINUTE(post_time) AS minute_post_time,
                                    DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
-				                   FROM blog_post ORDER BY ID DESC LIMIT :limit_page, 5');
+				                   FROM post ORDER BY ID DESC LIMIT :limit_page, 5');
 
         $blog_post->bindValue('limit_page', $limit_page, PDO::PARAM_INT);
         $blog_post->execute();
 
         return $blog_post;
-    }
-
-    public function linkedPost()
-    {
-        $post = $this->db->prepare('SELECT title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
-                                   HOUR(post_time) AS hour_post_time, 
-                                   MINUTE(post_time) AS minute_poste_time,
-                                   DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
-			                       FROM blog_post WHERE id = ?');
-        $post->execute(array($_GET['comment']));
-        $post = $post->fetch();
-        return $post;
     }
 	
 	private function getLIMIT()
@@ -40,5 +30,26 @@ class PostManager extends Manager
 			$limit_page = $limit_page + 5;
 		}
 		return $limit_page;
+	}
+	
+	public function insert()
+	{
+		$sent_post = $this->db->prepare('INSERT INTO post (title, message, author, post_date, post_time) VALUES (:title, :message, :author, NOW(), NOW())');
+		$sent_post->execute(array(
+			'title' => $_POST['title'],
+			'message' => $_POST['post_content'],
+			'author' => $_SESSION['pseudo']
+		));
+	}
+	
+	public function edit()
+	{
+		$edit_post = $this->db->prepare('UPDATE post SET title = :title, message = :message, author = :author, update_date = NOW() WHERE id = :id');
+		$edit_post->execute(array(
+			'title' => $_POST['edit_title'],
+			'message' => $_POST['edit_post_content'],
+			'author' => $_POST['edit_author'],
+			'id' => $_GET['sent_edit_post']
+		));
 	}
 }

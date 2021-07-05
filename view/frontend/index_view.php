@@ -23,7 +23,7 @@ if (isset($user_message)) {
         {
     ?>
             <h3><?= htmlspecialchars($display_blog['title']) ?></h3>
-            <p>Posté le <?= $display_blog['post_date'] ?>à <?= $display_blog['hour_post_time'] ?>h<?= $display_blog['minute_poste_time'] ?>
+            <p>Posté le <?= $display_blog['post_date'] ?> à <?= $display_blog['hour_post_time'] ?>h<?= $display_blog['minute_post_time'] ?>
 				<?php
 				if (isset($display_blog['update_date']))
 				{

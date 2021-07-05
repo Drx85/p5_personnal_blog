@@ -2,6 +2,7 @@
 	session_start();
     $page_title = 'Bienvenue sur mon blog !';
     ob_start();
+	setlocale(LC_TIME, "fr_FR", "French");
 
     if (empty($post)) {
         throw new Exception('<p>Oups ! On dirait que cette page n\'existe pas...</p><a href="index.php">Retour à la page principale</a>');
@@ -14,10 +15,11 @@ if (isset($_GET['notify'])) {
 ?>
 		<p>
 			<h3>Commentaires du billet : <?= htmlspecialchars($post['title']) ?> </h3>
-			Posté le <?= $post['post_date'] ?> à <?= $post['hour_post_time'] ?>h<?= $post['minute_poste_time'] ?>
+			Posté le <?= strftime("%d %b %G", strtotime($post['post_date'])); ?> à
+			<?= substr(str_replace(':', 'h', $post['post_time']), 0, 5); ?>
 			<?php
 			if (isset($post['update_date'])) {
-				echo '(dernière modification le ' . $post['update_date'] . '),';
+				echo '(dernière modification le ' . strftime("%d %b %G", strtotime($post['update_date'])) . '),';
 			}
 			?>
 			par : <?= htmlspecialchars($post['author']) ?>

@@ -2,27 +2,26 @@
 
 require_once("Manager.php");
 
-class Pages extends Manager
+class Page extends Manager
 {
     public function count()
     {
-        $nb = $this->db->query('SELECT COUNT(*) AS lines_number FROM blog_post');
+        $q = $this->db->query('SELECT COUNT(*) AS number FROM post');
+        $number = $q->fetch();
 
-        $count_lines_number = $nb->fetch();
+        $pageNumber = $number['number'] / 5;
 
-        $page_number = $count_lines_number['lines_number'] / 5;
-
-        return ceil($page_number);
+        return ceil($pageNumber);
     }
 
     public function get()
     {
-        $rounded_page_number = $this->countPages();
+        $roundedNumber = $this->count();
         $page = 1;
 
         $array_page = array ();
 
-        for ($i=0 ; $i < $rounded_page_number ; $i++)
+        for ($i=0 ; $i < $roundedNumber ; $i++)
         {
             $array_page[] = $page;
             $page++;

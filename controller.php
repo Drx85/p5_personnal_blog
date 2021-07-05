@@ -1,10 +1,10 @@
 <?php
 
-require_once(__DIR__ . '/model/PostManager.php');
-require_once(__DIR__ . '/model/CommentManager.php');
-require_once(__DIR__ . '/model/PagesManager.php');
-require_once(__DIR__ . '/model/AccountManager.php');
-require_once(__DIR__ . '/model/AdminManager.php');
+require_once(__DIR__ . '/model/Post.php');
+require_once(__DIR__ . '/model/Comment.php');
+require_once(__DIR__ . '/model/Page.php');
+require_once(__DIR__ . '/model/Account.php');
+require_once(__DIR__ . '/model/Admin.php');
 
 function troncate($text, $char_nb, $delim='...')
 {
@@ -20,14 +20,14 @@ function troncate($text, $char_nb, $delim='...')
 
 function displayPosts($user_message)
 {
-    $postManager = new PostManager();
-    $pagesManager = new PagesManager();
-    $commentManager = new CommentManager();
+    $post = new Post();
+    $pages = new Page();
+    $comment = new Comment();
 
-    $blog = $postManager->listPosts();
-    $rounded_page_number = $pagesManager->countPages();
-    $array_pages = $pagesManager->getPages();
-    $comments_number = $commentManager->countComments();
+    $blog = $post->findAll();
+    $rounded_page_number = $pages->count();
+    $array_pages = $pages->get();
+    $comments_number = $comment->count();
 
     $error_page = true;
     $increment_comments_number = 0;
@@ -36,28 +36,28 @@ function displayPosts($user_message)
 
 function displayComments()
 {
-    $postManager = new PostManager();
-    $commentManager = new CommentManager();
+    $post = new Post();
+    $comment = new Comment();
 
-    $post = $postManager->linkedPost();
-    $blog_comments = $commentManager->listComments();
+    $post = $post->find($_GET['comment']);
+    $blog_comments = $comment->findAll();
     require(__DIR__ . '/view/frontend/comments_view.php');
 }
 
 function sendComment()
 {
-    $commentManager = new CommentManager();
-    $commentManager->insertComment();
+    $comment = new Comment();
+    $comment->insert();
     header('Location: index.php?comment=' . $_GET['send_comment']);
 }
 
 function register()
 {
-	$accountManager = new AccountManager();
+	$account = new Account();
 	
-	$exists = $accountManager->exists($_POST['pseudo'], $_POST['mail']);
+	$exists = $account->exists($_POST['pseudo'], $_POST['mail']);
 	if ($exists === false) {
-	$accountManager->createAccount();
+	$account->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
 	}
 	else {
 		return $exists;
@@ -66,41 +66,41 @@ function register()
 
 function UserConnected()
 {
-	$accountManager = new AccountManager();
-	return $accountManager->userConnect($_POST['password'], $_POST['username']);
+	$account = new Account();
+	return $account->connect($_POST['password'], $_POST['username']);
 }
 
 function adminSendPost()
 {
-	$adminManager = new AdminManager();
-	$adminManager->insertPost();
+	$post = new Post();
+	$post->insert();
 	header('Location: index.php?send_post=true');
 }
 
 function adminDeletePost()
 {
-	$adminManager = new AdminManager();
-	$adminManager->deletePost();
+	$post = new Post();
+	$post->delete($_GET['delete_post']);
 	header('Location: index.php?deleted_post=true');
 }
 
 function formEditPost()
 {
-	$adminManager = new AdminManager();
-	$edit_values = $adminManager->valuesEditPost();
+	$admin = new Admin();
+	$edit_values = $admin->valuesEditPost();
 	require(__DIR__ . '/view/backend/edit_form.php');
 }
 
 function adminEditPost()
 {
-	$adminManager = new AdminManager();
-	$adminManager->editPost();
+	$post = new Post();
+	$post->edit();
 	header('Location: index.php?edited_post=true');
 }
 
 function adminDeleteComment()
 {
-	$adminManager = new AdminManager();
-	$adminManager->deleteComment();
+	$comment = new Comment();
+	$comment->delete($_GET['delete_comment']);
 	header('Location: index.php?deleted_comment=true');
 }
