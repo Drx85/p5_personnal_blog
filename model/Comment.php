@@ -23,23 +23,23 @@ class Comment extends Manager
         return $array;
     }
 
-    public function findAll()
+    public function findAll(int $id_post)
     {
         $blog_comments = $this->db->prepare('SELECT id, id_post, author, text_comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date,
                                       HOUR(comment_time) AS hour_comment_time, MINUTE(comment_time) AS minute_comment_time
 				                      FROM comment WHERE id_post = ? ORDER BY ID');
-        $blog_comments->execute(array($_GET['comment']));
+        $blog_comments->execute(array($id_post));
         return $blog_comments;
     }
 
-    public function insert()
+    public function insert(int $id_post, string $pseudo, string $text_comment)
     {
         $sent_comment = $this->db->prepare('INSERT INTO comment (id_post, author, text_comment, comment_date, comment_time)
 												VALUES (:id_post, :author, :text_comment, NOW(), NOW())');
         $sent_comment->execute(array(
-            'id_post' => $_GET['send_comment'],
-            'author' => $_SESSION['pseudo'],
-            'text_comment' => $_POST['user_comment']
+            'id_post' => $id_post,
+            'author' => $pseudo,
+            'text_comment' => $text_comment
         ));
     }
 }

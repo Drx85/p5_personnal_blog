@@ -25,4 +25,13 @@ abstract class Manager extends Database
 		$q = $this->db->prepare("DELETE FROM {$this->table} WHERE id = ?");
 		$q->execute(array($id));
 	}
+	
+	
+	public function finAllTest(int $id)
+	{
+		$q = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = ?");
+		$q->execute(array($id));
+		$item = $q->fetch();
+		return $item;
+	}
 }

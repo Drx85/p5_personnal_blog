@@ -32,24 +32,24 @@ class Post extends Manager
 		return $limit_page;
 	}
 	
-	public function insert()
+	public function insert(string $title, string $message, string $pseudo)
 	{
 		$sent_post = $this->db->prepare('INSERT INTO post (title, message, author, post_date, post_time) VALUES (:title, :message, :author, NOW(), NOW())');
 		$sent_post->execute(array(
-			'title' => $_POST['title'],
-			'message' => $_POST['post_content'],
-			'author' => $_SESSION['pseudo']
+			'title' => $title,
+			'message' => $message,
+			'author' => $pseudo
 		));
 	}
 	
-	public function edit()
+	public function edit(string $title, string $message, string $author, int $id)
 	{
 		$edit_post = $this->db->prepare('UPDATE post SET title = :title, message = :message, author = :author, update_date = NOW() WHERE id = :id');
 		$edit_post->execute(array(
-			'title' => $_POST['edit_title'],
-			'message' => $_POST['edit_post_content'],
-			'author' => $_POST['edit_author'],
-			'id' => $_GET['sent_edit_post']
+			'title' => $title,
+			'message' => $message,
+			'author' => $author,
+			'id' => $id
 		));
 	}
 }

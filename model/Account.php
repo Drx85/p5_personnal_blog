@@ -4,7 +4,7 @@ require_once("Manager.php");
 
 class Account extends Manager
 {
-	public function create($pseudo, $password, $mail)
+	public function create(string $pseudo, string $password, string $mail)
 	{
 		$password = password_hash($password, PASSWORD_BCRYPT);
 		$q = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
@@ -15,7 +15,7 @@ class Account extends Manager
 		));
 	}
 	
-	public function exists($pseudo, $mail)
+	public function exists(string $pseudo, string $mail)
 	{
 		$q = $this->db->prepare('SELECT * FROM user WHERE pseudo= ?');
 		$q->execute(array($pseudo));
@@ -38,7 +38,7 @@ class Account extends Manager
 		}
 	}
 	
-	public function connect($password, $pseudo)
+	public function connect(string $password, string $pseudo)
 	{
 		$q = $this->db->prepare('SELECT user.id as user_id, user.password as password, user_role.role as role
 									FROM user, user_role

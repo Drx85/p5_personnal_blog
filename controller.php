@@ -40,14 +40,14 @@ function displayComments()
     $comment = new Comment();
 
     $post = $post->find($_GET['comment']);
-    $blog_comments = $comment->findAll();
+    $blog_comments = $comment->findAll($_GET['comment']);
     require(__DIR__ . '/view/frontend/comments_view.php');
 }
 
 function sendComment()
 {
     $comment = new Comment();
-    $comment->insert();
+    $comment->insert($_GET['send_comment'], $_SESSION['pseudo'], $_POST['user_comment']);
     header('Location: index.php?comment=' . $_GET['send_comment']);
 }
 
@@ -73,7 +73,7 @@ function UserConnected()
 function adminSendPost()
 {
 	$post = new Post();
-	$post->insert();
+	$post->insert($_POST['title'], $_POST['post_content'], $_SESSION['pseudo']);
 	header('Location: index.php?send_post=true');
 }
 
@@ -94,7 +94,7 @@ function formEditPost()
 function adminEditPost()
 {
 	$post = new Post();
-	$post->edit();
+	$post->edit($_POST['edit_title'], $_POST['edit_post_content'], $_POST['edit_author'], $_GET['sent_edit_post']);
 	header('Location: index.php?edited_post=true');
 }
 
