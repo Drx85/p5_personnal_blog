@@ -1,9 +1,8 @@
 <?php
 
-
-abstract class Database
+class Database
 {
-	protected function dbConnect()
+	public static function dbConnect()
 	{
 		return new PDO('mysql:host=localhost;port=3308;dbname=blog;charset=utf8', 'root', '');
 	}

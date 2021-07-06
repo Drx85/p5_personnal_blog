@@ -1,9 +1,8 @@
 <?php
 
-require_once("Manager.php");
-require_once("Post.php");
+namespace Models;
 
-class Comment extends Manager
+class Comment extends Model
 {
 	protected $table = 'comment';
 	
@@ -15,7 +14,7 @@ class Comment extends Manager
 
         while ($display_blog = $blog->fetch())
         {
-            $req = $this->db->prepare('SELECT COUNT(*) AS number_of_comments FROM comment WHERE id_post= ?');
+            $req = $this->db->prepare('SELECT COUNT(id) AS number_of_comments FROM comment WHERE id_post= ?');
             $req->execute(array($display_blog['id']));
             $comments_number = $req->fetch();
             $array[] = $comments_number;

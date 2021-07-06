@@ -1,8 +1,8 @@
 <?php
 
-require_once("Manager.php");
+namespace Models;
 
-class Account extends Manager
+class Account extends Model
 {
 	public function create(string $pseudo, string $password, string $mail)
 	{

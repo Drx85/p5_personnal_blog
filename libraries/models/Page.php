@@ -1,12 +1,12 @@
 <?php
 
-require_once("Manager.php");
+namespace Models;
 
-class Page extends Manager
+class Page extends Model
 {
     public function count()
     {
-        $q = $this->db->query('SELECT COUNT(*) AS number FROM post');
+        $q = $this->db->query('SELECT COUNT(id) AS number FROM post');
         $number = $q->fetch();
 
         $pageNumber = $number['number'] / 5;

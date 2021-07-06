@@ -1,5 +1,6 @@
 <?php
 	session_start();
+		
     $page_title = 'Bienvenue sur mon blog !';
     ob_start();
 ?>
@@ -34,7 +35,7 @@ if (isset($user_message)) {
 			</p>
 			<p>
 				<?php
-				echo troncate(nl2br(htmlspecialchars($display_blog['message'])), 300) .
+				echo \Format::troncate(nl2br(htmlspecialchars($display_blog['message'])), 300) .
 					'<a href="index.php?comment=' . $display_blog['id'] . '"> Lire la suite</a>';
 				?>
 			</p>

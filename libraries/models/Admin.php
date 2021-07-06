@@ -1,13 +1,13 @@
 <?php
 
-require_once("Manager.php");
+namespace Models;
 
-class Admin extends Manager
+class Admin extends Model
 {
-    public function valuesEditPost()
+    public function valuesEditPost($id)
     {
         $req = $this->db->prepare('SELECT title, message, author FROM post WHERE id = ?');
-        $req->execute(array($_GET['edit_post']));
+        $req->execute(array($id));
         $req = $req->fetch();
         return $req;
     }

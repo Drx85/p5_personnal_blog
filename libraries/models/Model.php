@@ -1,15 +1,15 @@
 <?php
 
-require_once("Database.php");
+namespace Models;
 
-abstract class Manager extends Database
+abstract class Model
 {
 	protected $db;
 	protected $table;
 	
 	public function __construct()
 	{
-		$this->db = $this->dbConnect();
+		$this->db = \Database::dbConnect();
 	}
 	
 	public function find(int $id)
@@ -25,7 +25,6 @@ abstract class Manager extends Database
 		$q = $this->db->prepare("DELETE FROM {$this->table} WHERE id = ?");
 		$q->execute(array($id));
 	}
-	
 	
 	public function finAllTest(int $id)
 	{

@@ -1,14 +1,16 @@
 <?php
 
-require_once("Manager.php");
+namespace Models;
 
-class Post extends Manager
+use PDO;
+
+class Post extends Model
 {
 	protected $table = 'post';
 	
     public function findAll()
     {
-        $limit_page = $this->getLIMIT();
+        $limit_page = $this->getLIMIT($_GET['page']);
 
         $blog_post = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
                                    HOUR(post_time) AS hour_post_time, 
@@ -22,11 +24,11 @@ class Post extends Manager
         return $blog_post;
     }
 	
-	private function getLIMIT()
+	private function getLIMIT($page)
 	{
 		$limit_page = 0;
 		
-		for ($i = 0; $i < $_GET['page'] - 1; $i++) {
+		for ($i = 0; $i < $page - 1; $i++) {
 			$limit_page = $limit_page + 5;
 		}
 		return $limit_page;

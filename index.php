@@ -1,6 +1,9 @@
 <?php
 
-require('controller.php');
+namespace Controllers;
+
+require_once('libraries/autoload.php');
+
 $user_message = false;
 
 try
@@ -48,19 +51,22 @@ try
 
     if (! isset($_GET['comment']) OR $_GET['comment'] > 1000 OR $_GET['comment'] <= 0)
     {
-        displayPosts($user_message);
+    	$controller = new \Controllers\Post();
+        $controller->displayPosts($user_message);
     }
 
     else
     {
-        displayComments();
+    	$controller = new Comment();
+        $controller->displayComments();
     }
     
 	if (isset($_GET['send_comment']))
 	{
 		if (! empty($_POST['user_comment']) OR $_POST['user_comment'] === '0')
 		{
-			sendComment();
+			$controller = new Comment();
+			$controller->sendComment();
 		}
 		
 		else
@@ -86,7 +92,8 @@ try
 	{
 		if (!empty($_POST['pseudo']) && !empty($_POST['mail']) && !empty($_POST['password']))
 		{
-			switch (register()) {
+			$controller = new Account();
+			switch ($controller->register()) {
 				case 'pseudoExists':
 					header('Location: view/frontend/register.php?exists=pseudo');
 					break;
@@ -110,7 +117,8 @@ try
 	
 	if (isset($_POST['username']) && isset($_POST['password']))
 	{
-		if (userConnected() === true) {
+		$controller = new Account();
+		if ($controller->userConnected() === true) {
 			header('Location: index.php');
 		}
 		else {
@@ -123,7 +131,8 @@ try
 	{
 		if (! empty($_POST['title']) AND ! empty($_POST['post_content']))
 		{
-			adminSendPost();
+			$controller = new Post();
+			$controller->adminSendPost();
 		}
 		else
 		{
@@ -140,7 +149,8 @@ try
 	if (isset($_GET['delete_post']))
 	{
 		if (isset($_SESSION['user_id'])) {
-			adminDeletePost();
+			$controller = new Post();
+			$controller->adminDeletePost();
 		}
 		else {
 			throw new Exception('privilege');
@@ -156,7 +166,8 @@ try
 	if(isset($_GET['edit_post']))
 	{
 		if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'publisher') {
-			formEditPost();
+			$controller = new Post();
+			$controller->formEditPost();
 		}
 		else {
 			throw new Exception('privilege');
@@ -166,7 +177,8 @@ try
 	if(isset($_GET['sent_edit_post']))
 	{
 		if (isset($_SESSION['user_id'])) {
-			adminEditPost();
+			$controller = new Post();
+			$controller->adminEditPost();
 		}
 		else {
 			throw new Exception('privilege');
@@ -178,11 +190,11 @@ try
 		throw new Exception('post_modified');
 	}
 	
-	
 	if (isset($_GET['delete_comment']))
 	{
 		if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'publisher') {
-			adminDeleteComment();
+			$controller = new Comment();
+			$controller->adminDeleteComment();
 		}
 		else {
 			throw new Exception('privilege');
