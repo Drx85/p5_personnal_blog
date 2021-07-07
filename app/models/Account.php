@@ -8,11 +8,7 @@ class Account extends Model
 	{
 		$password = password_hash($password, PASSWORD_BCRYPT);
 		$q = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
-		$q->execute(array(
-			'pseudo' => $pseudo,
-			'password' => $password,
-			'mail' => $mail
-		));
+		$q->execute(compact('pseudo', 'password', 'mail'));
 	}
 	
 	public function exists(string $pseudo, string $mail)

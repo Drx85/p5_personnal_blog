@@ -34,11 +34,7 @@ class Comment extends Model
     public function insert(int $id_post, string $pseudo, string $text_comment)
     {
         $sent_comment = $this->db->prepare('INSERT INTO comment (id_post, author, text_comment, comment_date, comment_time)
-												VALUES (:id_post, :author, :text_comment, NOW(), NOW())');
-        $sent_comment->execute(array(
-            'id_post' => $id_post,
-            'author' => $pseudo,
-            'text_comment' => $text_comment
-        ));
+												VALUES (:id_post, :pseudo, :text_comment, NOW(), NOW())');
+        $sent_comment->execute(compact('id_post', 'pseudo', 'text_comment'));
     }
 }

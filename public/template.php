@@ -16,12 +16,12 @@
 <?php
 
 if (! isset($_SESSION['user_id'])) {
-	echo '<a href = "/p5_personnal_blog/index.php?p=register"> Créer un compte </a ></br >
-	<a href = "/p5_personnal_blog/index.php?p=connexion"> Se connecter </a>';
+	echo '<a href = "/p5_personnal_blog/public/index.php?p=register"> Créer un compte </a ></br >
+	<a href = "/p5_personnal_blog/public/index.php?p=connexion"> Se connecter </a>';
 }
 else {
 	echo 'Connecté en tant que ' . $_SESSION['pseudo'] . ' (' . $_SESSION['role'] . ')</br>
-	<a href="/p5_personnal_blog/view/frontend/disconnection.php?p=connexion">Se déconnecter</a>';
+	<a href="/p5_personnal_blog/public/frontend/disconnection.php?p=connexion">Se déconnecter</a>';
 }
 
 ?>

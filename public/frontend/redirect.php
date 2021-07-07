@@ -13,7 +13,7 @@ switch ($_GET['redirect']) {
 ?>
 
 <p>Vous allez redirigé vers la page d'accueil dans 3 secondes...</p>
-<p><a href="../../index.php">Cliquez ici si vous ne souhaitez pas attendre :)</a></p>
+<p><a href="../index.php">Cliquez ici si vous ne souhaitez pas attendre :)</a></p>
 
 <?php
 $page_content = ob_get_clean();

@@ -7,7 +7,7 @@ $page_title = 'Créer un compte';
 ob_start();
 ?>
 	
-	<form action="../../index.php" method="post">
+	<form action="../index.php" method="post">
 		<div>
 			<label for="pseudo">Pseudo </label><input type="text" id="pseudo" name="pseudo" minlength="2" required>
 		</div>

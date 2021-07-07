@@ -8,7 +8,7 @@
 <?php
 	if (isset($_SESSION['role'])) {
 		if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'publisher') {
-			echo '<p><a href="view/backend/add_form.php">Ajouter un billet </a></p>';
+			echo '<p><a href="backend/add_form.php">Ajouter un billet </a></p>';
 		}
 	}
 

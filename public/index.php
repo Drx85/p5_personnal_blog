@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-require_once('libraries/autoload.php');
+require_once('../app/autoload.php');
 
 $user_message = false;
 
@@ -79,11 +79,11 @@ try
 	{
 		switch ($_GET['p']) {
 			case 'register':
-				header('Location: view/frontend/register.php');
+				header('Location: frontend/register.php');
 				break;
 				
 			case 'connexion':
-				header('Location: view/frontend/connexion.php');
+				header('Location: frontend/connexion.php');
 				break;
 		}
 	}
@@ -95,23 +95,23 @@ try
 			$controller = new Account();
 			switch ($controller->register()) {
 				case 'pseudoExists':
-					header('Location: view/frontend/register.php?exists=pseudo');
+					header('Location: frontend/register.php?exists=pseudo');
 					break;
 					
 				case 'emailExists':
-					header('Location: view/frontend/register.php?exists=mail');
+					header('Location: frontend/register.php?exists=mail');
 					break;
 					
 				case 'pseudoMailExists':
-					header('Location: view/frontend/register.php?exists=pseudomail');
+					header('Location: frontend/register.php?exists=pseudomail');
 					break;
 					
 				default:
-					header('Location: view/frontend/redirect.php?redirect=register');
+					header('Location: frontend/redirect.php?redirect=register');
 			}
 		}
 		else {
-			header('Location: view/frontend/register.php?field=empty');
+			header('Location: frontend/register.php?field=empty');
 		}
 	}
 	
@@ -122,7 +122,7 @@ try
 			header('Location: index.php');
 		}
 		else {
-			header('Location: view/frontend/connexion.php?connect=false');
+			header('Location: frontend/connexion.php?connect=false');
 		}
 	}
 
@@ -136,7 +136,7 @@ try
 		}
 		else
 		{
-			header('Location: view/backend/add_form.php?empty_field=true');
+			header('Location: backend/add_form.php?empty_field=true');
 		}
 	}
 	

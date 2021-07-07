@@ -13,7 +13,7 @@ class Post extends Controller
 		
 		$error_page = true;
 		$increment_comments_number = 0;
-		require('view/frontend/index_view.php');
+		require('../public/frontend/index_view.php');
 	}
 	
 	public function adminSendPost()
@@ -31,7 +31,7 @@ class Post extends Controller
 	public function formEditPost()
 	{
 		$edit_values = $this->admin->valuesEditPost($_GET['edit_post']);
-		require('view/backend/edit_form.php');
+		require('../public/backend/edit_form.php');
 	}
 	
 	public function adminEditPost()

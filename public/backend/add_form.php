@@ -3,7 +3,7 @@
     ob_start();
 ?>
 
-<form method="post" action="../../index.php">
+<form method="post" action="../index.php">
     <p>
         <label for="title">Titre : </label> <input type="text" name="title" /> <br/>
         <label for="post_content">Contenu du billet : <br/></label> <textarea name="post_content" rows="20" cols="150"></textarea> <br/>
@@ -18,7 +18,7 @@
     }
 ?>
 
-<p><a href="../../index.php">Retour à la page principale</a></p>
+<p><a href="../index.php">Retour à la page principale</a></p>
 
 <?php
     $page_content = ob_get_clean();

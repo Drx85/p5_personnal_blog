@@ -8,7 +8,7 @@ class Comment extends Controller
 	{
 		$post = $this->post->find($_GET['comment']);
 		$blog_comments = $this->comment->findAll($_GET['comment']);
-		require('view/frontend/comments_view.php');
+		require('../public/frontend/comments_view.php');
 	}
 	
 	public function sendComment()

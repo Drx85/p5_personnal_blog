@@ -7,7 +7,7 @@ $page_title = 'Se connecter';
 ob_start();
 ?>
 
-<form action="../../index.php" method="post">
+<form action="../index.php" method="post">
 	
 	<label><b>Nom d'utilisateur</b></label>
 	<input type="text" placeholder="Entrer votre pseudo" name="username" required>
