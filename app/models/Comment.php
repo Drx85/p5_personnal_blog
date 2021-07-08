@@ -12,11 +12,11 @@ class Comment extends Model
         $post = new Post();
         $blog = $post->findAll();
 
-        while ($display_blog = $blog->fetch())
+        foreach ($blog as $display_blog)
         {
-            $req = $this->db->prepare('SELECT COUNT(id) AS number_of_comments FROM comment WHERE id_post= ?');
-            $req->execute(array($display_blog['id']));
-            $comments_number = $req->fetch();
+            $q = $this->db->prepare('SELECT COUNT(id) AS number_of_comments FROM comment WHERE id_post= ?');
+            $q->execute(array($display_blog['id']));
+            $comments_number = $q->fetch();
             $array[] = $comments_number;
         }
         return $array;
@@ -24,17 +24,16 @@ class Comment extends Model
 
     public function findAll(int $id_post)
     {
-        $blog_comments = $this->db->prepare('SELECT id, id_post, author, text_comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date,
+        $q = $this->db->prepare('SELECT id, id_post, author, text_comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date,
                                       HOUR(comment_time) AS hour_comment_time, MINUTE(comment_time) AS minute_comment_time
 				                      FROM comment WHERE id_post = ? ORDER BY ID');
-        $blog_comments->execute(array($id_post));
-        return $blog_comments;
+        return $q->execute(array($id_post));
     }
 
     public function insert(int $id_post, string $pseudo, string $text_comment)
     {
-        $sent_comment = $this->db->prepare('INSERT INTO comment (id_post, author, text_comment, comment_date, comment_time)
+        $q = $this->db->prepare('INSERT INTO comment (id_post, author, text_comment, comment_date, comment_time)
 												VALUES (:id_post, :pseudo, :text_comment, NOW(), NOW())');
-        $sent_comment->execute(compact('id_post', 'pseudo', 'text_comment'));
+        $q->execute(compact('id_post', 'pseudo', 'text_comment'));
     }
 }

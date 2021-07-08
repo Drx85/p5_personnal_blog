@@ -2,11 +2,60 @@
 
 namespace Controllers;
 
+
+
+
 require_once('../app/autoload.php');
+
 
 $user_message = false;
 
-try
+$page = 'home';
+
+if (isset($_GET['p'])) {
+	$page = $_GET['p'];
+}
+
+if (! isset($_GET['page']) OR $_GET['page'] > 1000 OR $_GET['page'] < 0)
+{
+	$_GET['page'] = 1;
+}
+
+else
+{
+	$_GET['page'] = (int) $_GET['page'];
+}
+
+
+
+
+switch ($page) {
+	case 'home':
+		echo $twig->render('home.twig');
+		break;
+		
+	case 'posts':
+		$controller = new \Controllers\Post();
+		$controller->displayPosts($user_message);
+		break;
+	
+	default:
+		header('HTTP/1.0 404 Not Found');
+		echo $twig->render('404.twig');
+		break;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*try
 {
 	//FRONT
 	if(isset ($_GET['notify'])) {
@@ -215,4 +264,4 @@ catch(Exception $e)
 	else {
 		header('Location: index.php?notify=' . $e->getMessage() . '');
 	}
-}
+}*/

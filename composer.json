@@ -1,0 +1,12 @@
+{
+    "name": "cedric/blog",
+    "authors": [
+        {
+            "name": "Drx85",
+            "email": "ced.dep.85@hotmail.fr"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}

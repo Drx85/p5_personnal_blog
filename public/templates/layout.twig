@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Bienvenue sur mon blog !</title>
+	{% block head %}
+	{% endblock head %}
+</head>
+
+<body>
+
+<h1>
+	{% block title %}
+	{% endblock title %}
+</h1>
+
+{% block content %}
+
+{% endblock content %}
+
+
+
+{% if session.user_id %}
+	Connecté en tant que {{ session.pseudo }} ({{ session.role }})</br>
+	<a href="/p5_personnal_blog/public/frontend/disconnection.php?p=connexion">Se déconnecter</a>
+{% else %}
+	<a href="/p5_personnal_blog/public/index.php?p=register"> Créer un compte </a></br >
+	<a href="/p5_personnal_blog/public/index.php?p=connexion"> Se connecter </a>
+{% endif %}
+
+</body>
+</html>
+

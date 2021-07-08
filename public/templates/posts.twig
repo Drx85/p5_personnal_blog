@@ -1,0 +1,53 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+	Blog
+{% endblock title %}
+
+{% block content %}
+	
+	{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
+		<p><a href="backend/add_form.php">Ajouter un billet </a></p>
+	{% endif %}
+	
+	<h2>Les derniers billets</h2>
+	
+	{% for post in blog %}
+		
+		<h3>{{ post.title }}</h3>
+		<p>Posté le {{ post.post_date }} à {{ post.hour_post_time }}h{{ post.minute_post_time }}
+			
+			{% if post.update_date %}
+				(dernière modification le {{ post.update_date }}),
+			{% endif %}
+			par : {{ post.author }}
+		
+		<p>{{ post.message }}</p>
+		<a href="index.php?comment={{ post.id }}"> Lire la suite</a>
+		</p>
+		
+		{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
+			
+			<p><a href="index.php?delete_post={{ post.id }}">Supprimer ce billet</a>
+				| <a href="index.php?edit_post={{ post.id }}">Modifier ce billet</a></p>
+		{% endif %}
+		
+		{% set counter = ( counter | default(-1) ) + 1 %}
+		
+		{% set displayNb = (comments_number[counter].number_of_comments) %}
+		
+		{% if displayNb %}
+			<p><a href="index.php?p=post&page={{ post.id }}">Voir les commentaires ({{ displayNb }})</a></p>
+		{% else %}
+			<p><a href="index.php?p=post&page={{ post.id }}">Il n'y a pas de commentaire sur ce billet. Cliquez ici pour en ajouter un.</a></p>
+		{% endif %}
+	
+	{% endfor %}
+	
+	<p>
+		{% for key, number in array_pages %}
+			<a href="index.php?p=posts&page={{ number }}">{{ number }}</a> |
+		{% endfor %}
+	</p>
+
+{% endblock content %}

@@ -4,16 +4,13 @@ namespace Controllers;
 
 class Post extends Controller
 {
-	public function displayPosts($user_message)
+	public function displayPosts()
 	{
 		$blog = $this->post->findAll();
-		$rounded_page_number = $this->pages->count();
 		$array_pages = $this->pages->get();
 		$comments_number = $this->comment->count();
-		
-		$error_page = true;
-		$increment_comments_number = 0;
-		require('../public/frontend/index_view.php');
+
+		echo $this->twig->render('posts.twig', compact('blog', 'comments_number', 'array_pages'));
 	}
 	
 	public function adminSendPost()

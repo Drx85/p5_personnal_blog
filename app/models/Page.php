@@ -4,7 +4,7 @@ namespace Models;
 
 class Page extends Model
 {
-    public function count()
+    private function count()
     {
         $q = $this->db->query('SELECT COUNT(id) AS number FROM post');
         $number = $q->fetch();

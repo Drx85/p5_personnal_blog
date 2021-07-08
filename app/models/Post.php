@@ -12,16 +12,15 @@ class Post extends Model
     {
         $limit_page = $this->getLIMIT($_GET['page']);
 
-        $blog_post = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
+        $q = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
                                    HOUR(post_time) AS hour_post_time, 
                                    MINUTE(post_time) AS minute_post_time,
                                    DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
 				                   FROM post ORDER BY ID DESC LIMIT :limit_page, 5');
 
-        $blog_post->bindValue('limit_page', $limit_page, PDO::PARAM_INT);
-        $blog_post->execute();
-
-        return $blog_post;
+        $q->bindValue('limit_page', $limit_page, PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchAll();
     }
 	
 	private function getLIMIT($page)
