@@ -9,15 +9,28 @@ if (isset($_GET['p'])) {
 	$page = $_GET['p'];
 }
 
-if (! isset($_GET['page']) OR $_GET['page'] > 1000 OR $_GET['page'] < 1)
-{
+$action = 'showHome';
+if (isset($_GET['action'])) {
+	$action = $_GET['action'];
+}
+
+if (!isset($_GET['page']) or $_GET['page'] > 1000 or $_GET['page'] < 1) {
 	$_GET['page'] = 1;
 }
 
 switch ($page) {
 	case 'home':
-		$controller = new \Controllers\Page();
-		$controller->showHome();
+		switch ($action) {
+			case 'showHome':
+				$controller = new \Controllers\Page();
+				$controller->showHome();
+				break;
+				
+			case 'disconnect':
+				$controller = new \Controllers\Account();
+				$controller->disconnect();
+				break;
+		}
 		break;
 	
 	case 'posts':
@@ -33,7 +46,7 @@ switch ($page) {
 	case 'register':
 		$controller = new \Controllers\Account();
 		
-		switch ($_GET['action']) {
+		switch ($action) {
 			case 'showRegister':
 				$controller->showRegister();
 				break;
@@ -47,7 +60,7 @@ switch ($page) {
 	case 'connection':
 		$controller = new \Controllers\Account();
 		
-		switch ($_GET['action']) {
+		switch ($action) {
 			case 'showConnection':
 				$controller->showConnection();
 				break;
@@ -59,140 +72,15 @@ switch ($page) {
 		break;
 	
 	default:
-		header('HTTP/1.0 404 Not Found');
-		echo $twig->render('404.twig');
+		$controller = new \Controllers\Page();
+		$controller->show404();
 		break;
 }
 
 
 
 
-
-
-
-
-
-/*try
-{
-	//FRONT
-	if(isset ($_GET['notify'])) {
-		switch ($_GET['notify']) {
-			case 'privilege':
-				$user_message = 'Vous n\'avez pas les droits pour effectuer cette action.';
-				break;
-				
-			case 'post_modified':
-				$user_message = 'Le billet a bien été modifié.';
-				break;
-			
-			case 'post_deleted':
-				$user_message = 'Le billet a bien été supprimé.';
-				break;
-				
-			case 'comment_deleted':
-				$user_message = 'Le commentaire a bien été supprimé.';
-				break;
-				
-			case 'added_post':
-				$user_message = 'Le billet a bien été ajouté.';
-				break;
-		}
-	}
-	
-    if (! isset($_GET['page']) OR $_GET['page'] > 1000 OR $_GET['page'] < 0)
-    {
-        $_GET['page'] = 1;
-    }
-
-    else
-    {
-        $_GET['page'] = (int) $_GET['page'];
-    }
-
-
-    if (isset($_GET['comment']))
-    {
-        $_GET['comment'] = (int) $_GET['comment'];
-    }
-
-    if (! isset($_GET['comment']) OR $_GET['comment'] > 1000 OR $_GET['comment'] <= 0)
-    {
-    	$controller = new \Controllers\Post();
-        $controller->displayPosts($user_message);
-    }
-
-    else
-    {
-    	$controller = new Comment();
-        $controller->displayComments();
-    }
-    
-	if (isset($_GET['send_comment']))
-	{
-		if (! empty($_POST['user_comment']) OR $_POST['user_comment'] === '0')
-		{
-			$controller = new Comment();
-			$controller->sendComment();
-		}
-		
-		else
-		{
-			throw new Exception('empty_comment', 1);
-		}
-	}
-	
-	if (isset($_GET['p']))
-	{
-		switch ($_GET['p']) {
-			case 'register':
-				header('Location: frontend/register.php');
-				break;
-				
-			case 'connexion':
-				header('Location: frontend/connexion.php');
-				break;
-		}
-	}
-
-	if (isset($_POST['pseudo']) && isset($_POST['mail']) && isset($_POST['password']))
-	{
-		if (!empty($_POST['pseudo']) && !empty($_POST['mail']) && !empty($_POST['password']))
-		{
-			$controller = new Account();
-			switch ($controller->register()) {
-				case 'pseudoExists':
-					header('Location: frontend/register.php?exists=pseudo');
-					break;
-					
-				case 'emailExists':
-					header('Location: frontend/register.php?exists=mail');
-					break;
-					
-				case 'pseudoMailExists':
-					header('Location: frontend/register.php?exists=pseudomail');
-					break;
-					
-				default:
-					header('Location: frontend/redirect.php?redirect=register');
-			}
-		}
-		else {
-			header('Location: frontend/register.php?field=empty');
-		}
-	}
-	
-	if (isset($_POST['username']) && isset($_POST['password']))
-	{
-		$controller = new Account();
-		if ($controller->userConnected() === true) {
-			header('Location: index.php');
-		}
-		else {
-			header('Location: frontend/connexion.php?connect=false');
-		}
-	}
-
-//BACK
+/*//BACK
 	if (isset($_POST['title']) AND isset($_POST['post_content']))
 	{
 		if (! empty($_POST['title']) AND ! empty($_POST['post_content']))

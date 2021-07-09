@@ -48,4 +48,10 @@ class Account extends Controller
 			echo $this->twig->render('connection.twig', ['message' => Message::BAD_CREDENTIALS]);
 		}
 	}
+	
+	public function disconnect()
+	{
+		session_destroy();
+		echo $this->twig->render('home.twig', ['message' => Message::DISCONNECTED]);
+	}
 }

@@ -28,7 +28,7 @@
 
 {% if session.user_id %}
 	Connecté en tant que {{ session.pseudo }} ({{ session.role }})</br>
-	<a href="/p5_personnal_blog/public/frontend/disconnection.php?p=connexion">Se déconnecter</a>
+	<a href="index.php?p=home&action=disconnect">Se déconnecter</a>
 {% else %}
 	<a href="index.php?p=register&action=showRegister">Créer un compte</a></br >
 	<a href="index.php?p=connection&action=showConnection">Se connecter</a></br>

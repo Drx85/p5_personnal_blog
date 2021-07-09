@@ -47,7 +47,6 @@ class Account extends Model
 			$_SESSION['user_id'] = $q['user_id'];
 			$_SESSION['pseudo'] = $pseudo;
 			$_SESSION['role'] = $q['role'];
-			return true;
-		}
+			}
 	}
 }

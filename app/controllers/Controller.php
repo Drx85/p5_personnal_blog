@@ -26,7 +26,7 @@ abstract class Controller
 		$this->comment = new \Models\Comment();
 		$this->admin = new \Models\Admin();
 		
-		$loader = new FilesystemLoader('templates');
+		$loader = new FilesystemLoader('views');
 		$this->twig = new Environment($loader, [
 			'cache' => false,
 			'debug' => true
