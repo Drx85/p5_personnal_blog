@@ -16,6 +16,10 @@
 	{% endblock title %}
 </h1>
 
+{% if message %}
+	<p>{{ message|raw }}</p>
+{% endif %}
+
 {% block content %}
 
 {% endblock content %}
@@ -26,9 +30,11 @@
 	Connecté en tant que {{ session.pseudo }} ({{ session.role }})</br>
 	<a href="/p5_personnal_blog/public/frontend/disconnection.php?p=connexion">Se déconnecter</a>
 {% else %}
-	<a href="/p5_personnal_blog/public/index.php?p=register"> Créer un compte </a></br >
-	<a href="/p5_personnal_blog/public/index.php?p=connexion"> Se connecter </a>
+	<a href="index.php?p=register&action=showRegister">Créer un compte</a></br >
+	<a href="index.php?p=connection&action=showConnection">Se connecter</a></br>
 {% endif %}
+
+<a href="index.php?p=posts">Blog</a>
 
 </body>
 </html>

@@ -2,41 +2,60 @@
 
 namespace Controllers;
 
-
-
-
 require_once('../app/autoload.php');
 
-
-$user_message = false;
-
 $page = 'home';
-
 if (isset($_GET['p'])) {
 	$page = $_GET['p'];
 }
 
-if (! isset($_GET['page']) OR $_GET['page'] > 1000 OR $_GET['page'] < 0)
+if (! isset($_GET['page']) OR $_GET['page'] > 1000 OR $_GET['page'] < 1)
 {
 	$_GET['page'] = 1;
 }
 
-else
-{
-	$_GET['page'] = (int) $_GET['page'];
-}
-
-
-
-
 switch ($page) {
 	case 'home':
-		echo $twig->render('home.twig');
+		$controller = new \Controllers\Page();
+		$controller->showHome();
 		break;
-		
+	
 	case 'posts':
 		$controller = new \Controllers\Post();
-		$controller->displayPosts($user_message);
+		$controller->index();
+		break;
+	
+	case 'post':
+		$controller = new \Controllers\Post();
+		$controller->show();
+		break;
+	
+	case 'register':
+		$controller = new \Controllers\Account();
+		
+		switch ($_GET['action']) {
+			case 'showRegister':
+				$controller->showRegister();
+				break;
+			
+			case 'register':
+				$controller->register();
+				break;
+		}
+		break;
+	
+	case 'connection':
+		$controller = new \Controllers\Account();
+		
+		switch ($_GET['action']) {
+			case 'showConnection':
+				$controller->showConnection();
+				break;
+			
+			case 'connect':
+				$controller->connect();
+				break;
+		}
 		break;
 	
 	default:
@@ -44,8 +63,6 @@ switch ($page) {
 		echo $twig->render('404.twig');
 		break;
 }
-
-
 
 
 

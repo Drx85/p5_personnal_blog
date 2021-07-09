@@ -21,13 +21,13 @@ class Account extends Model
 		$mailExists = $q->fetch();
 		
 		if($pseudoExists && $mailExists) {
-			return 'pseudoMailExists';
+			return 'pseudo_mail_exists';
 		}
 		elseif ($pseudoExists) {
-			return 'pseudoExists';
+			return 'pseudo_exists';
 		}
 		elseif ($mailExists) {
-			return 'emailExists';
+			return 'mail_exists';
 		}
 		else {
 			return false;

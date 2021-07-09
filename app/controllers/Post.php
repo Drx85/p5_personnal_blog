@@ -4,13 +4,19 @@ namespace Controllers;
 
 class Post extends Controller
 {
-	public function displayPosts()
+	public function index()
 	{
 		$blog = $this->post->findAll();
 		$array_pages = $this->pages->get();
 		$comments_number = $this->comment->count();
-
 		echo $this->twig->render('posts.twig', compact('blog', 'comments_number', 'array_pages'));
+	}
+	
+	public function show()
+	{
+		$post = $this->post->find($_GET['id']);
+		$comments = $this->comment->findAll($_GET['id']);
+		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
 	public function adminSendPost()

@@ -22,8 +22,8 @@
 			{% endif %}
 			par : {{ post.author }}
 		
-		<p>{{ post.message }}</p>
-		<a href="index.php?comment={{ post.id }}"> Lire la suite</a>
+			{{ post.message }}
+			<a href="index.php?p=post&id={{ post.id }}"> Lire la suite</a>
 		</p>
 		
 		{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
@@ -37,9 +37,9 @@
 		{% set displayNb = (comments_number[counter].number_of_comments) %}
 		
 		{% if displayNb %}
-			<p><a href="index.php?p=post&page={{ post.id }}">Voir les commentaires ({{ displayNb }})</a></p>
+			<p><a href="index.php?p=post&id={{ post.id }}">Voir les commentaires ({{ displayNb }})</a></p>
 		{% else %}
-			<p><a href="index.php?p=post&page={{ post.id }}">Il n'y a pas de commentaire sur ce billet. Cliquez ici pour en ajouter un.</a></p>
+			<p><a href="index.php?p=post&id={{ post.id }}">Il n'y a pas de commentaire sur ce billet. Cliquez ici pour en ajouter un.</a></p>
 		{% endif %}
 	
 	{% endfor %}

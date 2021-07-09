@@ -24,10 +24,11 @@ class Comment extends Model
 
     public function findAll(int $id_post)
     {
-        $q = $this->db->prepare('SELECT id, id_post, author, text_comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date,
-                                      HOUR(comment_time) AS hour_comment_time, MINUTE(comment_time) AS minute_comment_time
+        $q = $this->db->prepare('SELECT id, id_post, author, text, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS c_date,
+                                      HOUR(comment_time) AS c_hour, MINUTE(comment_time) AS c_minute
 				                      FROM comment WHERE id_post = ? ORDER BY ID');
-        return $q->execute(array($id_post));
+        $q->execute(array($id_post));
+        return $q->fetchAll();
     }
 
     public function insert(int $id_post, string $pseudo, string $text_comment)

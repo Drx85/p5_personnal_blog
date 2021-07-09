@@ -16,7 +16,7 @@
 <?php
 
 if (! isset($_SESSION['user_id'])) {
-	echo '<a href = "/p5_personnal_blog/public/index.php?p=register"> Créer un compte </a ></br >
+	echo '<a href = "/p5_personnal_blog/public/index.php?p=register&action=register"> Créer un compte </a ></br >
 	<a href = "/p5_personnal_blog/public/index.php?p=connexion"> Se connecter </a>';
 }
 else {

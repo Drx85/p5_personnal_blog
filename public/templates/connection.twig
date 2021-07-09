@@ -1,0 +1,20 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+	Connection
+{% endblock title %}
+
+{% block content %}
+
+<form action="index.php?p=connection&action=connect" method="post">
+	<label><b>Nom d'utilisateur</b></label>
+	<input type="text" placeholder="Entrer votre pseudo" name="username" required>
+	
+	<label><b>Mot de passe</b></label>
+	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
+	
+	<input type="submit" id='submit' value='Connection'>
+	<?php
+</form>
+
+{% endblock content %}

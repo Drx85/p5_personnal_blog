@@ -10,7 +10,7 @@ class Post extends Model
 	
     public function findAll()
     {
-        $limit_page = $this->getLIMIT($_GET['page']);
+        $limit_page = $this->getLIMIT((int)$_GET['page']);
 
         $q = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
                                    HOUR(post_time) AS hour_post_time, 

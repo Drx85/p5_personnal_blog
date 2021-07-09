@@ -16,11 +16,7 @@ ob_start();
 	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
 	
 	<input type="submit" id='submit' value='Connection' >
-	<?php
-	if (isset($_GET['connect']) && $_GET['connect'] === 'false') {
-		echo '<p>Mauvais nom d\'utilisateur ou mot de passe.</p>';
-	}
-	?>
+
 </form>
 
 <?php
