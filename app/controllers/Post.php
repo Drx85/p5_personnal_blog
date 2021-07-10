@@ -37,5 +37,4 @@ class Post extends Controller
 		$this->post->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
 		echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
 	}
-	
 }

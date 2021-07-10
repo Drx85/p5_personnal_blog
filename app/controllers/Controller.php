@@ -6,6 +6,7 @@ session_start();
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
+use Twig\Extra\String\StringExtension;
 
 require_once('../vendor/autoload.php');
 
@@ -15,7 +16,6 @@ abstract class Controller
 	protected $pages;
 	protected $account;
 	protected $comment;
-	protected $admin;
 	protected $twig;
 	
 	public function __construct()
@@ -24,7 +24,6 @@ abstract class Controller
 		$this->pages = new \Models\Page();
 		$this->account = new \Models\Account();
 		$this->comment = new \Models\Comment();
-		$this->admin = new \Models\Admin();
 		
 		$loader = new FilesystemLoader('views');
 		$this->twig = new Environment($loader, [
@@ -33,5 +32,6 @@ abstract class Controller
 		]);
 		$this->twig->addGlobal('session', $_SESSION);
 		$this->twig->addExtension(new DebugExtension());
+		$this->twig->addExtension(new StringExtension());
 	}
 }

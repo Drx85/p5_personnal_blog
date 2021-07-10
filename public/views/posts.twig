@@ -22,7 +22,7 @@
 			{% endif %}
 			par : {{ post.author }}
 		
-			{{ post.message }}
+			{{ post.message | u.truncate(700, '...', false) | nl2br }}
 			<a href="index.php?controller=post&action=show&id={{ post.id }}"> Lire la suite</a>
 		</p>
 		
