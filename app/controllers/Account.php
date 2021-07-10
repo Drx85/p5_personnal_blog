@@ -28,7 +28,7 @@ class Account extends Controller
 	public function register()
 	{
 		$exists = $this->account->exists($_POST['pseudo'], $_POST['mail']);
-		if ($exists === false) {
+		if (! $exists) {
 			$this->account->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
 			echo $this->twig->render('home.twig', ['message' => Message::CREATED]);
 		}

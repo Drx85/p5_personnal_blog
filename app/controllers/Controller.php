@@ -17,6 +17,7 @@ abstract class Controller
 	protected $account;
 	protected $comment;
 	protected $twig;
+	protected $role;
 	
 	public function __construct()
 	{
@@ -33,5 +34,22 @@ abstract class Controller
 		$this->twig->addGlobal('session', $_SESSION);
 		$this->twig->addExtension(new DebugExtension());
 		$this->twig->addExtension(new StringExtension());
+		
+		if (isset($_SESSION['role'])) {
+			$this->role = $_SESSION['role'];
+		}
+	}
+	
+	protected function hasPermission()
+	{
+		if ($this->role === 'admin' || $this->role === 'publisher') {
+			return true;
+		}
+	}
+	
+	protected function forbidden()
+	{
+		header('HTTP/1.0 403 Forbidden');
+		echo $this->twig->render('forbidden.twig');
 	}
 }

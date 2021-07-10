@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+
 use Message;
 
 class Comment extends Controller
@@ -13,7 +14,11 @@ class Comment extends Controller
 	
 	public function delete()
 	{
-		$this->comment->delete($_GET['id']);
-		echo $this->twig->render('home.twig', ['message' => Message::DELETED_COMMENT]);
+		if ($this->hasPermission()) {
+			$this->comment->delete($_GET['id']);
+			echo $this->twig->render('home.twig', ['message' => Message::DELETED_COMMENT]);
+		} else {
+			$this->forbidden();
+		}
 	}
 }

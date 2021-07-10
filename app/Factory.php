@@ -6,7 +6,7 @@ use Doctrine\Inflector\InflectorFactory;
 require_once('../vendor/autoload.php');
 
 
-class Factory extends Exception
+class Factory
 {
 	public static function process($controller, $action)
 	{
