@@ -1,26 +1,19 @@
 <?php
 
 namespace Controllers;
+use Message;
 
 class Comment extends Controller
 {
-	public function displayComments()
+	public function send()
 	{
-		$post = $this->post->find($_GET['comment']);
-		$blog_comments = $this->comment->findAll($_GET['comment']);
-		require('../public/frontend/comments_view.php');
+		$this->comment->insert($_GET['id_post'], $_SESSION['pseudo'], $_POST['user_comment']);
+		echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 	}
 	
-	public function sendComment()
+	public function delete()
 	{
-		$this->comment->insert($_GET['send_comment'], $_SESSION['pseudo'], $_POST['user_comment']);
-		header('Location: index.php?comment=' . $_GET['send_comment']);
+		$this->comment->delete($_GET['id']);
+		echo $this->twig->render('home.twig', ['message' => Message::DELETED_COMMENT]);
 	}
-	
-	public function adminDeleteComment()
-	{
-		$this->comment->delete($_GET['delete_comment']);
-		header('Location: index.php?deleted_comment=true');
-	}
-	
 }

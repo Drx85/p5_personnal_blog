@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+use Message;
 
 class Post extends Controller
 {
@@ -19,28 +20,22 @@ class Post extends Controller
 		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
-	public function adminSendPost()
+	public function add()
 	{
 		$this->post->insert($_POST['title'], $_POST['post_content'], $_SESSION['pseudo']);
-		header('Location: index.php?send_post=true');
+		echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 	}
 	
-	public function adminDeletePost()
+	public function delete()
 	{
-		$this->post->delete($_GET['delete_post']);
-		header('Location: index.php?deleted_post=true');
+		$this->post->delete($_GET['id']);
+		echo $this->twig->render('home.twig', ['message' => Message::DELETED_POST]);
 	}
 	
-	public function formEditPost()
+	public function edit()
 	{
-		$edit_values = $this->admin->valuesEditPost($_GET['edit_post']);
-		require('../public/backend/edit_form.php');
-	}
-	
-	public function adminEditPost()
-	{
-		$this->post->edit($_POST['edit_title'], $_POST['edit_post_content'], $_POST['edit_author'], $_GET['sent_edit_post']);
-		header('Location: index.php?edited_post=true');
+		$this->post->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
+		echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
 	}
 	
 }

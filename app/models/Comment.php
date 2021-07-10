@@ -31,10 +31,10 @@ class Comment extends Model
         return $q->fetchAll();
     }
 
-    public function insert(int $id_post, string $pseudo, string $text_comment)
+    public function insert(int $id_post, string $pseudo, string $text)
     {
-        $q = $this->db->prepare('INSERT INTO comment (id_post, author, text_comment, comment_date, comment_time)
-												VALUES (:id_post, :pseudo, :text_comment, NOW(), NOW())');
-        $q->execute(compact('id_post', 'pseudo', 'text_comment'));
+        $q = $this->db->prepare('INSERT INTO comment (id_post, author, text, comment_date, comment_time)
+												VALUES (:id_post, :pseudo, :text, NOW(), NOW())');
+        $q->execute(compact('id_post', 'pseudo', 'text'));
     }
 }

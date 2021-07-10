@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+	Ajouter un billet
+{% endblock title %}
+
+{% block content %}
+	
+	<form method="post" action="index.php?controller=post&action=add">
+		<p>
+			<label for="title">Titre : </label> <input type="text" name="title" required/> <br/>
+			<label for="post_content">Contenu du billet : <br/></label> <textarea name="post_content" rows="20" cols="150" required></textarea> <br/>
+			<input type="submit"/>
+		</p>
+	</form>
+
+{% endblock content %}

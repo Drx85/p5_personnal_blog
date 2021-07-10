@@ -23,7 +23,7 @@ class Post extends Model
         return $q->fetchAll();
     }
 	
-	private function getLIMIT($page)
+	private function getLIMIT(int $page)
 	{
 		$limit_page = 0;
 		
@@ -37,6 +37,13 @@ class Post extends Model
 	{
 		$sent_post = $this->db->prepare('INSERT INTO post (title, message, author, post_date, post_time) VALUES (:title, :message, :pseudo, NOW(), NOW())');
 		$sent_post->execute(compact('title', 'message', 'pseudo'));
+	}
+	
+	public function getEditValues(int $id)
+	{
+		$q = $this->db->prepare('SELECT id, title, message, author FROM post WHERE id = ?');
+		$q->execute(array($id));
+		return $q->fetch();
 	}
 	
 	public function edit(string $title, string $message, string $author, int $id)

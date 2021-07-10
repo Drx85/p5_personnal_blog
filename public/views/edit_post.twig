@@ -1,0 +1,18 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+	Ajouter un billet
+{% endblock title %}
+
+{% block content %}
+	
+	<form method="post" action="index.php?controller=post&action=edit&id={{ value.id }}">
+		<p>
+			<label for="title">Titre : </label> <input type="text" name="title" value="{{ value.title }}"/> <br/>
+			<label for="author">Auteur : </label> <input type="text" name="author" value="{{ value.author }}"/> <br/>
+			<label for="message">Contenu du billet : <br/></label> <textarea name="message" rows="20" cols="150">{{ value.message }}</textarea> <br/>
+			<input type="submit"/>
+		</p>
+	</form>
+
+{% endblock content %}

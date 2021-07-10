@@ -28,13 +28,13 @@
 
 {% if session.user_id %}
 	Connecté en tant que {{ session.pseudo }} ({{ session.role }})</br>
-	<a href="index.php?p=home&action=disconnect">Se déconnecter</a>
+	<a href="index.php?controller=account&action=disconnect">Se déconnecter</a>
 {% else %}
-	<a href="index.php?p=register&action=showRegister">Créer un compte</a></br >
-	<a href="index.php?p=connection&action=showConnection">Se connecter</a></br>
+	<a href="index.php?controller=account&action=show_register">Créer un compte</a></br >
+	<a href="index.php?controller=account&action=show_connection">Se connecter</a></br>
 {% endif %}
 
-<a href="index.php?p=posts">Blog</a>
+<a href="index.php?controller=post&action=index">Blog</a>
 
 </body>
 </html>

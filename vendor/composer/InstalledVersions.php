@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'a60fce2776e5ad690822b6816355a08030ae998e',
+    'reference' => '77a9e4973c25d5595ae994ba4c2147b7f29c45e5',
     'name' => 'cedric/blog',
   ),
   'versions' => 
@@ -42,7 +42,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'a60fce2776e5ad690822b6816355a08030ae998e',
+      'reference' => '77a9e4973c25d5595ae994ba4c2147b7f29c45e5',
+    ),
+    'doctrine/inflector' => 
+    array (
+      'pretty_version' => '2.0.3',
+      'version' => '2.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9cf661f4eb38f7c881cac67c75ea9b00bf97b210',
     ),
     'symfony/polyfill-ctype' => 
     array (

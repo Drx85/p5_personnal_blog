@@ -4,9 +4,9 @@ namespace Controllers;
 
 require_once('../app/autoload.php');
 
-$page = 'home';
-if (isset($_GET['p'])) {
-	$page = $_GET['p'];
+$controller = 'Page';
+if (isset($_GET['controller'])) {
+	$controller = $_GET['controller'];
 }
 
 $action = 'showHome';
@@ -18,7 +18,10 @@ if (!isset($_GET['page']) or $_GET['page'] > 1000 or $_GET['page'] < 1) {
 	$_GET['page'] = 1;
 }
 
-switch ($page) {
+\Factory::process($controller, $action);
+
+
+/*switch ($page) {
 	case 'home':
 		switch ($action) {
 			case 'showHome':
@@ -75,7 +78,7 @@ switch ($page) {
 		$controller = new \Controllers\Page();
 		$controller->show404();
 		break;
-}
+}*/
 
 
 
