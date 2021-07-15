@@ -31,6 +31,10 @@ class ComposerStaticInit8301ba70b7fa83bf4626d668fe85d64a
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Component\\String\\' => 25,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'D' => 
         array (
             'Doctrine\\Inflector\\' => 19,
@@ -73,6 +77,10 @@ class ComposerStaticInit8301ba70b7fa83bf4626d668fe85d64a
         'Symfony\\Component\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Doctrine\\Inflector\\' => 
         array (

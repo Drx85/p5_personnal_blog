@@ -14,4 +14,5 @@ class Message
 	public const EDITED = "Le billet a bien été modifié.";
 	public const DELETED_POST = "Le billet a bien été supprimé.";
 	public const DELETED_COMMENT = "Le commentaire a bien été supprimé.";
+	public const SENT_MAIL = "Votre email a bien été envoyé.";
 }

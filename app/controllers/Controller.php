@@ -16,6 +16,7 @@ abstract class Controller
 	protected $pages;
 	protected $account;
 	protected $comment;
+	protected $mail;
 	protected $twig;
 	protected $role;
 	
@@ -25,6 +26,7 @@ abstract class Controller
 		$this->pages = new \Models\Page();
 		$this->account = new \Models\Account();
 		$this->comment = new \Models\Comment();
+		$this->mail = new \Models\Mail();
 		
 		$loader = new FilesystemLoader('views');
 		$this->twig = new Environment($loader, [

@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '86a16eefa540ff51a9aaa574da23564b1e18c8d5',
+    'reference' => '68b1523c84dc2c0facc2ab933ba0ce37642f6a9a',
     'name' => 'cedric/blog',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '86a16eefa540ff51a9aaa574da23564b1e18c8d5',
+      'reference' => '68b1523c84dc2c0facc2ab933ba0ce37642f6a9a',
     ),
     'doctrine/inflector' => 
     array (
@@ -28,6 +28,15 @@
       array (
       ),
       'reference' => '9cf661f4eb38f7c881cac67c75ea9b00bf97b210',
+    ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v6.5.0',
+      'version' => '6.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a5b5c43e50b7fba655f793ad27303cd74c57363c',
     ),
     'symfony/polyfill-ctype' => 
     array (
