@@ -11,20 +11,20 @@ class Mail extends Model
 	{
 		$mail = new PHPMailer();
 		$mail->IsSMTP();
-		$mail->Host = 'mail.infomaniak.com';
-		$mail->Port = 465;
+		$mail->Host = \Config::MAIL_HOST;
+		$mail->Port = \Config::MAIL_PORT;
 		$mail->SMTPAuth = 1;
 		
 		if($mail->SMTPAuth){
 			$mail->SMTPSecure = 'ssl';
-			$mail->Username   =  'cedric@deperne.fr';
-			$mail->Password   =  '4iu6uJdAJkZxW3i';
+			$mail->Username   =  \Config::MAIL_USERNAME;
+			$mail->Password   =  \Config::MAIL_PASSWORD;
 		}
 		
-		$mail->addAddress('cedric@deperne.fr');
+		$mail->addAddress(\Config::MAIL_USERNAME);
 		$mail->CharSet = 'UTF-8';
 		$mail->smtpConnect();
-		$mail->From       =  'cedric@deperne.fr';
+		$mail->From       =  \Config::MAIL_USERNAME;
 		
 		$mail->Subject    =  'Nouveau message de ' . $surname . ' ' . $name;
 		$mail->WordWrap   = 50;
