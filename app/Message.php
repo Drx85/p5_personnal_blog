@@ -11,6 +11,8 @@ class Message
 	public const PSEUDO_EXISTS = "Ce pseudo existe déjà.";
 	public const MAIL_EXISTS = "Cet email existe déjà.";
 	public const ADDED = "Le billet a bien été ajouté.";
+	public const SENT_COMMENT = "Votre commentaire a bien été envoyé et a été soumis pour validation, il sera publié d'ici peu.";
+	public const VALIDATED_COMMENT = "Le commentaire a bien été validé et publié.";
 	public const EDITED = "Le billet a bien été modifié.";
 	public const DELETED_POST = "Le billet a bien été supprimé.";
 	public const DELETED_COMMENT = "Le commentaire a bien été supprimé.";

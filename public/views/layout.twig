@@ -20,6 +20,10 @@
 	<p>{{ message|raw }}</p>
 {% endif %}
 
+{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
+	<p><a href="index.php?controller=comment&action=show_pending">Voir les commentaires en attente de validation</a></p>
+{% endif %}
+
 {% block content %}
 
 {% endblock content %}

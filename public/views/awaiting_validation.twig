@@ -1,0 +1,19 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+	Commentaires en attente de validation
+{% endblock title %}
+
+{% block content %}
+	
+	{% for comment in comments %}
+		
+		<p>Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
+		{{ comment.text }}
+		
+		<p><a href="index.php?controller=comment&action=delete&id={{ comment.id }}">Supprimer ce commentaire</a> |
+			<a href="index.php?controller=comment&action=validate&id={{ comment.id }}">Valider et publier ce commentaire</a></p>
+	
+	{% endfor %}
+
+{% endblock content %}

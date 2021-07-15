@@ -16,7 +16,7 @@ class Post extends Controller
 	public function show()
 	{
 		$post = $this->post->find($_GET['id']);
-		$comments = $this->comment->findAll($_GET['id']);
+		$comments = $this->comment->findAll(1, $_GET['id']);
 		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
