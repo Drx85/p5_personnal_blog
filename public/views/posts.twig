@@ -21,13 +21,12 @@
 				(dernière modification le {{ post.update_date }}),
 			{% endif %}
 			par : {{ post.author }}
-		
-			{{ post.message | u.truncate(700, '...', false) | nl2br }}
+			
+			{{ post.message | u.truncate(500, '...', false) | nl2br }}
 			<a href="index.php?controller=post&action=show&id={{ post.id }}"> Lire la suite</a>
 		</p>
 		
 		{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
-			
 			<p><a href="index.php?controller=post&action=delete&id={{ post.id }}">Supprimer ce billet</a>
 				| <a href="index.php?controller=page&action=show_edit&id={{ post.id }}">Modifier ce billet</a></p>
 		{% endif %}

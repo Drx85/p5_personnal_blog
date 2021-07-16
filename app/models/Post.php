@@ -8,20 +8,30 @@ class Post extends Model
 {
 	protected $table = 'post';
 	
-    public function findAll()
-    {
-        $limit_page = $this->getLIMIT((int)$_GET['page']);
-
-        $q = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
+	public function findAll()
+	{
+		$limit_page = $this->getLIMIT((int)$_GET['page']);
+		
+		$q = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
                                    HOUR(post_time) AS hour_post_time, 
                                    MINUTE(post_time) AS minute_post_time,
                                    DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
 				                   FROM post ORDER BY ID DESC LIMIT :limit_page, 5');
-
-        $q->bindValue('limit_page', $limit_page, PDO::PARAM_INT);
-        $q->execute();
-        return $q->fetchAll();
-    }
+		
+		$q->bindValue('limit_page', $limit_page, PDO::PARAM_INT);
+		$q->execute();
+		return $q->fetchAll();
+	}
+	
+	public function find(int $id)
+	{
+		$q = $this->db->prepare("SELECT id, title, message, author, DATE_FORMAT(post_date, '%d/%m/%Y') AS date,
+                                   HOUR(post_time) AS hour,
+                                   MINUTE(post_time) AS minute,
+                                   DATE_FORMAT(update_date, '%d/%m/%Y') AS update_date FROM post WHERE id = ?");
+		$q->execute(array($id));
+		return $q->fetch();
+	}
 	
 	private function getLIMIT(int $page)
 	{

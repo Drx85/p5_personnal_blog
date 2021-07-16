@@ -4,6 +4,8 @@ namespace Controllers;
 
 class Page extends Controller
 {
+	protected $modelName = \Models\Post::class;
+	
 	public function showHome()
 	{
 		echo $this->twig->render('home.twig');
@@ -21,8 +23,8 @@ class Page extends Controller
 	public function showEdit()
 	{
 		if ($this->hasPermission()) {
-		$value = $this->post->getEditValues($_GET['id']);
-		echo $this->twig->render('edit_post.twig', compact('value'));
+			$value = $this->model->getEditValues($_GET['id']);
+			echo $this->twig->render('edit_post.twig', compact('value'));
 		} else {
 			$this->forbidden();
 		}

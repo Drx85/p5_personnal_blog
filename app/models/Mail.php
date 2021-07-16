@@ -15,23 +15,23 @@ class Mail extends Model
 		$mail->Port = \Config::MAIL_PORT;
 		$mail->SMTPAuth = 1;
 		
-		if($mail->SMTPAuth){
+		if ($mail->SMTPAuth) {
 			$mail->SMTPSecure = 'ssl';
-			$mail->Username   =  \Config::MAIL_USERNAME;
-			$mail->Password   =  \Config::MAIL_PASSWORD;
+			$mail->Username = \Config::MAIL_USERNAME;
+			$mail->Password = \Config::MAIL_PASSWORD;
 		}
 		
 		$mail->addAddress(\Config::MAIL_USERNAME);
 		$mail->CharSet = 'UTF-8';
 		$mail->smtpConnect();
-		$mail->From       =  \Config::MAIL_USERNAME;
+		$mail->From = \Config::MAIL_USERNAME;
 		
-		$mail->Subject    =  'Nouveau message de ' . $surname . ' ' . $name;
-		$mail->WordWrap   = 50;
-
+		$mail->Subject = 'Nouveau message de ' . $surname . ' ' . $name;
+		$mail->WordWrap = 50;
+		
 		$mail->MsgHTML('Prénom :' . $surname . '</br>
 								Nom :' . $name . '</br>
-								Mail :' .$email . '</br>
+								Mail :' . $email . '</br>
 								Message :' . $message . '</br>');
 		$mail->send();
 	}

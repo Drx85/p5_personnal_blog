@@ -5,6 +5,8 @@ use Message;
 
 class Account extends Controller
 {
+	protected $modelName = \Models\Account::class;
+	
 	public function showRegister()
 	{
 		if (! isset($_SESSION['user_id'])) {
@@ -27,9 +29,9 @@ class Account extends Controller
 	
 	public function register()
 	{
-		$exists = $this->account->exists($_POST['pseudo'], $_POST['mail']);
+		$exists = $this->model->exists($_POST['pseudo'], $_POST['mail']);
 		if (! $exists) {
-			$this->account->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
+			$this->model->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
 			echo $this->twig->render('home.twig', ['message' => Message::CREATED]);
 		}
 		else {
@@ -39,7 +41,7 @@ class Account extends Controller
 	
 	public function connect()
 	{
-		$this->account->connect($_POST['password'], $_POST['username']);
+		$this->model->connect($_POST['password'], $_POST['username']);
 		
 		if (isset($_SESSION['user_id'])) {
 			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED]);

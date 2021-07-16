@@ -9,7 +9,7 @@
 	<h2>Détails et commentaires</h2>
 	
 	<p>
-		Posté le {{ post.post_date }} à {{ post.post_time }}
+		Posté le {{ post.date }} à {{ post.hour }}h{{ post.minute }}
 		{% if post.update_date %}
 			(dernière modification le {{ post.update_date }})
 		{% endif %}

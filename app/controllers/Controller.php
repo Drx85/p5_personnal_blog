@@ -12,21 +12,14 @@ require_once('../vendor/autoload.php');
 
 abstract class Controller
 {
-	protected $post;
-	protected $pages;
-	protected $account;
-	protected $comment;
-	protected $mail;
+	protected $model;
+	protected $modelName;
 	protected $twig;
 	protected $role;
 	
 	public function __construct()
 	{
-		$this->post = new \Models\Post();
-		$this->pages = new \Models\Page();
-		$this->account = new \Models\Account();
-		$this->comment = new \Models\Comment();
-		$this->mail = new \Models\Mail();
+		$this->model = new $this->modelName;
 		
 		$loader = new FilesystemLoader('views');
 		$this->twig = new Environment($loader, [

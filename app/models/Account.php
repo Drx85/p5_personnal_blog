@@ -20,16 +20,13 @@ class Account extends Model
 		$q->execute(array($mail));
 		$mailExists = $q->fetch();
 		
-		if($pseudoExists && $mailExists) {
+		if ($pseudoExists && $mailExists) {
 			return 'pseudo_mail_exists';
-		}
-		elseif ($pseudoExists) {
+		} elseif ($pseudoExists) {
 			return 'pseudo_exists';
-		}
-		elseif ($mailExists) {
+		} elseif ($mailExists) {
 			return 'mail_exists';
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -47,6 +44,6 @@ class Account extends Model
 			$_SESSION['user_id'] = $q['user_id'];
 			$_SESSION['pseudo'] = $pseudo;
 			$_SESSION['role'] = $q['role'];
-			}
+		}
 	}
 }

@@ -1,30 +1,37 @@
 <?php
 
 namespace Controllers;
+
 use Message;
 
 class Post extends Controller
 {
+	protected $modelName = \Models\Post::class;
+	
 	public function index()
 	{
-		$blog = $this->post->findAll();
-		$array_pages = $this->pages->get();
-		$comments_number = $this->comment->count();
+		$pages = new \Models\Page();
+		$comment = new \Models\Comment();
+		
+		$blog = $this->model->findAll();
+		$array_pages = $pages->get();
+		$comments_number = $comment->count();
 		echo $this->twig->render('posts.twig', compact('blog', 'comments_number', 'array_pages'));
 	}
 	
 	public function show()
 	{
-		$post = $this->post->find($_GET['id']);
-		$comments = $this->comment->findAll(1, $_GET['id']);
+		$comment = new \Models\Comment();
+		$post = $this->model->find($_GET['id']);
+		$comments = $comment->findAllByPost(1, $_GET['id']);
 		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
 	public function add()
 	{
 		if ($this->hasPermission()) {
-		$this->post->insert($_POST['title'], $_POST['post_content'], $_SESSION['pseudo']);
-		echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
+			$this->model->insert($_POST['title'], $_POST['post_content'], $_SESSION['pseudo']);
+			echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 		} else {
 			$this->forbidden();
 		}
@@ -33,8 +40,8 @@ class Post extends Controller
 	public function delete()
 	{
 		if ($this->hasPermission()) {
-		$this->post->delete($_GET['id']);
-		echo $this->twig->render('home.twig', ['message' => Message::DELETED_POST]);
+			$this->model->delete($_GET['id']);
+			echo $this->twig->render('home.twig', ['message' => Message::DELETED_POST]);
 		} else {
 			$this->forbidden();
 		}
@@ -43,8 +50,8 @@ class Post extends Controller
 	public function edit()
 	{
 		if ($this->hasPermission()) {
-		$this->post->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
-		echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
+			$this->model->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
+			echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
 		} else {
 			$this->forbidden();
 		}
