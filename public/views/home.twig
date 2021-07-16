@@ -1,21 +1,60 @@
 {% extends 'layout.twig' %}
 
 {% block title %}
-	Page d'accueil
+	Bienvenue !
 {% endblock title %}
 
 {% block content %}
 	
-	<h3>Me contacter</h3>
+	<h2>Cédric Deperne - A Propos
+		<hr/>
+	</h2>
 	
-	<form method="post" action="index.php?controller=mail&action=submit">
-		<p>
-			<label for="surname">Prénom : </label> <input type="text" name="surname" required/> <br/>
-			<label for="name">Nom : </label> <input type="text" name="name" required/> <br/>
-			<label for="email">Email : </label> <input type="email" name="email" required/> <br/>
-			<label for="message">Message : <br/></label> <textarea name="message" rows="6" cols="50" required></textarea> <br/>
-			<input type="submit"/>
-		</p>
-	</form>
+	<div class="row">
+		<div class="col me-3">
+			<h3>Qui suis-je ?</h3>
+			<p>Je suis actuellement en formation de Développeur d'Application PHP / Symfony chez OpenClassRooms.
+				Passionné par le domaine du numérique, je souhaite par cette formation valider mes compétences acquises en autodidacte, et approfondir les points que je ne maîtrise pas encore.</p>
+		</div>
+		
+		<div class="col mx-3">
+			<h3>Mes logiciels</h3>
+			<p>J'utilise principalement Windows 10. Pour coder, j'utilise PHP et versionne mon code avec Git. J'ai pour projet d'installer et m'initier à Docker, une solution utilisée par de
+				nombreuses entités.</p>
+		</div>
+		
+		<div class="col ms-3">
+			<h3>Social</h3>
+			<p>
+				<a href="#">Télécharger mon cv</a>
+				<img src="#" alt="Github">
+				<img src="#" alt="Linkedin">
+			</p>
+		</div>
+	</div>
+	
+	<h2 class="mb-3 mt-4">Me contacter</h2>
+	
+	<div class="col-3">
+		<form method="post" action="index.php?controller=mail&action=submit">
+			<div class="mb-3">
+				<label for="surname" class="form-label">Prénom :</label>
+				<input type="text" class="form-control" name="surname" required/>
+			</div>
+			<div class="mb-3">
+				<label for="name" class="form-label">Nom :</label>
+				<input type="text" class="form-control" name="name" required/>
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email :</label>
+				<input type="email" class="form-control" name="email" required/>
+			</div>
+			<div class="mb-3">
+				<label for="message" class="form-label">Message :</label>
+				<textarea name="message" class="form-control" rows="4" required></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Envoyer</button>
+		</form>
+	</div>
 
 {% endblock content %}

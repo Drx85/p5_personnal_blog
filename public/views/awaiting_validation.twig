@@ -6,6 +6,10 @@
 
 {% block content %}
 	
+	{% if comments is empty %}
+		<p>Il n'y a pas de commentaire(s) en attente de validation.</p>
+	{% endif %}
+	
 	{% for comment in comments %}
 		
 		<p>Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
