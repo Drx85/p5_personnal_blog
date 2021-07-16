@@ -6,15 +6,22 @@
 
 {% block content %}
 
-<form action="index.php?controller=account&action=connect" method="post">
-	<label><b>Nom d'utilisateur</b></label>
-	<input type="text" placeholder="Entrer votre pseudo" name="username" required>
+
 	
-	<label><b>Mot de passe</b></label>
-	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
+	<p>Connectez-vous pour pouvoir commenter les billets de blog.</p>
 	
-	<input type="submit" id='submit' value='Connection'>
-	<?php
-</form>
+	<div class="col-3 mt-4">
+		<form method="post" action="index.php?controller=account&action=connect">
+			<div class="mb-3">
+				<label for="username" class="form-label">Nom d'utilisateur</label>
+				<input type="text" class="form-control" name="username" required/>
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Mot de passe</label>
+				<input type="password" class="form-control" name="password" required/>
+			</div>
+			<button type="submit" class="btn btn-primary">Se connecter</button>
+		</form>
+	</div>
 
 {% endblock content %}

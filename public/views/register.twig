@@ -5,20 +5,31 @@
 {% endblock title %}
 
 {% block content %}
-
-<form action="index.php?controller=account&action=register" method="post">
-	<div>
-		<label for="pseudo">Pseudo </label><input type="text" id="pseudo" name="pseudo" minlength="2" required>
+	
+	<p>Inscrivez-vous pour pouvoir commenter les billets de blog.</p>
+	
+	<div class="col-3 mt-4">
+		<form method="post" action="index.php?controller=account&action=register">
+			<div class="mb-3">
+				<label for="pseudo" class="form-label">Pseudo</label>
+				<input type="text" class="form-control" name="pseudo" minlength="3" aria-describedby="pseudoDesc" required/>
+				<div id="pseudoDesc" class="form-text">
+					3 caractères minimum.
+				</div>
+			</div>
+			<div class="mb-3">
+				<label for="mail" class="form-label">E-mail</label>
+				<input type="email" class="form-control" name="mail" required/>
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Mot de passe</label>
+				<input type="password" class="form-control" name="password" minlength="8" aria-describedby="passwordDesc" required/>
+				<div id="passwordDesc" class="form-text">
+					8 caractères minimum.
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">S'inscrire</button>
+		</form>
 	</div>
-	<div>
-		<label for="mail">E-mail </label><input type="email" id="mail" name="mail" required>
-	</div>
-	<div>
-		<label for="password">Mot de passe (8 caractères min.) </label><input type="password" id="password" name="password" minlength="8" required>
-	</div>
-	<div class="button">
-		<button type="submit">Envoyer</button>
-	</div>
-</form>
 
 {% endblock content %}

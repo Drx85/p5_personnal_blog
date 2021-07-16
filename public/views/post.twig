@@ -26,7 +26,7 @@
 		{{ comment.text }}
 		
 		{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
-			<p><a href="index.php?controller=comment&action=delete&id={{ comment.id }}">Supprimer ce commentaire</a></p>
+			<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}">Supprimer</a></p>
 		{% endif %}
 	
 	{% endfor %}
@@ -34,10 +34,16 @@
 	
 	{% if session.user_id %}
 		<h4>Ajouter un commentaire</h4>
-		<form method="post" action="index.php?controller=comment&action=send&id_post={{ post.id }}">
-			<label for="user_comment">Votre commentaire : <br/></label> <textarea name="user_comment" rows="3" cols="80"></textarea> <br/>
-			<input type="submit"/>
-		</form>
+		
+		<div class="col-10 mt-4">
+			<form method="post" action="index.php?controller=comment&action=send&id_post={{ post.id }}">
+				<div class="mb-3">
+					<label for="user_comment" class="form-label">Votre commentaire :</label>
+					<textarea name="user_comment" class="form-control" rows="3" required></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Envoyer</button>
+			</form>
+		</div>
 	{% endif %}
 	
 	<p><a href="index.php?controller=post&action=index">Retour à la liste des billets</a></p>

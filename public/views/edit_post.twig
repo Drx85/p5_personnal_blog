@@ -6,13 +6,22 @@
 
 {% block content %}
 	
-	<form method="post" action="index.php?controller=post&action=edit&id={{ value.id }}">
-		<p>
-			<label for="title">Titre : </label> <input type="text" name="title" value="{{ value.title }}"/> <br/>
-			<label for="author">Auteur : </label> <input type="text" name="author" value="{{ value.author }}"/> <br/>
-			<label for="message">Contenu du billet : <br/></label> <textarea name="message" rows="20" cols="150">{{ value.message }}</textarea> <br/>
-			<input type="submit"/>
-		</p>
-	</form>
+	<div class="col-10 mt-4">
+		<form method="post" action="index.php?controller=post&action=edit&id={{ value.id }}">
+			<div class="mb-3">
+				<label for="title" class="form-label">Titre</label>
+				<input type="text" class="form-control" name="title" value="{{ value.title }}" required/>
+			</div>
+			<div class="mb-3">
+				<label for="author" class="form-label">Auteur</label>
+				<input type="text" class="form-control" name="author" value="{{ value.author }}" required/>
+			</div>
+			<div class="mb-3">
+				<label for="message" class="form-label">Contenu du billet</label>
+				<textarea name="message" class="form-control" rows="15" required>{{ value.message }}</textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Valider</button>
+		</form>
+	</div>
 
 {% endblock content %}

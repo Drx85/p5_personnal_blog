@@ -6,12 +6,18 @@
 
 {% block content %}
 	
-	<form method="post" action="index.php?controller=post&action=add">
-		<p>
-			<label for="title">Titre : </label> <input type="text" name="title" required/> <br/>
-			<label for="post_content">Contenu du billet : <br/></label> <textarea name="post_content" rows="20" cols="150" required></textarea> <br/>
-			<input type="submit"/>
-		</p>
-	</form>
+	<div class="col-10 mt-4">
+		<form method="post" action="index.php?controller=post&action=add">
+			<div class="mb-3">
+				<label for="title" class="form-label">Titre</label>
+				<input type="text" class="form-control" name="title" required/>
+			</div>
+			<div class="mb-3">
+				<label for="post_content" class="form-label">Contenu du billet</label>
+				<textarea name="post_content" class="form-control" rows="15" required></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Envoyer</button>
+		</form>
+	</div>
 
 {% endblock content %}

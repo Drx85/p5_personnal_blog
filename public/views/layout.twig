@@ -15,42 +15,64 @@
 
 <body>
 
-<nav class="navbar navbar-expand">
+<nav class="navbar navbar-expand bg-dark px-2 mb-3">
 	<ul class="navbar-nav">
-		<li class="nav-item active">
+		<li class="nav-item">
 			<a class="nav-link" href="index.php">Accueil</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="index.php?controller=post&action=index">Blog</a>
 		</li>
-		<li>
-			{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
+		
+		{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
+			<li>
 				<a class="nav-link" href="index.php?controller=comment&action=show_pending">Commentaires en attente de validation</a>
-			{% endif %}
-		</li>
+			</li>
+		{% endif %}
+	</ul>
+	
+	<ul class="navbar-nav ms-auto">
+		{% if session.user_id %}
+			<span class="navbar-text text-white-50">
+      			Connecté en tant que {{ session.pseudo }} ({{ session.role }})
+    		</span>
+			<li>
+				<a class="nav-link" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
+			</li>
+		{% else %}
+			<li>
+				<a class="nav-link" href="index.php?controller=account&action=show_register">Créer un compte</a>
+			</li>
+			<li>
+				<a class="nav-link" href="index.php?controller=account&action=show_connection">Se connecter</a>
+			</li>
+		{% endif %}
 	</ul>
 </nav>
 
-<h1>
+<h1 class="mb-5">
 	{% block title %}
 	{% endblock title %}
 </h1>
 
 {% if message %}
-	<p>{{ message|raw }}</p>
+	<p class="text-info">{{ message|raw }}</p>
 {% endif %}
 
 {% block content %}
 
 {% endblock content %}
 
-{% if session.user_id %}
-	Connecté en tant que {{ session.pseudo }} ({{ session.role }})</br>
-	<a href="index.php?controller=account&action=disconnect">Se déconnecter</a>
-{% else %}
-	<a href="index.php?controller=account&action=show_register">Créer un compte</a></br >
-	<a href="index.php?controller=account&action=show_connection">Se connecter</a></br>
-{% endif %}
+
+<footer class="mt-4">
+	{% if session.user_id %}
+		Connecté en tant que {{ session.pseudo }} ({{ session.role }})</br>
+		<a href="index.php?controller=account&action=disconnect">Se déconnecter</a>
+	{% else %}
+		<a href="index.php?controller=account&action=show_register">Créer un compte</a></br >
+		<a href="index.php?controller=account&action=show_connection">Se connecter</a></br>
+	{% endif %}
+</footer>
 
 </body>
 </html>
