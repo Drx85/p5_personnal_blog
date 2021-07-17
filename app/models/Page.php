@@ -9,7 +9,7 @@ class Page extends Model
 		$q = $this->db->query('SELECT COUNT(id) AS number FROM post');
 		$number = $q->fetch();
 		
-		$pageNumber = $number['number'] / 5;
+		$pageNumber = $number['number'] / \Config::NB_POSTS_PER_PAGE;
 		
 		return ceil($pageNumber);
 	}

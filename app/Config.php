@@ -12,4 +12,6 @@ class Config
 	public const MAIL_PORT = '465';
 	public const MAIL_USERNAME = 'cedric@deperne.fr';
 	public const MAIL_PASSWORD = '4iu6uJdAJkZxW3i';
+	
+	public const NB_POSTS_PER_PAGE = 6;
 }

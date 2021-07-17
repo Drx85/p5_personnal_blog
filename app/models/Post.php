@@ -16,9 +16,10 @@ class Post extends Model
                                    HOUR(post_time) AS hour_post_time, 
                                    MINUTE(post_time) AS minute_post_time,
                                    DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
-				                   FROM post ORDER BY ID DESC LIMIT :limit_page, 5');
+				                   FROM post ORDER BY ID DESC LIMIT :limit_page, :nb_posts');
 		
 		$q->bindValue('limit_page', $limit_page, PDO::PARAM_INT);
+		$q->bindValue('nb_posts', \Config::NB_POSTS_PER_PAGE, PDO::PARAM_INT);
 		$q->execute();
 		return $q->fetchAll();
 	}
@@ -38,7 +39,7 @@ class Post extends Model
 		$limit_page = 0;
 		
 		for ($i = 0; $i < $page - 1; $i++) {
-			$limit_page = $limit_page + 5;
+			$limit_page = $limit_page + \Config::NB_POSTS_PER_PAGE;
 		}
 		return $limit_page;
 	}
