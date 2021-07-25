@@ -24,15 +24,15 @@
 		
 		<p>Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
 		{{ comment.text }}
-		
-		{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
+
+		{% if session.user.role is same as ('admin') or session.user.role is same as ('publisher') %}
 			<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}">Supprimer</a></p>
 		{% endif %}
 	
 	{% endfor %}
 	
 	
-	{% if session.user_id %}
+	{% if session.user.id %}
 		<h4>Ajouter un commentaire</h4>
 		
 		<div class="col-10 mt-4">

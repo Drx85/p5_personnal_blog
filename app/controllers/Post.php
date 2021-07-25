@@ -30,7 +30,7 @@ class Post extends Controller
 	public function add()
 	{
 		if ($this->hasPermission()) {
-			$this->model->insert($_POST['title'], $_POST['post_content'], $_SESSION['pseudo']);
+			$this->model->insert($_POST['title'], $_POST['post_content'], $_SESSION['user']->getPseudo());
 			echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 		} else {
 			$this->forbidden();

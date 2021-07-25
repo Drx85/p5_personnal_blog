@@ -24,7 +24,7 @@
 			<a class="nav-link" href="index.php?controller=post&action=index">Blog</a>
 		</li>
 		
-		{% if session.role is same as ('admin') or session.role is same as ('publisher') %}
+		{% if session.user.role is same as ('admin') or session.user.role is same as ('publisher') %}
 			<li>
 				<a class="nav-link" href="index.php?controller=comment&action=show_pending">Commentaires en attente de validation</a>
 			</li>
@@ -32,9 +32,9 @@
 	</ul>
 	
 	<ul class="navbar-nav ms-auto">
-		{% if session.user_id %}
+		{% if disconnected is not defined and session.user or user.id is defined %}
 			<span class="navbar-text text-white-50">
-      			Connecté en tant que {{ session.pseudo }} ({{ session.role }})
+      			Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role }}{{ user.role }})
     		</span>
 			<li>
 				<a class="nav-link" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
@@ -65,8 +65,8 @@
 
 
 <footer class="mt-4">
-	{% if session.user_id %}
-		Connecté en tant que {{ session.pseudo }} ({{ session.role }})</br>
+	{% if disconnected is not defined and session.user or user.id is defined %}
+		Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role }}{{ user.role }})</br>
 		<a href="index.php?controller=account&action=disconnect">Se déconnecter</a>
 	{% else %}
 		<a href="index.php?controller=account&action=show_register">Créer un compte</a></br >

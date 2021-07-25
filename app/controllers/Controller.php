@@ -1,7 +1,7 @@
 <?php
 
 namespace Controllers;
-session_start();
+
 
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
@@ -30,8 +30,8 @@ abstract class Controller
 		$this->twig->addExtension(new DebugExtension());
 		$this->twig->addExtension(new StringExtension());
 		
-		if (isset($_SESSION['role'])) {
-			$this->role = $_SESSION['role'];
+		if (isset($_SESSION['user'])) {
+			$this->role = $_SESSION['user']->getRole();
 		}
 	}
 	

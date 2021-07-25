@@ -7,9 +7,7 @@ class Message
 	public const CONNECTED = 'Connection effectuée avec succès.';
 	public const DISCONNECTED = 'Déconnection effectuée avec succès.';
 	public const BAD_CREDENTIALS = 'Mauvais nom d\'utilisateur ou mot de passe.';
-	public const PSEUDO_MAIL_EXISTS = 'Ce pseudo et cet email existent déjà.';
-	public const PSEUDO_EXISTS = "Ce pseudo existe déjà.";
-	public const MAIL_EXISTS = "Cet email existe déjà.";
+	public const ALREADY_TAKEN = 'Ce pseudo ou cet email existe(nt) déjà.';
 	public const ADDED = "Le billet a bien été ajouté.";
 	public const SENT_COMMENT = "Votre commentaire a bien été envoyé et a été soumis pour validation, il sera publié d'ici peu.";
 	public const VALIDATED_COMMENT = "Le commentaire a bien été validé et publié.";

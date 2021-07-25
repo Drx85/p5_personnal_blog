@@ -9,7 +9,7 @@ class Account extends Controller
 	
 	public function showRegister()
 	{
-		if (! isset($_SESSION['user_id'])) {
+		if (! isset($_SESSION['user'])) {
 			echo $this->twig->render('register.twig');
 		}
 		else {
@@ -19,7 +19,7 @@ class Account extends Controller
 	
 	public function showConnection()
 	{
-		if (! isset($_SESSION['user_id'])) {
+		if (! isset($_SESSION['user'])) {
 			echo $this->twig->render('connection.twig');
 		}
 		else {
@@ -29,22 +29,21 @@ class Account extends Controller
 	
 	public function register()
 	{
-		$exists = $this->model->exists($_POST['pseudo'], $_POST['mail']);
-		if (! $exists) {
-			$this->model->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
+		$user = $this->model->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
+
+		if ($user) {
 			echo $this->twig->render('home.twig', ['message' => Message::CREATED]);
-		}
-		else {
-			echo $this->twig->render('register.twig', ['message' => constant("Message::" . strtoupper($exists))]);
+		} else {
+			echo $this->twig->render('home.twig', ['message' => Message::ALREADY_TAKEN]);
 		}
 	}
 	
 	public function connect()
 	{
-		$this->model->connect($_POST['password'], $_POST['username']);
+		$user = $this->model->connect($_POST['password'], $_POST['username']);
 		
-		if (isset($_SESSION['user_id'])) {
-			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED]);
+		if ($user) {
+			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED, 'user' => $user]);
 		}
 		else {
 			echo $this->twig->render('connection.twig', ['message' => Message::BAD_CREDENTIALS]);
@@ -54,6 +53,6 @@ class Account extends Controller
 	public function disconnect()
 	{
 		session_destroy();
-		echo $this->twig->render('home.twig', ['message' => Message::DISCONNECTED]);
+		echo $this->twig->render('home.twig', ['message' => Message::DISCONNECTED, 'disconnected' => true]);
 	}
 }
