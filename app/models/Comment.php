@@ -36,7 +36,6 @@ class Comment extends Model
 			$q = $this->db->prepare($sql);
 			$q->execute(array($approved));
 		}
-		
 		return $q->fetchAll();
 	}
 	
@@ -51,5 +50,6 @@ class Comment extends Model
 	{
 		$q = $this->db->prepare('UPDATE comment SET approved = 1 WHERE id = ?');
 		$q->execute(array($id));
+		return $q->rowCount();
 	}
 }

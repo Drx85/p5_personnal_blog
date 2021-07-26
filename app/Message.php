@@ -15,4 +15,6 @@ class Message
 	public const DELETED_POST = "Le billet a bien été supprimé.";
 	public const DELETED_COMMENT = "Le commentaire a bien été supprimé.";
 	public const SENT_MAIL = "Votre email a bien été envoyé.";
+	public const UNDEFINED_COMMENT = "Ce commentaire n'existe pas.";
+	public const UNDEFINED_POST = "Ce billet n'existe pas.";
 }

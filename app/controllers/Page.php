@@ -15,9 +15,9 @@ class Page extends Controller
 	{
 		if ($this->hasPermission()) {
 			echo $this->twig->render('add_post.twig');
-		} else {
-			$this->forbidden();
+			exit;
 		}
+		$this->forbidden();
 	}
 	
 	public function showEdit()
@@ -25,9 +25,9 @@ class Page extends Controller
 		if ($this->hasPermission()) {
 			$value = $this->model->getEditValues($_GET['id']);
 			echo $this->twig->render('edit_post.twig', compact('value'));
-		} else {
-			$this->forbidden();
+			exit;
 		}
+		$this->forbidden();
 	}
 	
 	public function show404()

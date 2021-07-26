@@ -16,5 +16,6 @@ abstract class Model
 	{
 		$q = $this->db->prepare("DELETE FROM {$this->table} WHERE id = ?");
 		$q->execute(array($id));
+		return $q->rowCount();
 	}
 }

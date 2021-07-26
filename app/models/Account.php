@@ -7,8 +7,8 @@ class Account extends Model
 	public function create(string $pseudo, string $password, string $mail)
 	{
 			$password = password_hash($password, PASSWORD_BCRYPT);
-			$q = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
-			$q->execute(compact('pseudo', 'password', 'mail'));
+			$user = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
+			return $user->execute(compact('pseudo', 'password', 'mail'));
 	}
 	
 	public function connect(string $password, string $pseudo)

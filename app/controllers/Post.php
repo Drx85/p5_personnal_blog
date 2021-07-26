@@ -32,19 +32,23 @@ class Post extends Controller
 		if ($this->hasPermission()) {
 			$this->model->insert($_POST['title'], $_POST['post_content'], $_SESSION['user']->getPseudo());
 			echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
-		} else {
-			$this->forbidden();
+			exit;
 		}
+		$this->forbidden();
 	}
 	
 	public function delete()
 	{
 		if ($this->hasPermission()) {
-			$this->model->delete($_GET['id']);
-			echo $this->twig->render('home.twig', ['message' => Message::DELETED_POST]);
-		} else {
-			$this->forbidden();
+			$deleted = $this->model->delete($_GET['id']);
+			if ($deleted) {
+				echo $this->twig->render('home.twig', ['message' => Message::DELETED_POST]);
+				exit;
+			}
+			echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_POST]);
+			exit;
 		}
+		$this->forbidden();
 	}
 	
 	public function edit()
@@ -52,8 +56,8 @@ class Post extends Controller
 		if ($this->hasPermission()) {
 			$this->model->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
 			echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
-		} else {
-			$this->forbidden();
+			exit;
 		}
+		$this->forbidden();
 	}
 }

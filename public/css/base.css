@@ -20,7 +20,7 @@ p {
 hr {
 	color: black;
 	opacity: 60%;
-	height: 2px!important;
+	height: 2px !important;
 }
 
 .navbar {
@@ -34,13 +34,13 @@ hr {
 }
 
 #social ul {
-	list-style:none;
-	margin-left:0;
-	padding-left:0;
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
 }
 
 #social li {
-	margin-bottom:20px;
+	margin-bottom: 20px;
 }
 
 .inline {

@@ -17,11 +17,15 @@ class Comment extends Controller
 	public function delete()
 	{
 		if ($this->hasPermission()) {
-			$this->model->delete($_GET['id']);
-			echo $this->twig->render('home.twig', ['message' => Message::DELETED_COMMENT]);
-		} else {
-			$this->forbidden();
+			$deleted = $this->model->delete($_GET['id']);
+			if ($deleted) {
+				echo $this->twig->render('home.twig', ['message' => Message::DELETED_COMMENT]);
+				exit;
+			}
+			echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_COMMENT]);
+			exit;
 		}
+		$this->forbidden();
 	}
 	
 	public function showPending()
@@ -29,18 +33,22 @@ class Comment extends Controller
 		if ($this->hasPermission()) {
 			$comments = $this->model->findAllByPost(0);
 			echo $this->twig->render('awaiting_validation.twig', compact('comments'));
-		} else {
-			$this->forbidden();
+			exit;
 		}
+		$this->forbidden();
 	}
 	
 	public function validate()
 	{
 		if ($this->hasPermission()) {
-			$this->model->validate($_GET['id']);
-			echo $this->twig->render('home.twig', ['message' => Message::VALIDATED_COMMENT]);
-		} else {
-			$this->forbidden();
+			$validate = $this->model->validate($_GET['id']);
+			if ($validate) {
+				echo $this->twig->render('home.twig', ['message' => Message::VALIDATED_COMMENT]);
+				exit;
+			}
+			echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_COMMENT]);
+			exit;
 		}
+		$this->forbidden();
 	}
 }

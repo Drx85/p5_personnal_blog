@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+
 use Message;
 
 class Account extends Controller
@@ -9,33 +10,31 @@ class Account extends Controller
 	
 	public function showRegister()
 	{
-		if (! isset($_SESSION['user'])) {
+		if (!isset($_SESSION['user'])) {
 			echo $this->twig->render('register.twig');
+			exit;
 		}
-		else {
-			echo $this->twig->render('home.twig');
-		}
+		echo $this->twig->render('home.twig');
 	}
 	
 	public function showConnection()
 	{
-		if (! isset($_SESSION['user'])) {
+		if (!isset($_SESSION['user'])) {
 			echo $this->twig->render('connection.twig');
+			exit;
 		}
-		else {
-			echo $this->twig->render('home.twig');
-		}
+		echo $this->twig->render('home.twig');
 	}
 	
 	public function register()
 	{
 		$user = $this->model->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
-
+		
 		if ($user) {
-			echo $this->twig->render('home.twig', ['message' => Message::CREATED]);
-		} else {
-			echo $this->twig->render('home.twig', ['message' => Message::ALREADY_TAKEN]);
+			echo $this->twig->render('register.twig', ['message' => Message::CREATED]);
+			exit;
 		}
+		echo $this->twig->render('register.twig', ['message' => Message::ALREADY_TAKEN]);
 	}
 	
 	public function connect()
@@ -44,10 +43,9 @@ class Account extends Controller
 		
 		if ($user) {
 			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED, 'user' => $user]);
+			exit;
 		}
-		else {
-			echo $this->twig->render('connection.twig', ['message' => Message::BAD_CREDENTIALS]);
-		}
+		echo $this->twig->render('connection.twig', ['message' => Message::BAD_CREDENTIALS]);
 	}
 	
 	public function disconnect()
