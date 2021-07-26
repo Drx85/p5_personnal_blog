@@ -52,11 +52,18 @@ footer {
 }
 
 footer a:link {
-	text-decoration:none;
+	text-decoration: none;
 }
 
 #header {
 	max-width: 100%;
 	border-radius: 5px;
+}
 
+#linkedin {
+	color: #0082ca;
+}
+
+#github {
+	color: #333333;
 }

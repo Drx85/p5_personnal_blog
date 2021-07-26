@@ -28,7 +28,10 @@
 		{% if disconnected is not defined and session.user.role is same as ('admin') or session.user.role is same as ('publisher')
 			or user.role is same as ('admin') or user.role is same as ('publisher') %}
 			<li>
-				<a class="nav-link" href="index.php?controller=comment&action=show_pending">Commentaires en attente de validation</a>
+				<a class="nav-link" href="index.php?controller=comment&action=show_pending">Commentaires att. validation</a>
+			</li>
+			<li>
+				<a class="nav-link" href="index.php?controller=page&action=show_add">Ajouter un billet </a>
 			</li>
 		{% endif %}
 	</ul>
@@ -36,7 +39,7 @@
 	<ul class="navbar-nav ms-auto">
 		{% if disconnected is not defined and session.user or user.id is defined %}
 			<span class="navbar-text text-white-50">
-      			Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role }}{{ user.role }})
+      			Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role | trans }}{{ user.role | trans }})
     		</span>
 			<li>
 				<a class="nav-link" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
@@ -71,8 +74,22 @@
 <footer class="bg-link text-center mt-4">
 	<div class="container p-3">
 		<section class="mb-4">
-			<a class="btn btn-primary btn-floating m-1 border-white rounded-circle" style="background-color: #0082ca" href="https://www.linkedin.com/in/deperne-cedric/" target="_blank" role="button"><i class="fab fa-linkedin-in"></i></a>
-			<a class="btn btn-primary btn-floating m-1 border-white rounded-circle" style="background-color: #333333" href="https://github.com/Drx85" target="_blank" role="button"><i class="fab fa-github"></i></a>
+			<li class="list-inline-item">
+				<a href="https://www.linkedin.com/in/deperne-cedric/" target="_blank">
+                  <span class="fa-stack fa-lg" id="linkedin">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+				</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="https://github.com/Drx85" target="_blank">
+                  <span class="fa-stack fa-lg" id="github">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+				</a>
+			</li>
 		</section>
 		
 		<section class="mb-4">
@@ -83,7 +100,7 @@
 					<ul class="list-unstyled mb-0">
 						{% if disconnected is not defined and session.user or user.id is defined %}
 							<li class="text-muted">
-								Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role }}{{ user.role }})
+								Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role | trans }}{{ user.role | trans }})
 							</li>
 							<li>
 								<a class="text-dark" href="index.php?controller=account&action=disconnect">Se déconnecter</a>

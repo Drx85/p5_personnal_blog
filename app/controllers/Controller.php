@@ -7,6 +7,8 @@ use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extra\String\StringExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 require_once('../vendor/autoload.php');
 
@@ -29,6 +31,9 @@ abstract class Controller
 		$this->twig->addGlobal('session', $_SESSION);
 		$this->twig->addExtension(new DebugExtension());
 		$this->twig->addExtension(new StringExtension());
+		$this->twig->addFilter(new TwigFilter('trans', function ($value) {
+			return \Translation::translate($value);
+		}));
 		
 		if (isset($_SESSION['user'])) {
 			$this->role = $_SESSION['user']->getRole();
