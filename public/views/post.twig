@@ -6,6 +6,8 @@
 
 {% block content %}
 	
+	<p><a href="index.php?controller=post&action=index" class="text-decoration-none"><i class="far fa-arrow-alt-circle-left"></i> Retour à la liste des billets</a></p>
+	
 	<h2>Détails et commentaires</h2>
 	
 	<p>
@@ -31,7 +33,6 @@
 	
 	{% endfor %}
 	
-	
 	{% if session.user.id %}
 		<h4>Ajouter un commentaire</h4>
 		
@@ -45,7 +46,5 @@
 			</form>
 		</div>
 	{% endif %}
-	
-	<p><a href="index.php?controller=post&action=index">Retour à la liste des billets</a></p>
 
 {% endblock content %}

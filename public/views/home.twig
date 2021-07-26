@@ -1,11 +1,16 @@
 {% extends 'layout.twig' %}
 
 {% block title %}
-	Bienvenue !
+	Bienvenue sur mon blog !
 {% endblock title %}
 
 {% block content %}
-	<h2>Cédric Deperne - A Propos
+	
+	<img src="imgs/learning.jpg" id="header" class="mb-4 mt-2">
+	
+	<h3 class="fw-light fst-italic mb-5">Cédric, un développeur passionné et à votre écoute.</h3>
+	
+	<h2 class="mt-4">Cédric Deperne - A Propos
 		<hr/>
 	</h2>
 	
@@ -33,7 +38,7 @@
 		</div>
 	</div>
 	
-	<h2 class="mb-3 mt-4">Me contacter</h2>
+	<h2 class="mb-3">Me contacter</h2>
 	
 	<div class="col-3">
 		<form method="post" action="index.php?controller=mail&action=submit">
