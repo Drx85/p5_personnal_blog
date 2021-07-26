@@ -7,6 +7,7 @@
 		  crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8">
 	<link rel="stylesheet" href="css/base.css"/>
+	<script src="https://kit.fontawesome.com/28959e4cf7.js" crossorigin="anonymous"></script>
 	
 	<title>Bienvenue sur mon blog !</title>
 	{% block head %}
@@ -24,7 +25,8 @@
 			<a class="nav-link" href="index.php?controller=post&action=index">Blog</a>
 		</li>
 		
-		{% if session.user.role is same as ('admin') or session.user.role is same as ('publisher') %}
+		{% if disconnected is not defined and session.user.role is same as ('admin') or session.user.role is same as ('publisher')
+			or user.role is same as ('admin') or user.role is same as ('publisher') %}
 			<li>
 				<a class="nav-link" href="index.php?controller=comment&action=show_pending">Commentaires en attente de validation</a>
 			</li>
@@ -63,15 +65,93 @@
 
 {% endblock content %}
 
+<div class="fill">
+</div>
 
-<footer class="mt-4">
-	{% if disconnected is not defined and session.user or user.id is defined %}
-		Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role }}{{ user.role }})</br>
-		<a href="index.php?controller=account&action=disconnect">Se déconnecter</a>
-	{% else %}
-		<a href="index.php?controller=account&action=show_register">Créer un compte</a></br >
-		<a href="index.php?controller=account&action=show_connection">Se connecter</a></br>
-	{% endif %}
+<footer class="bg-link text-center mt-4">
+	<div class="container p-3">
+		<section class="mb-4">
+			<a class="btn btn-primary btn-floating m-1 border-white rounded-circle" style="background-color: #0082ca" href="https://www.linkedin.com/in/deperne-cedric/" target="_blank" role="button"><i class="fab fa-linkedin-in"></i></a>
+			<a class="btn btn-primary btn-floating m-1 border-white rounded-circle" style="background-color: #333333" href="https://github.com/Drx85" target="_blank" role="button"><i class="fab fa-github"></i></a>
+		</section>
+		
+		<section class="mb-4">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+					<h5 class="text-uppercase mb-3">Compte</h5>
+					
+					<ul class="list-unstyled mb-0">
+						{% if disconnected is not defined and session.user or user.id is defined %}
+							<li class="text-muted">
+								Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role }}{{ user.role }})
+							</li>
+							<li>
+								<a class="text-dark" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
+							</li>
+						{% else %}
+							<li>
+								<a class="text-dark" href="index.php?controller=account&action=show_register">Créer un compte</a>
+							</li>
+							<li>
+								<a class="text-dark" href="index.php?controller=account&action=show_connection">Se connecter</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+				
+				<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+					<h5 class="text-uppercase mb-3">Contact</h5>
+					
+					<ul class="list-unstyled mb-0">
+						<li>
+							<a href="mailto:cedric@deperne.fr" class="text-dark">cedric@deperne.fr</a>
+						</li>
+						<li>
+							<a href="tel:+33601234567" class="text-dark">06 01 23 45 67</a>
+						</li>
+						<li>
+							<a href="http://www.deperne.fr/" class="text-dark">www.deperne.fr</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+					<h5 class="text-uppercase mb-3">Navigation</h5>
+					
+					<ul class="list-unstyled mb-0">
+						<li>
+							<a href="index.php" class="text-dark">Accueil</a>
+						</li>
+						<li>
+							<a href="index.php?controller=post&action=index" class="text-dark">Blog</a>
+						</li>
+						{% if disconnected is not defined and session.user.role is same as ('admin') or session.user.role is same as ('publisher')
+							or user.role is same as ('admin') or user.role is same as ('publisher') %}
+							<li>
+								<a href="index.php?controller=comment&action=show_pending" class="text-dark">Commentaires att. validation</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+				
+				<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+					<h5 class="text-uppercase mb-3">A propos</h5>
+					
+					<ul class="list-unstyled mb-0">
+						<li>
+							<a href="#!" class="text-dark">Conditions Générales d'Utilisation</a>
+						</li>
+						<li>
+							<a href="#!" class="text-dark">Mentions légales</a>
+						</li>
+						<li>
+							<a href="#!" class="text-dark">Plan du site</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</div>
 </footer>
 
 </body>

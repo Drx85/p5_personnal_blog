@@ -46,3 +46,11 @@ hr {
 .inline {
 	display: inline;
 }
+
+footer {
+	border-top: 1px solid gray;
+}
+
+footer a:link {
+	text-decoration:none;
+}
