@@ -9,6 +9,7 @@ use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extra\String\StringExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 require_once('../vendor/autoload.php');
 
@@ -33,6 +34,9 @@ abstract class Controller
 		$this->twig->addExtension(new StringExtension());
 		$this->twig->addFilter(new TwigFilter('trans', function ($value) {
 			return \Translation::translate($value);
+		}));
+		$this->twig->addFunction(new TwigFunction('csrf_token', function () {
+			return \AntiCsrf::createToken();
 		}));
 		
 		if (isset($_SESSION['user'])) {

@@ -28,7 +28,7 @@
 		{{ comment.text }}</p>
 
 		{% if session.user.role is same as ('admin') or session.user.role is same as ('publisher') %}
-			<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}">Supprimer</a></p>
+			<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrf_token() }}">Supprimer</a></p>
 		{% endif %}
 	
 	{% endfor %}

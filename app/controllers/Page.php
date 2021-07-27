@@ -35,4 +35,10 @@ class Page extends Controller
 		header('HTTP/1.0 404 Not Found');
 		echo $this->twig->render('404.twig');
 	}
+	
+	public function forbidden()
+	{
+		header('HTTP/1.0 403 Forbidden');
+		echo $this->twig->render('forbidden.twig');
+	}
 }

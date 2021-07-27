@@ -8,14 +8,19 @@ require_once('../vendor/autoload.php');
 
 class Factory
 {
-	public static function process($controller, $action)
+	public static function process(string $controller, string $action, string $token = null)
 	{
 		try {
 			$controllerName = ucfirst($controller);
 			
 			$inflector = InflectorFactory::create()->build();
-			$task      = $inflector->classify($action);
-	
+			$task      = lcfirst($inflector->classify($action));
+			if (AntiCsrf::validate($task, $token) !== true) {
+			$controller = new Page();
+			$controller->forbidden();
+			exit;
+			}
+			
 			$controllerName = '\Controllers\\' . $controllerName;
 			$controller     = new $controllerName;
 			$controller->$task();

@@ -27,8 +27,17 @@ if (isset($_GET['action'])) {
 	$action = $_GET['action'];
 }
 
+$token = null;
+if (isset($_GET['token'])) {
+	$token = $_GET['token'];
+}
+
+if (isset($_POST['token'])) {
+	$token = $_POST['token'];
+}
+
 if (!isset($_GET['page']) or $_GET['page'] > 1000 or $_GET['page'] < 1) {
 	$_GET['page'] = 1;
 }
 
-\Factory::process($controller, $action);
+\Factory::process($controller, $action, $token);

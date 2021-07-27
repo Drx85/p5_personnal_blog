@@ -15,8 +15,8 @@
 		<p>Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
 		{{ comment.text }}
 		
-		<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}">Supprimer</a>
-			<a class="btn btn-success" href="index.php?controller=comment&action=validate&id={{ comment.id }}">Valider et publier</a></p>
+		<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrf_token() }}">Supprimer</a>
+			<a class="btn btn-success" href="index.php?controller=comment&action=validate&id={{ comment.id }}&token={{ csrf_token() }}">Valider et publier</a></p>
 	
 	{% endfor %}
 

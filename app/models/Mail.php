@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail extends Model
 {
-	public function send($surname, $name, $email, $message)
+	public function send(string $surname, string $name, string $email, string $message)
 	{
 		$mail = new PHPMailer();
 		$mail->IsSMTP();

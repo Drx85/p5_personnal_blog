@@ -46,7 +46,7 @@ class Comment extends Model
 		$q->execute(compact('id_post', 'pseudo', 'text'));
 	}
 	
-	public function validate($id)
+	public function validate(int $id)
 	{
 		$q = $this->db->prepare('UPDATE comment SET approved = 1 WHERE id = ?');
 		$q->execute(array($id));
