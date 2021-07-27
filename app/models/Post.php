@@ -46,8 +46,8 @@ class Post extends Model
 	
 	public function insert(string $title, string $message, string $pseudo)
 	{
-		$sent_post = $this->db->prepare('INSERT INTO post (title, message, author, post_date, post_time) VALUES (:title, :message, :pseudo, NOW(), NOW())');
-		$sent_post->execute(compact('title', 'message', 'pseudo'));
+		$q = $this->db->prepare('INSERT INTO post (title, message, author, post_date, post_time) VALUES (:title, :message, :pseudo, NOW(), NOW())');
+		return $q->execute(compact('title', 'message', 'pseudo'));
 	}
 	
 	public function getEditValues(int $id)
@@ -59,7 +59,7 @@ class Post extends Model
 	
 	public function edit(string $title, string $message, string $author, int $id)
 	{
-		$edit_post = $this->db->prepare('UPDATE post SET title = :title, message = :message, author = :author, update_date = NOW() WHERE id = :id');
-		$edit_post->execute(compact('title', 'message', 'author', 'id'));
+		$q = $this->db->prepare('UPDATE post SET title = :title, message = :message, author = :author, update_date = NOW() WHERE id = :id');
+		return $q->execute(compact('title', 'message', 'author', 'id'));
 	}
 }

@@ -14,20 +14,6 @@ class Comment extends Controller
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_COMMENT]);
 	}
 	
-	public function delete()
-	{
-		if ($this->hasPermission()) {
-			$deleted = $this->model->delete($_GET['id']);
-			if ($deleted) {
-				echo $this->twig->render('home.twig', ['message' => Message::DELETED_COMMENT]);
-				exit;
-			}
-			echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_COMMENT]);
-			exit;
-		}
-		$this->forbidden();
-	}
-	
 	public function showPending()
 	{
 		if ($this->hasPermission()) {

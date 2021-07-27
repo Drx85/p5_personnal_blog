@@ -12,9 +12,8 @@ class Message
 	public const SENT_COMMENT = "Votre commentaire a bien été envoyé et a été soumis pour validation, il sera publié d'ici peu.";
 	public const VALIDATED_COMMENT = "Le commentaire a bien été validé et publié.";
 	public const EDITED = "Le billet a bien été modifié.";
-	public const DELETED_POST = "Le billet a bien été supprimé.";
-	public const DELETED_COMMENT = "Le commentaire a bien été supprimé.";
+	public const DELETED_CONTENT = "Le contenu a bien été supprimé.";
 	public const SENT_MAIL = "Votre email a bien été envoyé.";
-	public const UNDEFINED_COMMENT = "Ce commentaire n'existe pas.";
-	public const UNDEFINED_POST = "Ce billet n'existe pas.";
+	public const UNDEFINED_CONTENT = "Ce billet ou ce commentaire n'existe pas.";
+	public const TITLE_ALREADY_EXISTS = "Ce titre existe déjà.";
 }

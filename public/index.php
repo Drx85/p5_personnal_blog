@@ -6,6 +6,17 @@ require_once('../app/autoload.php');
 
 session_start();
 
+if (isset($_SESSION['destroyed'])
+	&& $_SESSION['destroyed'] < time() - 300) {
+	remove_all_authentication_flag_from_active_sessions($_SESSION['user']);
+	throw(new DestroyedSessionAccessException);
+}
+
+$_SESSION['destroyed'] = time();
+session_regenerate_id();
+unset($_SESSION['destroyed']);
+
+
 $controller = 'Page';
 if (isset($_GET['controller'])) {
 	$controller = $_GET['controller'];

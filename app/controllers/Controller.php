@@ -3,12 +3,12 @@
 namespace Controllers;
 
 
+use Message;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extra\String\StringExtension;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 require_once('../vendor/autoload.php');
 
@@ -51,5 +51,19 @@ abstract class Controller
 	{
 		header('HTTP/1.0 403 Forbidden');
 		echo $this->twig->render('forbidden.twig');
+	}
+	
+	public function delete()
+	{
+		if ($this->hasPermission()) {
+			$deleted = $this->model->delete($_GET['id']);
+			if ($deleted) {
+				echo $this->twig->render('home.twig', ['message' => Message::DELETED_CONTENT]);
+				exit;
+			}
+			echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_CONTENT]);
+			exit;
+		}
+		$this->forbidden();
 	}
 }

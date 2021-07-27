@@ -30,22 +30,12 @@ class Post extends Controller
 	public function add()
 	{
 		if ($this->hasPermission()) {
-			$this->model->insert($_POST['title'], $_POST['post_content'], $_SESSION['user']->getPseudo());
-			echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
-			exit;
-		}
-		$this->forbidden();
-	}
-	
-	public function delete()
-	{
-		if ($this->hasPermission()) {
-			$deleted = $this->model->delete($_GET['id']);
-			if ($deleted) {
-				echo $this->twig->render('home.twig', ['message' => Message::DELETED_POST]);
+			$added = $this->model->insert($_POST['title'], $_POST['post_content'], $_SESSION['user']->getPseudo());
+			if ($added) {
+				echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 				exit;
 			}
-			echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_POST]);
+			echo $this->twig->render('home.twig', ['message' => Message::TITLE_ALREADY_EXISTS]);
 			exit;
 		}
 		$this->forbidden();
@@ -54,8 +44,12 @@ class Post extends Controller
 	public function edit()
 	{
 		if ($this->hasPermission()) {
-			$this->model->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
-			echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
+			$edited = $this->model->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
+			if ($edited) {
+				echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
+				exit;
+			}
+			echo $this->twig->render('home.twig', ['message' => Message::TITLE_ALREADY_EXISTS]);
 			exit;
 		}
 		$this->forbidden();
