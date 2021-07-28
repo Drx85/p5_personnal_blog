@@ -22,7 +22,8 @@ class Account extends Model
 		
 		if (password_verify($password, $q['password'])) {
 			$user = new \User($q['user_id'], $pseudo, $q['role']);
-			return \Session::put('user', $user);
+			\Session::put('user', $user);
+			return $user;
 		}
 	}
 }
