@@ -5,11 +5,11 @@ class Session
 {
 	/**
 	 * @param string $key
-	 * @param string $value
+	 * @param $value
 	 *
-	 * @return mixed
+	 * @return
 	 */
-	public static function put(string $key, string $value): mixed
+	public static function put(string $key, $value)
 	{
 		return $_SESSION[$key] = $value;
 	}
@@ -17,9 +17,9 @@ class Session
 	/**
 	 * @param $string key
 	 *
-	 * @return mixed|null
+	 * @return
 	 */
-	public static function get(string $key): ?mixed
+	public static function get(string $key)
 	{
 		return (isset($_SESSION[$key]) ? $_SESSION[$key] : null);
 	}

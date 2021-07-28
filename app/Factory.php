@@ -31,6 +31,7 @@ class Factory
 			$controller->$task();
 		}
 		catch (Error $e) {
+			echo $e->getMessage(); die;
 			$controller = new Page();
 			$controller->show404();
 		}
@@ -43,7 +44,7 @@ class Factory
 	 *
 	 * @return mixed|string|null
 	 */
-	public static function affectGlobal(string $var_name, string $method, ?string $default): mixed
+	public static function affectGlobal(string $var_name, string $method, ?string $default): ?string
 	{
 		$type = constant('INPUT_' . $method);
 		$global = filter_input($type, $var_name);

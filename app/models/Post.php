@@ -30,9 +30,9 @@ class Post extends Model
 	/**
 	 * @param int $id
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	public function find(int $id): mixed
+	public function find(int $id): array
 	{
 		$q = $this->db->prepare("SELECT id, title, message, author, DATE_FORMAT(post_date, '%d/%m/%Y') AS date,
                                    HOUR(post_time) AS hour,
@@ -73,9 +73,9 @@ class Post extends Model
 	/**
 	 * @param int $id
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	public function getEditValues(int $id): mixed
+	public function getEditValues(int $id): array
 	{
 		$q = $this->db->prepare('SELECT id, title, message, author FROM post WHERE id = ?');
 		$q->execute(array($id));

@@ -42,9 +42,9 @@ class AntiCsrf
 	 * @param string      $task
 	 * @param string|null $token
 	 *
-	 * @return bool
+	 * @return bool|null
 	 */
-	public static function validate(string $task, string $token = null): bool
+	public static function validate(string $task, string $token = null): ?bool
 	{
 		if ($token === null) {
 			return self::validateTask($task);
@@ -55,9 +55,9 @@ class AntiCsrf
 	/**
 	 * @param string $token
 	 *
-	 * @return bool
+	 * @return bool|void
 	 */
-	public static function validateToken(string $token): bool
+	public static function validateToken(string $token)
 	{
 		if (Session::get('token') && Session::get('token_time')) {
 			$expired_timestamp = time() - (15 * 60);
