@@ -12,7 +12,7 @@ use Twig\Extra\String\StringExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
-require_once('../vendor/autoload.php');
+require_once '../vendor/autoload.php';
 
 abstract class Controller
 {

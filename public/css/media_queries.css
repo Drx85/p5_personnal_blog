@@ -15,7 +15,7 @@
 		max-width: 135px;
 		margin-top: 25px;
 	}
-	
+
 	.menu-checkbox:checked ~ #menu {
 		visibility: visible;
 		opacity: 1;
@@ -29,7 +29,7 @@
 	}
 	
 	header label {
-		font-family: MyriadProRegular;
+		font-family: MyriadProRegular, sans-serif;
 		color: black;
 		font-size: 4em;
 		display: block;
