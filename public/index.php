@@ -6,15 +6,14 @@ require_once('../app/autoload.php');
 
 session_start();
 
-if (isset($_SESSION['destroyed'])
-	&& $_SESSION['destroyed'] < time() - 300) {
-	remove_all_authentication_flag_from_active_sessions($_SESSION['user']);
+if (\Session::get('destroyed') && \Session::get('destroyed') < time() - 300) {
+	remove_all_authentication_flag_from_active_sessions(\Session::get('user'));
 	throw(new DestroyedSessionAccessException);
 }
 
-$_SESSION['destroyed'] = time();
+\Session::put('destroyed', time());
 session_regenerate_id();
-unset($_SESSION['destroyed']);
+\Session::forget('destroyed');
 
 
 $controller = 'Page';

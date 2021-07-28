@@ -4,6 +4,7 @@ namespace Controllers;
 
 
 use Message;
+use Session;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
@@ -39,8 +40,8 @@ abstract class Controller
 			return \AntiCsrf::createToken();
 		}));
 		
-		if (isset($_SESSION['user'])) {
-			$this->role = $_SESSION['user']->getRole();
+		if (Session::get('user')) {
+			$this->role = Session::get('user')->getRole();
 		}
 	}
 	

@@ -21,7 +21,8 @@ class Account extends Model
 		$q = $q->fetch();
 		
 		if (password_verify($password, $q['password'])) {
-			return $_SESSION['user'] = new \User($q['user_id'], $pseudo, $q['role']);
+			$user = new \User($q['user_id'], $pseudo, $q['role']);
+			return \Session::put('user', $user);
 		}
 	}
 }

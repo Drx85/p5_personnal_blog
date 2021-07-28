@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Message;
+use Session;
 
 class Account extends Controller
 {
@@ -10,7 +11,7 @@ class Account extends Controller
 	
 	public function showRegister()
 	{
-		if (!isset($_SESSION['user'])) {
+		if (!Session::get('user')) {
 			echo $this->twig->render('register.twig');
 			exit;
 		}
@@ -19,7 +20,7 @@ class Account extends Controller
 	
 	public function showConnection()
 	{
-		if (!isset($_SESSION['user'])) {
+		if (!Session::get('user')) {
 			echo $this->twig->render('connection.twig');
 			exit;
 		}

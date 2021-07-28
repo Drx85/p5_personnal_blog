@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Message;
+use Session;
 
 class Post extends Controller
 {
@@ -30,7 +31,7 @@ class Post extends Controller
 	public function add()
 	{
 		if ($this->hasPermission()) {
-			$added = $this->model->insert($_POST['title'], $_POST['post_content'], $_SESSION['user']->getPseudo());
+			$added = $this->model->insert($_POST['title'], $_POST['post_content'], Session::get('user')->getPseudo());
 			if ($added) {
 				echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 				exit;

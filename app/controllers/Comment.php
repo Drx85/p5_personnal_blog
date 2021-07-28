@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Message;
+use Session;
 
 class Comment extends Controller
 {
@@ -10,7 +11,7 @@ class Comment extends Controller
 	
 	public function send()
 	{
-		$this->model->insert($_GET['id_post'], $_SESSION['user']->getPseudo(), $_POST['user_comment']);
+		$this->model->insert($_GET['id_post'], Session::get('user')->getPseudo(), $_POST['user_comment']);
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_COMMENT]);
 	}
 	
