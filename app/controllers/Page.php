@@ -2,10 +2,6 @@
 
 namespace Controllers;
 
-
-
-use http\Env\Response;
-
 class Page extends Controller
 {
 	protected $modelName = \Models\Post::class;
@@ -19,9 +15,9 @@ class Page extends Controller
 	{
 		if ($this->hasPermission()) {
 			echo $this->twig->render('add_post.twig');
-			exit;
+		} else {
+			$this->forbidden();
 		}
-		$this->forbidden();
 	}
 	
 	public function showEdit()
@@ -29,16 +25,15 @@ class Page extends Controller
 		if ($this->hasPermission()) {
 			$value = $this->model->getEditValues((int)filter_input(INPUT_GET, 'id'));
 			echo $this->twig->render('edit_post.twig', compact('value'));
-			exit;
+		} else {
+			$this->forbidden();
 		}
-		$this->forbidden();
 	}
 	
 	public function show404()
 	{
-		/*header('HTTP/1.0 404 Not Found');*/
-		echo new Response($this->twig->render('404.twig'), 404);
-		/*echo $this->twig->render('404.twig');*/
+		header('HTTP/1.0 404 Not Found');
+		echo $this->twig->render('404.twig');
 	}
 	
 	public function forbidden()

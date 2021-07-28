@@ -1,7 +1,5 @@
 {% if session.user is defined %}
 	{% set user = session.user %}
-{% else %}
-	{% set  user = user %}
 {% endif %}
 
 
@@ -37,8 +35,7 @@
 				<a class="nav-link" href="index.php?controller=post&action=index">Blog</a>
 			</li>
 			
-			{% if disconnected is not defined and session.user.role is same as ('admin') or session.user.role is same as ('publisher')
-				or user.role is same as ('admin') or user.role is same as ('publisher') %}
+			{% if disconnected is not defined and user.role is same as ('admin') or user.role is same as ('publisher') %}
 				<li>
 					<a class="nav-link" href="index.php?controller=comment&action=show_pending">Commentaires att. validation</a>
 				</li>
@@ -49,9 +46,9 @@
 		</ul>
 		
 		<ul class="navbar-nav ms-auto">
-			{% if disconnected is not defined and session.user or user.id is defined %}
+			{% if disconnected is not defined and user.id is defined %}
 				<span class="navbar-text text-white-50">
-      			Connecté en tant que {{ user.pseudo }} ({{ session.user.role | trans }}{{ user.role | trans }})
+      			Connecté en tant que {{ user.pseudo }} ({{ user.role | trans }})
     		</span>
 				<li>
 					<a class="nav-link" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
@@ -112,9 +109,9 @@
 					<h5 class="text-uppercase mb-3">Compte</h5>
 					
 					<ul class="list-unstyled mb-0">
-						{% if disconnected is not defined and session.user or user.id is defined %}
+						{% if disconnected is not defined and user.id is defined %}
 							<li class="text-muted">
-								Connecté en tant que {{ user.pseudo }}({{ session.user.role | trans }}{{ user.role | trans }})
+								Connecté en tant que {{ user.pseudo }}({{ user.role | trans }})
 							</li>
 							<li>
 								<a class="text-dark" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
@@ -156,10 +153,12 @@
 						<li>
 							<a href="index.php?controller=post&action=index" class="text-dark">Blog</a>
 						</li>
-						{% if disconnected is not defined and session.user.role is same as ('admin') or session.user.role is same as ('publisher')
-							or user.role is same as ('admin') or user.role is same as ('publisher') %}
+						{% if disconnected is not defined and user.role is same as ('admin') or user.role is same as ('publisher') %}
 							<li>
 								<a href="index.php?controller=comment&action=show_pending" class="text-dark">Commentaires att. validation</a>
+							</li>
+							<li>
+								<a href="index.php?controller=page&action=show_add" class="text-dark">Ajouter un billet </a>
 							</li>
 						{% endif %}
 					</ul>
