@@ -51,7 +51,7 @@ class Account extends Controller
 	
 	public function disconnect()
 	{
-		session_destroy();
+		session_unset();
 		echo $this->twig->render('home.twig', ['message' => Message::DISCONNECTED, 'disconnected' => true]);
 	}
 }

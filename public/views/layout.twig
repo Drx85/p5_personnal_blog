@@ -1,3 +1,10 @@
+{% if session.user is defined %}
+	{% set user = session.user %}
+{% else %}
+	{% set  user = user %}
+{% endif %}
+
+
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -44,7 +51,7 @@
 		<ul class="navbar-nav ms-auto">
 			{% if disconnected is not defined and session.user or user.id is defined %}
 				<span class="navbar-text text-white-50">
-      			Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role | trans }}{{ user.role | trans }})
+      			Connecté en tant que {{ user.pseudo }} ({{ session.user.role | trans }}{{ user.role | trans }})
     		</span>
 				<li>
 					<a class="nav-link" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
@@ -107,7 +114,7 @@
 					<ul class="list-unstyled mb-0">
 						{% if disconnected is not defined and session.user or user.id is defined %}
 							<li class="text-muted">
-								Connecté en tant que {{ session.user.pseudo }}{{ user.pseudo }} ({{ session.user.role | trans }}{{ user.role | trans }})
+								Connecté en tant que {{ user.pseudo }}({{ session.user.role | trans }}{{ user.role | trans }})
 							</li>
 							<li>
 								<a class="text-dark" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
