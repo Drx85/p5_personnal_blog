@@ -10,7 +10,10 @@ class Mail extends Controller
 	
 	public function submit()
 	{
-		$this->model->send($_POST['surname'], $_POST['name'], $_POST['email'], $_POST['message']);
+		$this->model->send(filter_input(INPUT_POST, 'surname'),
+			filter_input(INPUT_POST, 'name'),
+			filter_input(INPUT_POST, 'email'),
+			filter_input(INPUT_POST, 'message'));
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_MAIL]);
 	}
 }

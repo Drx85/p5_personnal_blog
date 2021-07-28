@@ -29,7 +29,9 @@ class Account extends Controller
 	
 	public function register()
 	{
-		$user = $this->model->create($_POST['pseudo'], $_POST['password'], $_POST['mail']);
+		$user = $this->model->create(filter_input(INPUT_POST, 'pseudo'),
+			filter_input(INPUT_POST, 'password'),
+			filter_input(INPUT_POST, 'mail'));
 		
 		if ($user) {
 			echo $this->twig->render('register.twig', ['message' => Message::CREATED]);
@@ -40,7 +42,7 @@ class Account extends Controller
 	
 	public function connect()
 	{
-		$user = $this->model->connect($_POST['password'], $_POST['username']);
+		$user = $this->model->connect(filter_input(INPUT_POST, 'password'), filter_input(INPUT_POST, 'username'));
 		
 		if ($user) {
 			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED, 'user' => $user]);

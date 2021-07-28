@@ -16,27 +16,13 @@ session_regenerate_id();
 \Session::forget('destroyed');
 
 
-$controller = 'Page';
-if (isset($_GET['controller'])) {
-	$controller = $_GET['controller'];
-}
 
-$action = 'showHome';
-if (isset($_GET['action'])) {
-	$action = $_GET['action'];
-}
+$controller = \Factory::affectGlobal('controller', 'GET', 'Page');
+$action = \Factory::affectGlobal('action', 'GET', 'showHome');
+$token = \Factory::affectGlobal('token', 'GET', null);
 
-$token = null;
-if (isset($_GET['token'])) {
-	$token = $_GET['token'];
-}
-
-if (isset($_POST['token'])) {
-	$token = $_POST['token'];
-}
-
-if (!isset($_GET['page']) or $_GET['page'] > 1000 or $_GET['page'] < 1) {
-	$_GET['page'] = 1;
+if (!$token) {
+	$token = \Factory::affectGlobal('token', 'POST', null);
 }
 
 \Factory::process($controller, $action, $token);

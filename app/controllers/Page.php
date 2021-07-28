@@ -23,7 +23,7 @@ class Page extends Controller
 	public function showEdit()
 	{
 		if ($this->hasPermission()) {
-			$value = $this->model->getEditValues($_GET['id']);
+			$value = $this->model->getEditValues((int)filter_input(INPUT_GET, 'id'));
 			echo $this->twig->render('edit_post.twig', compact('value'));
 			exit;
 		}

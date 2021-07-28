@@ -11,7 +11,7 @@ class Comment extends Controller
 	
 	public function send()
 	{
-		$this->model->insert($_GET['id_post'], Session::get('user')->getPseudo(), $_POST['user_comment']);
+		$this->model->insert((int)filter_input(INPUT_GET, 'id_post'), Session::get('user')->getPseudo(), filter_input(INPUT_POST, 'user_comment'));
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_COMMENT]);
 	}
 	
@@ -28,7 +28,7 @@ class Comment extends Controller
 	public function validate()
 	{
 		if ($this->hasPermission()) {
-			$validate = $this->model->validate($_GET['id']);
+			$validate = $this->model->validate((int)filter_input(INPUT_GET, 'id'));
 			if ($validate) {
 				echo $this->twig->render('home.twig', ['message' => Message::VALIDATED_COMMENT]);
 				exit;

@@ -61,7 +61,7 @@ abstract class Controller
 	public function delete()
 	{
 		if ($this->hasPermission()) {
-			$deleted = $this->model->delete($_GET['id']);
+			$deleted = $this->model->delete((int)filter_input(INPUT_GET, 'id'));
 			if ($deleted) {
 				echo $this->twig->render('home.twig', ['message' => Message::DELETED_CONTENT]);
 				exit;

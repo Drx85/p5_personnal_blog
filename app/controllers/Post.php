@@ -23,15 +23,15 @@ class Post extends Controller
 	public function show()
 	{
 		$comment = new \Models\Comment();
-		$post = $this->model->find($_GET['id']);
-		$comments = $comment->findAllByPost(1, $_GET['id']);
+		$post = $this->model->find((int)filter_input(INPUT_GET, 'id'));
+		$comments = $comment->findAllByPost(1, (int)filter_input(INPUT_GET, 'id'));
 		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
 	public function add()
 	{
 		if ($this->hasPermission()) {
-			$added = $this->model->insert($_POST['title'], $_POST['post_content'], Session::get('user')->getPseudo());
+			$added = $this->model->insert(filter_input(INPUT_POST, 'title'), filter_input(INPUT_POST, 'post_content'), Session::get('user')->getPseudo());
 			if ($added) {
 				echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 				exit;
@@ -45,7 +45,10 @@ class Post extends Controller
 	public function edit()
 	{
 		if ($this->hasPermission()) {
-			$edited = $this->model->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
+			$edited = $this->model->edit(filter_input(INPUT_POST, 'title'),
+				filter_input(INPUT_POST, 'message'),
+				filter_input(INPUT_POST, 'author'),
+				(int)filter_input(INPUT_GET, 'id'));
 			if ($edited) {
 				echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
 				exit;
