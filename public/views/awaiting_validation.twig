@@ -12,11 +12,11 @@
 	
 	{% for comment in comments %}
 		
-		<p>Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
+		<p class="mt-5">Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
 		{{ comment.text }}
 		
-		<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrf_token() }}">Supprimer</a>
-			<a class="btn btn-success" href="index.php?controller=comment&action=validate&id={{ comment.id }}&token={{ csrf_token() }}">Valider et publier</a></p>
+		<p><a class="btn btn-danger mt-sm-4 mt-2" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrf_token() }}">Supprimer</a>
+			<a class="btn btn-success mt-sm-4 mt-2" href="index.php?controller=comment&action=validate&id={{ comment.id }}&token={{ csrf_token() }}">Valider et publier</a></p>
 	
 	{% endfor %}
 

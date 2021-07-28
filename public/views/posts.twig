@@ -15,7 +15,7 @@
 	<div class="row">
 	{% for post in blog %}
 		
-		<div class="col-4 mb-4">
+		<div class="col-md-6 col-lg-4 mb-4">
 			<div class="card">
 				<div class="card-body">
 					<h3 class="card-title">{{ post.title }}</h3>
@@ -32,8 +32,8 @@
 					</p>
 					
 					{% if session.user.role is same as ('admin') or session.user.role is same as ('publisher') %}
-						<p><a class="btn btn-danger" href="index.php?controller=post&action=delete&id={{ post.id }}&token={{ csrf_token() }}">Supprimer</a>
-							<a class="btn btn-secondary" href="index.php?controller=page&action=show_edit&id={{ post.id }}">Modifier</a></p>
+						<p><a class="btn btn-danger mt-2" href="index.php?controller=post&action=delete&id={{ post.id }}&token={{ csrf_token() }}">Supprimer</a>
+							<a class="btn btn-secondary mt-2" href="index.php?controller=page&action=show_edit&id={{ post.id }}">Modifier</a></p>
 					{% endif %}
 					
 					{% set counter = ( counter | default(-1) ) + 1 %}
