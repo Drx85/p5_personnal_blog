@@ -2,12 +2,21 @@
 
 namespace Models;
 
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 
 class Mail extends Model
 {
-	public function send(string $surname, string $name, string $email, string $message)
+	/**
+	 * @param string $surname
+	 * @param string $name
+	 * @param string $email
+	 * @param string $message
+	 *
+	 * @throws Exception
+	 */
+	public function send(string $surname, string $name, string $email, string $message): void
 	{
 		$mail = new PHPMailer();
 		$mail->IsSMTP();

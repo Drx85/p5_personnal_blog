@@ -9,13 +9,13 @@ class Comment extends Controller
 {
 	protected $modelName = \Models\Comment::class;
 	
-	public function send()
+	public function send(): void
 	{
 		$this->model->insert((int)filter_input(INPUT_GET, 'id_post'), Session::get('user')->getPseudo(), filter_input(INPUT_POST, 'user_comment'));
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_COMMENT]);
 	}
 	
-	public function showPending()
+	public function showPending(): void
 	{
 		if ($this->hasPermission()) {
 			$comments = $this->model->findAllByPost(0);
@@ -25,7 +25,7 @@ class Comment extends Controller
 		}
 	}
 	
-	public function validate()
+	public function validate(): void
 	{
 		if ($this->hasPermission()) {
 			$validate = $this->model->validate((int)filter_input(INPUT_GET, 'id'));

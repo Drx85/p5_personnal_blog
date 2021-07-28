@@ -5,7 +5,10 @@ class AntiCsrf
 {
 	private static $token = null;
 	
-	public static function createToken()
+	/**
+	 * @return string|null
+	 */
+	public static function createToken(): string
 	{
 		if (self::$token === null) {
 			self::$token = uniqid(rand(), true);
@@ -15,7 +18,12 @@ class AntiCsrf
 		return self::$token;
 	}
 	
-	public static function validateTask($task)
+	/**
+	 * @param string $task
+	 *
+	 * @return bool
+	 */
+	public static function validateTask(string $task): bool
 	{
 		switch ($task) {
 			case "edit":
@@ -30,7 +38,13 @@ class AntiCsrf
 		}
 	}
 	
-	public static function validate(string $task, string $token = null)
+	/**
+	 * @param string      $task
+	 * @param string|null $token
+	 *
+	 * @return bool
+	 */
+	public static function validate(string $task, string $token = null): bool
 	{
 		if ($token === null) {
 			return self::validateTask($task);
@@ -38,7 +52,12 @@ class AntiCsrf
 		return self::validateToken($token);
 	}
 	
-	public static function validateToken(string $token)
+	/**
+	 * @param string $token
+	 *
+	 * @return bool
+	 */
+	public static function validateToken(string $token): bool
 	{
 		if (Session::get('token') && Session::get('token_time')) {
 			$expired_timestamp = time() - (15 * 60);

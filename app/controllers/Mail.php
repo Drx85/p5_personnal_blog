@@ -8,7 +8,7 @@ class Mail extends Controller
 {
 	protected $modelName = \Models\Mail::class;
 	
-	public function submit()
+	public function submit(): void
 	{
 		$this->model->send(filter_input(INPUT_POST, 'surname'),
 			filter_input(INPUT_POST, 'name'),

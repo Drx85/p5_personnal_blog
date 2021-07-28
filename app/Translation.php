@@ -3,7 +3,12 @@
 
 class Translation
 {
-	public static function translate($value)
+	/**
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	public static function translate(string $value): string
 	{
 		switch ($value) {
 			case "publisher" :

@@ -8,7 +8,10 @@ class Post extends Model
 {
 	protected $table = 'post';
 	
-	public function findAll()
+	/**
+	 * @return array
+	 */
+	public function findAll(): array
 	{
 		$limit_page = $this->getLIMIT((int)filter_input(INPUT_GET, 'page'));
 		
@@ -24,7 +27,12 @@ class Post extends Model
 		return $q->fetchAll();
 	}
 	
-	public function find(int $id)
+	/**
+	 * @param int $id
+	 *
+	 * @return mixed
+	 */
+	public function find(int $id): mixed
 	{
 		$q = $this->db->prepare("SELECT id, title, message, author, DATE_FORMAT(post_date, '%d/%m/%Y') AS date,
                                    HOUR(post_time) AS hour,
@@ -34,7 +42,12 @@ class Post extends Model
 		return $q->fetch();
 	}
 	
-	private function getLIMIT(int $page)
+	/**
+	 * @param int $page
+	 *
+	 * @return int
+	 */
+	private function getLIMIT(int $page): int
 	{
 		$limit_page = 0;
 		
@@ -44,20 +57,40 @@ class Post extends Model
 		return $limit_page;
 	}
 	
-	public function insert(string $title, string $message, string $pseudo)
+	/**
+	 * @param string $title
+	 * @param string $message
+	 * @param string $pseudo
+	 *
+	 * @return bool
+	 */
+	public function insert(string $title, string $message, string $pseudo): bool
 	{
 		$q = $this->db->prepare('INSERT INTO post (title, message, author, post_date, post_time) VALUES (:title, :message, :pseudo, NOW(), NOW())');
 		return $q->execute(compact('title', 'message', 'pseudo'));
 	}
 	
-	public function getEditValues(int $id)
+	/**
+	 * @param int $id
+	 *
+	 * @return mixed
+	 */
+	public function getEditValues(int $id): mixed
 	{
 		$q = $this->db->prepare('SELECT id, title, message, author FROM post WHERE id = ?');
 		$q->execute(array($id));
 		return $q->fetch();
 	}
 	
-	public function edit(string $title, string $message, string $author, int $id)
+	/**
+	 * @param string $title
+	 * @param string $message
+	 * @param string $author
+	 * @param int    $id
+	 *
+	 * @return bool
+	 */
+	public function edit(string $title, string $message, string $author, int $id): bool
 	{
 		$q = $this->db->prepare('UPDATE post SET title = :title, message = :message, author = :author, update_date = NOW() WHERE id = :id');
 		return $q->execute(compact('title', 'message', 'author', 'id'));

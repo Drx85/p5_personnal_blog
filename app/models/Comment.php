@@ -4,9 +4,15 @@ namespace Models;
 
 class Comment extends Model
 {
+	/**
+	 * @var string
+	 */
 	protected $table = 'comment';
 	
-	public function count()
+	/**
+	 * @return array
+	 */
+	public function count(): array
 	{
 		$array = array();
 		$post = new Post();
@@ -21,7 +27,13 @@ class Comment extends Model
 		return $array;
 	}
 	
-	public function findAllByPost(bool $approved, ?int $id_post = null)
+	/**
+	 * @param bool     $approved
+	 * @param int|null $id_post
+	 *
+	 * @return array
+	 */
+	public function findAllByPost(bool $approved, ?int $id_post = null): array
 	{
 		if ($id_post) {
 			$sql = "SELECT id, id_post, author, text, DATE_FORMAT(comment_date, '%d/%m/%Y') AS c_date,
@@ -39,14 +51,24 @@ class Comment extends Model
 		return $q->fetchAll();
 	}
 	
-	public function insert(int $id_post, string $pseudo, string $text)
+	/**
+	 * @param int    $id_post
+	 * @param string $pseudo
+	 * @param string $text
+	 */
+	public function insert(int $id_post, string $pseudo, string $text): void
 	{
 		$q = $this->db->prepare('INSERT INTO comment (id_post, author, text, comment_date, comment_time)
 												VALUES (:id_post, :pseudo, :text, NOW(), NOW())');
 		$q->execute(compact('id_post', 'pseudo', 'text'));
 	}
 	
-	public function validate(int $id)
+	/**
+	 * @param int $id
+	 *
+	 * @return int
+	 */
+	public function validate(int $id): int
 	{
 		$q = $this->db->prepare('UPDATE comment SET approved = 1 WHERE id = ?');
 		$q->execute(array($id));

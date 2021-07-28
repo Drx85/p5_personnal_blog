@@ -21,13 +21,13 @@
 		opacity: 1;
 		transform: translateY(10%);
 	}
-	
+
 	.menu-checkbox {
 		opacity: 0;
 		position: absolute;
 		top: -5000px;
 	}
-	
+
 	header label {
 		font-family: MyriadProRegular, sans-serif;
 		color: black;
@@ -38,7 +38,7 @@
 		height: 10px;
 		line-height: 50px;
 	}
-	
+
 	header {
 		height: 60px;
 		padding-left: 2px;

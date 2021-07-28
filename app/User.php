@@ -15,23 +15,47 @@ class User
 		return $this;
 	}
 	
-	public function getId() {
+	/**
+	 * @return int
+	 */
+	public function getId(): int
+	{
 		return $this->id;
 	}
 	
-	public function getPseudo() {
+	/**
+	 * @return string
+	 */
+	public function getPseudo(): string
+	{
 		return $this->pseudo;
 	}
 	
-	public function setPseudo($pseudo) {
+	/**
+	 * @param string $pseudo
+	 *
+	 * @return mixed
+	 */
+	public function setPseudo(string $pseudo): string
+	{
 		return $this->pseudo = $pseudo;
 	}
 	
-	public function getRole() {
+	/**
+	 * @return string
+	 */
+	public function getRole(): string
+	{
 		return $this->role;
 	}
 	
-	public function setRole($role) {
+	/**
+	 * @param string $role
+	 *
+	 * @return mixed
+	 */
+	public function setRole(string $role): string
+	{
 		return $this->role = $role;
 	}
 }

@@ -9,7 +9,7 @@ class Post extends Controller
 {
 	protected $modelName = \Models\Post::class;
 	
-	public function index()
+	public function index(): void
 	{
 		$pages = new \Models\Page();
 		$comment = new \Models\Comment();
@@ -20,7 +20,7 @@ class Post extends Controller
 		echo $this->twig->render('posts.twig', compact('blog', 'comments_number', 'array_pages'));
 	}
 	
-	public function show()
+	public function show(): void
 	{
 		$comment = new \Models\Comment();
 		$post = $this->model->find((int)filter_input(INPUT_GET, 'id'));
@@ -28,7 +28,7 @@ class Post extends Controller
 		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
-	public function add()
+	public function add(): void
 	{
 		if ($this->hasPermission()) {
 			$added = $this->model->insert(filter_input(INPUT_POST, 'title'), filter_input(INPUT_POST, 'post_content'), Session::get('user')->getPseudo());
@@ -42,7 +42,7 @@ class Post extends Controller
 		}
 	}
 	
-	public function edit()
+	public function edit(): void
 	{
 		if ($this->hasPermission()) {
 			$edited = $this->model->edit(filter_input(INPUT_POST, 'title'),

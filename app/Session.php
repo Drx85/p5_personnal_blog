@@ -3,15 +3,32 @@
 
 class Session
 {
-	public static function put($key, $value){
+	/**
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return mixed
+	 */
+	public static function put(string $key, string $value): mixed
+	{
 		return $_SESSION[$key] = $value;
 	}
 	
-	public static function get($key){
+	/**
+	 * @param $string key
+	 *
+	 * @return mixed|null
+	 */
+	public static function get(string $key): ?mixed
+	{
 		return (isset($_SESSION[$key]) ? $_SESSION[$key] : null);
 	}
 	
-	public static function forget($key){
+	/**
+	 * @param string $key
+	 */
+	public static function forget(string $key): void
+	{
 		unset($_SESSION[$key]);
 	}
 }

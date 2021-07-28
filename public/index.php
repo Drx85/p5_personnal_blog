@@ -15,8 +15,6 @@ if (\Session::get('destroyed') && \Session::get('destroyed') < time() - 300) {
 session_regenerate_id();
 \Session::forget('destroyed');
 
-
-
 $controller = \Factory::affectGlobal('controller', 'GET', 'Page');
 $action = \Factory::affectGlobal('action', 'GET', 'showHome');
 $token = \Factory::affectGlobal('token', 'GET', null);

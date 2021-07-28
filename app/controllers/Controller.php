@@ -45,20 +45,23 @@ abstract class Controller
 		}
 	}
 	
-	protected function hasPermission()
+	/**
+	 * @return bool|null
+	 */
+	protected function hasPermission(): ?bool
 	{
 		if ($this->role === 'admin' || $this->role === 'publisher') {
 			return true;
 		}
 	}
 	
-	protected function forbidden()
+	protected function forbidden(): void
 	{
 		header('HTTP/1.0 403 Forbidden');
 		echo $this->twig->render('forbidden.twig');
 	}
 	
-	public function delete()
+	public function delete(): void
 	{
 		if ($this->hasPermission()) {
 			$deleted = $this->model->delete((int)filter_input(INPUT_GET, 'id'));

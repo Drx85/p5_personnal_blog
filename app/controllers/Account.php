@@ -9,7 +9,7 @@ class Account extends Controller
 {
 	protected $modelName = \Models\Account::class;
 	
-	public function showRegister()
+	public function showRegister(): void
 	{
 		if (!Session::get('user')) {
 			echo $this->twig->render('register.twig');
@@ -18,7 +18,7 @@ class Account extends Controller
 		}
 	}
 	
-	public function showConnection()
+	public function showConnection(): void
 	{
 		if (!Session::get('user')) {
 			echo $this->twig->render('connection.twig');
@@ -27,7 +27,7 @@ class Account extends Controller
 		}
 	}
 	
-	public function register()
+	public function register(): void
 	{
 		$user = $this->model->create(filter_input(INPUT_POST, 'pseudo'),
 			filter_input(INPUT_POST, 'password'),
@@ -40,7 +40,7 @@ class Account extends Controller
 		}
 	}
 	
-	public function connect()
+	public function connect(): void
 	{
 		$user = $this->model->connect(filter_input(INPUT_POST, 'password'), filter_input(INPUT_POST, 'username'));
 		
@@ -51,7 +51,7 @@ class Account extends Controller
 		}
 	}
 	
-	public function disconnect()
+	public function disconnect(): void
 	{
 		session_unset();
 		echo $this->twig->render('home.twig', ['message' => Message::DISCONNECTED, 'disconnected' => true]);

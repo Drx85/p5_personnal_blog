@@ -4,7 +4,10 @@ namespace Models;
 
 class Page extends Model
 {
-	private function count()
+	/**
+	 * @return false|float
+	 */
+	private function count(): float
 	{
 		$q = $this->db->query('SELECT COUNT(id) AS number FROM post');
 		$number = $q->fetch();
@@ -14,7 +17,10 @@ class Page extends Model
 		return ceil($pageNumber);
 	}
 	
-	public function get()
+	/**
+	 * @return array
+	 */
+	public function get(): array
 	{
 		$roundedNumber = $this->count();
 		$page = 1;

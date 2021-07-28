@@ -8,9 +8,12 @@ require_once '../vendor/autoload.php';
 
 class Factory
 {
-	
-	
-	public static function process(string $controller, string $action, string $token = null)
+	/**
+	 * @param string      $controller
+	 * @param string      $action
+	 * @param string|null $token
+	 */
+	public static function process(string $controller, string $action, string $token = null): void
 	{
 		try {
 			$controllerName = ucfirst($controller);
@@ -33,7 +36,14 @@ class Factory
 		}
 	}
 	
-	public static function affectGlobal(string $var_name, string $method, $default)
+	/**
+	 * @param string      $var_name
+	 * @param string      $method
+	 * @param string|null $default
+	 *
+	 * @return mixed|string|null
+	 */
+	public static function affectGlobal(string $var_name, string $method, ?string $default): mixed
 	{
 		$type = constant('INPUT_' . $method);
 		$global = filter_input($type, $var_name);
