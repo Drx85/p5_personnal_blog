@@ -1,1 +1,3 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3c111cac19694d47b6ff3f355633f431)](https://www.codacy.com/gh/Drx85/p5_personnal_blog/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drx85/p5_personnal_blog&amp;utm_campaign=Badge_Grade)
+
+Codacy Badge
