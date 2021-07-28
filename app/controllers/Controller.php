@@ -64,11 +64,11 @@ abstract class Controller
 			$deleted = $this->model->delete($_GET['id']);
 			if ($deleted) {
 				echo $this->twig->render('home.twig', ['message' => Message::DELETED_CONTENT]);
-				exit;
+			} else {
+				echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_CONTENT]);
 			}
-			echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_CONTENT]);
-			exit;
+		} else {
+			$this->forbidden();
 		}
-		$this->forbidden();
 	}
 }

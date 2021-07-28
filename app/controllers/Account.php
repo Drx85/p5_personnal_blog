@@ -13,18 +13,18 @@ class Account extends Controller
 	{
 		if (!Session::get('user')) {
 			echo $this->twig->render('register.twig');
-			exit;
+		} else {
+			echo $this->twig->render('home.twig');
 		}
-		echo $this->twig->render('home.twig');
 	}
 	
 	public function showConnection()
 	{
 		if (!Session::get('user')) {
 			echo $this->twig->render('connection.twig');
-			exit;
+		} else {
+			echo $this->twig->render('home.twig');
 		}
-		echo $this->twig->render('home.twig');
 	}
 	
 	public function register()
@@ -33,9 +33,9 @@ class Account extends Controller
 		
 		if ($user) {
 			echo $this->twig->render('register.twig', ['message' => Message::CREATED]);
-			exit;
+		} else {
+			echo $this->twig->render('register.twig', ['message' => Message::ALREADY_TAKEN]);
 		}
-		echo $this->twig->render('register.twig', ['message' => Message::ALREADY_TAKEN]);
 	}
 	
 	public function connect()
@@ -44,9 +44,9 @@ class Account extends Controller
 		
 		if ($user) {
 			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED, 'user' => $user]);
-			exit;
+		} else {
+			echo $this->twig->render('connection.twig', ['message' => Message::BAD_CREDENTIALS]);
 		}
-		echo $this->twig->render('connection.twig', ['message' => Message::BAD_CREDENTIALS]);
 	}
 	
 	public function disconnect()

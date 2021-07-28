@@ -18,7 +18,7 @@ class Factory
 			if (AntiCsrf::validate($task, $token) !== true) {
 			$controller = new Page();
 			$controller->forbidden();
-			exit;
+			return;
 			}
 			
 			$controllerName = '\Controllers\\' . $controllerName;

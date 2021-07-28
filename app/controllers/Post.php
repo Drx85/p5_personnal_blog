@@ -34,12 +34,12 @@ class Post extends Controller
 			$added = $this->model->insert($_POST['title'], $_POST['post_content'], Session::get('user')->getPseudo());
 			if ($added) {
 				echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
-				exit;
+			} else {
+				echo $this->twig->render('home.twig', ['message' => Message::TITLE_ALREADY_EXISTS]);
 			}
-			echo $this->twig->render('home.twig', ['message' => Message::TITLE_ALREADY_EXISTS]);
-			exit;
+		} else {
+			$this->forbidden();
 		}
-		$this->forbidden();
 	}
 	
 	public function edit()
@@ -48,11 +48,11 @@ class Post extends Controller
 			$edited = $this->model->edit($_POST['title'], $_POST['message'], $_POST['author'], $_GET['id']);
 			if ($edited) {
 				echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
-				exit;
+			} else {
+				echo $this->twig->render('home.twig', ['message' => Message::TITLE_ALREADY_EXISTS]);
 			}
-			echo $this->twig->render('home.twig', ['message' => Message::TITLE_ALREADY_EXISTS]);
-			exit;
+		} else {
+			$this->forbidden();
 		}
-		$this->forbidden();
 	}
 }
