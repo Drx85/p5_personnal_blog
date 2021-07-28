@@ -1,10 +1,15 @@
+@font-face {
+	font-family: 'MyriadProRegular';
+	src: url('../polices/MyriadProRegular.ttf');
+}
+
 @media all and (max-width: 992px) {
 	/* Mobile Menu */
 	#menu {
 		visibility: hidden;
 		opacity: 0;
 		transform: translateY(0);
-		transition: all .4s ease-out;
+		transition: all 0.4s ease-out;
 		z-index: 1;
 		position: fixed;
 		max-width: 135px;
@@ -41,7 +46,8 @@
 }
 
 @media all and (min-width: 992px) {
-	.menu-checkbox, .menu-toggle {
+	.menu-checkbox,
+	.menu-toggle {
 		display: none;
 	}
 }

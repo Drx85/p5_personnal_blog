@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-require_once('../app/autoload.php');
+require_once'../app/autoload.php';
 
 session_start();
 

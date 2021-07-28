@@ -3,7 +3,7 @@
 use Controllers\Page;
 use Doctrine\Inflector\InflectorFactory;
 
-require_once('../vendor/autoload.php');
+require_once '../vendor/autoload.php';
 
 
 class Factory
