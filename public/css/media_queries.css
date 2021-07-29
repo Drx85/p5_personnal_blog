@@ -8,7 +8,7 @@
 		z-index: 1;
 		position: fixed;
 		max-width: 135px;
-		margin-top: 40px!important;
+		margin-top: 40px !important;
 	}
 
 	.menu-checkbox:checked ~ #menu {
@@ -37,9 +37,9 @@
 		height: 60px;
 		padding-left: 2px;
 	}
-	
+
 	body {
-		margin-top: 0px;
+		margin-top: 0;
 	}
 }
 
