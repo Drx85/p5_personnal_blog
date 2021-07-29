@@ -41,4 +41,9 @@ class Page extends Controller
 		header('HTTP/1.0 403 Forbidden');
 		echo $this->twig->render('forbidden.twig');
 	}
+	
+	public function showCgu(): void
+	{
+		echo $this->twig->render('cgu.twig');
+	}
 }

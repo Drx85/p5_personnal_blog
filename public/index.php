@@ -6,14 +6,14 @@ require_once'../app/autoload.php';
 
 session_start();
 
-if (\Session::get('destroyed') && \Session::get('destroyed') < time() - 300) {
+/*if (\Session::get('destroyed') && \Session::get('destroyed') < time() - 300) {
 	remove_all_authentication_flag_from_active_sessions(\Session::get('user'));
 	throw(new DestroyedSessionAccessException);
 }
 
 \Session::put('destroyed', time());
 session_regenerate_id();
-\Session::forget('destroyed');
+\Session::forget('destroyed');*/
 
 $controller = \Factory::affectGlobal('controller', 'GET', 'Page');
 $action = \Factory::affectGlobal('action', 'GET', 'showHome');

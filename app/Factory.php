@@ -31,7 +31,6 @@ class Factory
 			$controller->$task();
 		}
 		catch (Error $e) {
-			echo $e->getMessage(); die;
 			$controller = new Page();
 			$controller->show404();
 		}

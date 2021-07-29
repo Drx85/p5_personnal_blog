@@ -3,6 +3,7 @@ body {
 	margin-right: 2%;
 	padding-top: 1%;
 	padding-bottom: 1%;
+	margin-top: 70px;
 }
 
 h3 {
@@ -66,4 +67,9 @@ footer a:link {
 
 #github {
 	color: #333;
+}
+
+#menu {
+	margin-left: 2%!important;
+	margin-right: 2%!important;
 }

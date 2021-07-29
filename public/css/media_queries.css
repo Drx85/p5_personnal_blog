@@ -1,8 +1,3 @@
-@font-face {
-	font-family: 'MyriadProRegular';
-	src: url('../polices/MyriadProRegular.ttf');
-}
-
 @media all and (max-width: 992px) {
 	/* Mobile Menu */
 	#menu {
@@ -13,7 +8,7 @@
 		z-index: 1;
 		position: fixed;
 		max-width: 135px;
-		margin-top: 25px;
+		margin-top: 40px!important;
 	}
 
 	.menu-checkbox:checked ~ #menu {
@@ -29,7 +24,6 @@
 	}
 
 	header label {
-		font-family: MyriadProRegular, sans-serif;
 		color: black;
 		font-size: 4em;
 		display: block;
@@ -42,6 +36,10 @@
 	header {
 		height: 60px;
 		padding-left: 2px;
+	}
+	
+	body {
+		margin-top: 0px;
 	}
 }
 
