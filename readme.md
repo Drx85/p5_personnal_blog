@@ -22,8 +22,8 @@ This blog must :
 
 ### Built With
 
-*  🐘️  PHP 7.4.9
-*  ⛵ phpMyAdmin 5.0.2
+*   🐘️ PHP 7.4.9
+*  ⛵phpMyAdmin 5.0.2
 * 🐬  MySQL 5.7.31
 * ✒️Apache 2.4.46
 * ⛕️ Git 2.31.1.windows.1
