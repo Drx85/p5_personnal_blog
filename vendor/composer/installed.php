@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '68b1523c84dc2c0facc2ab933ba0ce37642f6a9a',
+    'reference' => '1201d171b35a645efd251d96e6b63484ccae9a31',
     'name' => 'cedric/blog',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '68b1523c84dc2c0facc2ab933ba0ce37642f6a9a',
+      'reference' => '1201d171b35a645efd251d96e6b63484ccae9a31',
     ),
     'doctrine/inflector' => 
     array (
@@ -28,6 +28,15 @@
       array (
       ),
       'reference' => '9cf661f4eb38f7c881cac67c75ea9b00bf97b210',
+    ),
+    'michelf/php-markdown' => 
+    array (
+      'pretty_version' => '1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c83178d49e372ca967d1a8c77ae4e051b3a3c75c',
     ),
     'phpmailer/phpmailer' => 
     array (
@@ -100,6 +109,15 @@
       array (
       ),
       'reference' => '95c812666f3e91db75385749fe219c5e494c7f95',
+    ),
+    'twig/markdown-extra' => 
+    array (
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a9fe276dbb7f837c3f4ecc6dad89bcccb9fc8bc9',
     ),
     'twig/string-extra' => 
     array (

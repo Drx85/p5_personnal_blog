@@ -18,15 +18,15 @@
 		par : {{ post.author }}
 	</p>
 	
-	<p> {{ post.message | nl2br }} </p>
+	<p>{% apply markdown_to_html %} {{ post.message }} {% endapply %}</p>
 	
 	<h3 class="mt-5 mb-4">Commentaires :</h3>
 	
 	{% for comment in comments %}
 		
 		<p>Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</br>
-		{{ comment.text }}</p>
-
+			{{ comment.text }}</p>
+		
 		{% if user.role is same as ('admin') or user.role is same as ('publisher') %}
 			<p><a class="btn btn-danger" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrf_token() }}">Supprimer</a></p>
 		{% endif %}

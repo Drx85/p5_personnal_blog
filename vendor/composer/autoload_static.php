@@ -19,6 +19,7 @@ class ComposerStaticInit8301ba70b7fa83bf4626d668fe85d64a
         'T' => 
         array (
             'Twig\\Extra\\String\\' => 18,
+            'Twig\\Extra\\Markdown\\' => 20,
             'Twig\\' => 5,
         ),
         'S' => 
@@ -35,6 +36,10 @@ class ComposerStaticInit8301ba70b7fa83bf4626d668fe85d64a
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'M' => 
+        array (
+            'Michelf\\' => 8,
+        ),
         'D' => 
         array (
             'Doctrine\\Inflector\\' => 19,
@@ -45,6 +50,10 @@ class ComposerStaticInit8301ba70b7fa83bf4626d668fe85d64a
         'Twig\\Extra\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/string-extra',
+        ),
+        'Twig\\Extra\\Markdown\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/markdown-extra',
         ),
         'Twig\\' => 
         array (
@@ -81,6 +90,10 @@ class ComposerStaticInit8301ba70b7fa83bf4626d668fe85d64a
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Michelf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/michelf/php-markdown/Michelf',
         ),
         'Doctrine\\Inflector\\' => 
         array (
