@@ -1,13 +1,10 @@
 # p5_personnal_blog
 Blog made with Vanilla PHP, Twig, and Bootstrap.
 
-
-
 ## About The Project
 
 I made this little blog to improve my skills in PHP, in the context of my PHP/Symfony OpenClassRooms formation.
 Your comments and suggestions are welcome.
-
 
 ### Constraints
 
@@ -23,12 +20,11 @@ This blog must :
 * Avoid security fails like XSS, CSRF, SQL injection, session hijacking, injection of PHP scripts
 * Be monitored by Codacy and Code Climate
 
-
 ### Built With
 
-* 🐘️ PHP 7.4.9
-* ⛵ phpMyAdmin 5.0.2
-* 🐬 MySQL 5.7.31
+*  🐘️  PHP 7.4.9
+*  ⛵ phpMyAdmin 5.0.2
+* 🐬  MySQL 5.7.31
 * ✒️Apache 2.4.46
 * ⛕️ Git 2.31.1.windows.1
 * 🌿 Twig 3
@@ -43,12 +39,9 @@ Codacy : [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3c111cac196
 
 Code Climate : [![Maintainability](https://api.codeclimate.com/v1/badges/206f2e8eeaa601e365ad/maintainability)](https://codeclimate.com/github/Drx85/p5_personnal_blog/maintainability)
 
-
-
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
-
 
 ### Prerequisites
 
@@ -63,21 +56,15 @@ https://docs.phpmyadmin.net/fr/latest/setup.html
 
 * CSS libraries are called via CDN (Bootstrap 5.0.2, Font Awesome 5)
 
-
 ### Installation
 
 1. *Instructions are waiting end of project to be written*
 
-
-
 ## Usage
-
 
 ### Online example version
 
 See an example hosted by Infomaniak here : *link is waiting end of project to be created*
-
-
 
 ## Contact
 
