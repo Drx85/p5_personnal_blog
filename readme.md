@@ -9,16 +9,16 @@ Your comments and suggestions are welcome.
 ### Constraints
 
 This blog must :
-* Contains posts listed in a page with an overview of each post + its number of comments + author + title + last update date if exists
-* Each post have its own page, which display all the post content + its comments + a form to add comments for connected users
-* Implement admin/publisher/member accounts
-* Implement an admin interface with restricted access
-* Have possibility to create/update/delete posts and to delete/validate comments when connected as admin or publisher
-* Manually validate by admin or publisher each new comment sent
-* Have a form contact in homepage
-* Not use any framework, composer libraries are tolerated
-* Avoid security fails like XSS, CSRF, SQL injection, session hijacking, injection of PHP scripts
-* Be monitored by Codacy and Code Climate
+*   Contains posts listed in a page with an overview of each post + its number of comments + author + title + last update date if exists
+*   Each post have its own page, which display all the post content + its comments + a form to add comments for connected users
+*   Implement admin/publisher/member accounts
+*   Implement an admin interface with restricted access
+*   Have possibility to create/update/delete posts and to delete/validate comments when connected as admin or publisher
+*   Manually validate by admin or publisher each new comment sent
+*   Have a form contact in homepage
+*   Not use any framework, composer libraries are tolerated
+*   Avoid security fails like XSS, CSRF, SQL injection, session hijacking, injection of PHP scripts
+*   Be monitored by Codacy and Code Climate
 
 ### Built With
 
@@ -27,8 +27,7 @@ This blog must :
 *   🐬  MySQL 5.7.31
 *   ✒️Apache 2.4.46
 *   ⛕️Git 2.31.1.windows.1
-*   🌿 Twig 3
-
+*   🌿 Twig 3<p>&nbsp;</p>
 *   🖊️ Dia for UML
 *   🖊️ Draw.io for UML
 *   🐬 MySQL Workbench for UML
@@ -45,16 +44,16 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-* PHP 7.4.9
+*   PHP 7.4.9
 
-* SMTP server with mailing service or XAMPP/WAMP for local use (mails will not work in local)
+*   SMTP server with mailing service or XAMPP/WAMP for local use (mails will not work in local)
 
-* MySQL DMBS like phpMyAdmin :
+*   MySQL DMBS like phpMyAdmin :
 https://docs.phpmyadmin.net/fr/latest/setup.html
 
-* Composer libraries are directly in the repo (PHP Mailer, Inflector, Twig)
+*   Composer libraries are directly in the repo (PHP Mailer, Inflector, Twig)
 
-* CSS libraries are called via CDN (Bootstrap 5.0.2, Font Awesome 5)
+*   CSS libraries are called via CDN (Bootstrap 5.0.2, Font Awesome 5)
 
 ### Installation
 
