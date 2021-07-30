@@ -16,4 +16,6 @@ class Message
 	public const SENT_MAIL = "Votre email a bien été envoyé.";
 	public const UNDEFINED_CONTENT = "Ce billet ou ce commentaire n'existe pas.";
 	public const TITLE_ALREADY_EXISTS = "Ce titre existe déjà.";
+	public const UPDATED_USER = "Le role de l'utilisateur a bien été modifié";
+	public const UNDEFINED_USER = "Cet utilisateur n'existe pas.";
 }

@@ -38,15 +38,20 @@
 					<a class="nav-link" href="index.php?controller=comment&action=show_pending">Commentaires att. validation</a>
 				</li>
 				<li>
-					<a class="nav-link" href="index.php?controller=page&action=show_add">Ajouter un billet </a>
+					<a class="nav-link" href="index.php?controller=page&action=show_add">Nouveau billet</a>
 				</li>
+			{% if disconnected is not defined and user.role is same as ('admin') %}
+				<li>
+					<a class="nav-link" href="index.php?controller=account&action=index">Gérer les utilisateurs</a>
+				</li>
+			{% endif %}
 			{% endif %}
 		</ul>
 		
 		<ul class="navbar-nav ms-auto">
 			{% if disconnected is not defined and user.id is defined %}
 				<span class="navbar-text text-white-50">
-      			Connecté en tant que {{ user.pseudo }} ({{ user.role | trans }})
+      			{{ user.pseudo }} ({{ user.role | trans }})
     		</span>
 				<li>
 					<a class="nav-link" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
@@ -156,8 +161,13 @@
 								<a href="index.php?controller=comment&action=show_pending" class="text-dark">Commentaires att. validation</a>
 							</li>
 							<li>
-								<a href="index.php?controller=page&action=show_add" class="text-dark">Ajouter un billet </a>
+								<a href="index.php?controller=page&action=show_add" class="text-dark">Nouveau billet </a>
 							</li>
+						{% if disconnected is not defined and user.role is same as ('admin') %}
+							<li>
+								<a href="index.php?controller=account&action=index" class="text-dark">Gérer les utilisateurs</a>
+							</li>
+						{% endif %}
 						{% endif %}
 					</ul>
 				</div>

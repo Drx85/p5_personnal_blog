@@ -34,7 +34,8 @@ hr {
 	color: aliceblue;
 }
 
-#social ul {
+#social ul,
+.card-body ul {
 	list-style: none;
 	margin-left: 0;
 	padding-left: 0;

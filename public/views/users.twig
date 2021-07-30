@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+	Gérer les utilisateurs
+{% endblock title %}
+
+{% block content %}
+	<div class="row">
+		{% for user in users %}
+			<div class="col-sm-5 col-md-4 col-lg-3 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">{{ user.pseudo }}</h5>
+						<ul class="card-text">
+							<li>Role : <span class="fw-bold">{{ user.role | trans }}</span></li>
+							<li>Email : {{ user.mail }}</li>
+						</ul>
+						{% if user.role is same as ('member') %}
+							<a class="btn btn-success mt-2" href="index.php?controller=account&action=update&work=promote&id={{ user.id }}&token={{ csrf_token() }}">Promouvoir en éditeur</a>
+						{% endif %}
+						
+						{% if user.role is same as ('publisher') or user.role is same as ('admin') %}
+							<a class="btn btn-danger mt-2" href="index.php?controller=account&action=update&work=demote&id={{ user.id }}&token={{ csrf_token() }}">Rétrograder</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock content %}

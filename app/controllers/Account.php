@@ -91,4 +91,48 @@ class Account extends BaseController
 		session_unset();
 		echo $this->twig->render('home.twig', ['message' => Message::DISCONNECTED, 'disconnected' => true]);
 	}
+	
+	/**
+	 * Render a page with all users to manage them
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
+	public function index(): void
+	{
+		if ($this->role === 'admin') {
+			$users = $this->model->findAll();
+			echo $this->twig->render('users.twig', compact('users'));
+		} else {
+			$this->forbidden();
+		}
+	}
+	
+	/**
+	 * Ask model to promote or demote an user
+	 * Require admin role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
+	public function update(): void
+	{
+		if ($this->role === 'admin') {
+			$updated = $this->model->update(filter_input(INPUT_GET, 'id'), filter_input(INPUT_GET, 'work'));
+			switch ($updated) {
+				case false :
+					$this->show404();
+					break;
+				case 0 :
+					echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_USER]);
+					break;
+				default :
+					echo $this->twig->render('home.twig', ['message' => Message::UPDATED_USER]);
+			}
+		} else {
+			$this->forbidden();
+		}
+	}
 }

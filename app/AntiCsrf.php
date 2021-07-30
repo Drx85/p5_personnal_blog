@@ -36,6 +36,7 @@ class AntiCsrf
 			case "validate":
 			case "add":
 			case "edit":
+			case "update":
 				return false;
 			
 			default:

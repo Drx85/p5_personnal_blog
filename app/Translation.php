@@ -22,7 +22,7 @@ class Translation
 				break;
 			
 			case "admin" :
-				return "Administrateur";
+				return "Admin";
 				break;
 				
 			default:
