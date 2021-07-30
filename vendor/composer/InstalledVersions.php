@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '1201d171b35a645efd251d96e6b63484ccae9a31',
+    'reference' => '10fee76b0950ef5861e5c60d7a8ff30d01b0e73a',
     'name' => 'cedric/blog',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '1201d171b35a645efd251d96e6b63484ccae9a31',
+      'reference' => '10fee76b0950ef5861e5c60d7a8ff30d01b0e73a',
     ),
     'doctrine/inflector' => 
     array (

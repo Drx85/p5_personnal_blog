@@ -5,11 +5,13 @@ namespace Controllers;
 use Message;
 use Session;
 
-class Account extends Controller
+class Account extends BaseController
 {
 	protected $modelName = \Models\Account::class;
 	
 	/**
+	 * Render the registration page
+	 *
 	 * @throws \Twig\Error\LoaderError
 	 * @throws \Twig\Error\RuntimeError
 	 * @throws \Twig\Error\SyntaxError
@@ -24,6 +26,8 @@ class Account extends Controller
 	}
 	
 	/**
+	 * Render the connection page
+	 *
 	 * @throws \Twig\Error\LoaderError
 	 * @throws \Twig\Error\RuntimeError
 	 * @throws \Twig\Error\SyntaxError
@@ -38,6 +42,8 @@ class Account extends Controller
 	}
 	
 	/**
+	 * Ask model to create new user with role "member", and render homepage
+	 *
 	 * @throws \Twig\Error\LoaderError
 	 * @throws \Twig\Error\RuntimeError
 	 * @throws \Twig\Error\SyntaxError
@@ -56,6 +62,8 @@ class Account extends Controller
 	}
 	
 	/**
+	 * Ask model to connect user, and render homepage
+	 *
 	 * @throws \Twig\Error\LoaderError
 	 * @throws \Twig\Error\RuntimeError
 	 * @throws \Twig\Error\SyntaxError
@@ -72,6 +80,8 @@ class Account extends Controller
 	}
 	
 	/**
+	 * Unset the session and render homepage
+	 *
 	 * @throws \Twig\Error\LoaderError
 	 * @throws \Twig\Error\RuntimeError
 	 * @throws \Twig\Error\SyntaxError

@@ -4,10 +4,11 @@
 class Session
 {
 	/**
+	 * Affect asked value to asked SuperGlobal $_SESSION
+	 *
 	 * @param string $key
 	 * @param $value
 	 *
-	 * @return
 	 */
 	public static function put(string $key, $value)
 	{
@@ -15,9 +16,10 @@ class Session
 	}
 	
 	/**
-	 * @param $string key
+	 * Return asked SuperGlobal $_SESSION value
 	 *
-	 * @return
+	 * @param string key
+	 *
 	 */
 	public static function get(string $key)
 	{
@@ -25,7 +27,11 @@ class Session
 	}
 	
 	/**
+	 * Unset asked SuperGlobal $_SESSION
+	 *
 	 * @param string $key
+	 *
+	 * @return void
 	 */
 	public static function forget(string $key): void
 	{

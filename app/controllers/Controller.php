@@ -25,9 +25,14 @@ abstract class Controller
 	protected $twig;
 	protected $role;
 	
+	/**
+	 * Load linked Model + Load Twig and its extensions/functions/filters + Get user role
+	 */
 	public function __construct()
 	{
-		$this->model = new $this->modelName;
+		if ($this->modelName) {
+			$this->model = new $this->modelName;
+		}
 		
 		$loader = new FilesystemLoader('views');
 		$this->twig = new Environment($loader, [
@@ -60,21 +65,13 @@ abstract class Controller
 	}
 	
 	/**
-	 * @return bool|null
+	 * Ask model to delete asked item, and render homepage
+	 * Require admin or publisher role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
 	 */
-	protected function hasPermission(): ?bool
-	{
-		if ($this->role === 'admin' || $this->role === 'publisher') {
-			return true;
-		}
-	}
-	
-	protected function forbidden(): void
-	{
-		header('HTTP/1.0 403 Forbidden');
-		echo $this->twig->render('forbidden.twig');
-	}
-	
 	public function delete(): void
 	{
 		if ($this->hasPermission()) {
@@ -85,7 +82,8 @@ abstract class Controller
 				echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_CONTENT]);
 			}
 		} else {
-			$this->forbidden();
+			$controller = new BaseController();
+			$controller->forbidden();
 		}
 	}
 }

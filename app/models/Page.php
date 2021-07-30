@@ -5,7 +5,9 @@ namespace Models;
 class Page extends Model
 {
 	/**
-	 * @return false|float
+	 * Count all posts, then calculate and return how many pages are needed, depending of wanted NB_POSTS_PER_PAGE set in Config file
+	 *
+	 * @return float
 	 */
 	private function count(): float
 	{
@@ -18,6 +20,8 @@ class Page extends Model
 	}
 	
 	/**
+	 * Create and return coherent array page, depending number of pages needed
+	 *
 	 * @return array
 	 */
 	public function get(): array

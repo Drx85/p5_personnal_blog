@@ -13,6 +13,8 @@ abstract class Model
 	}
 	
 	/**
+	 * Delete asked item in DB
+	 *
 	 * @param int $id
 	 *
 	 * @return int

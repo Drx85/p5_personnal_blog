@@ -9,6 +9,8 @@ class Post extends Model
 	protected $table = 'post';
 	
 	/**
+	 * Return all posts by page, classed by recent date
+	 *
 	 * @return array
 	 */
 	public function findAll(): array
@@ -28,6 +30,8 @@ class Post extends Model
 	}
 	
 	/**
+	 * Return one asked post
+	 *
 	 * @param int $id
 	 *
 	 * @return array
@@ -43,6 +47,8 @@ class Post extends Model
 	}
 	
 	/**
+	 * Determine and return correct LIMIT value for asked page
+	 *
 	 * @param int $page
 	 *
 	 * @return int
@@ -58,6 +64,8 @@ class Post extends Model
 	}
 	
 	/**
+	 * Create new post
+	 *
 	 * @param string $title
 	 * @param string $message
 	 * @param string $pseudo
@@ -71,6 +79,8 @@ class Post extends Model
 	}
 	
 	/**
+	 * Return values to be displayed in asked edit post form
+	 *
 	 * @param int $id
 	 *
 	 * @return array
@@ -83,6 +93,8 @@ class Post extends Model
 	}
 	
 	/**
+	 * Update asked post
+	 *
 	 * @param string $title
 	 * @param string $message
 	 * @param string $author

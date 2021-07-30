@@ -9,6 +9,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 class Mail extends Model
 {
 	/**
+	 * Use PHPMailer to send email by SMTP
+	 *
 	 * @param string $surname
 	 * @param string $name
 	 * @param string $email

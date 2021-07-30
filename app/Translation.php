@@ -4,6 +4,8 @@
 class Translation
 {
 	/**
+	 * Translate in french asked word
+	 *
 	 * @param string $value
 	 *
 	 * @return string

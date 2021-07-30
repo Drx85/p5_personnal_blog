@@ -2,15 +2,30 @@
 
 namespace Controllers;
 
-class Page extends Controller
+class Page extends BaseController
 {
 	protected $modelName = \Models\Post::class;
 	
+	/**
+	 * Render homepage
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function showHome(): void
 	{
 		echo $this->twig->render('home.twig');
 	}
 	
+	/**
+	 * Render Add new post form
+	 * Require admin or publisher role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function showAdd(): void
 	{
 		if ($this->hasPermission()) {
@@ -20,6 +35,14 @@ class Page extends Controller
 		}
 	}
 	
+	/**
+	 * Render Edit post form
+	 * Require admin or publisher role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function showEdit(): void
 	{
 		if ($this->hasPermission()) {
@@ -30,18 +53,13 @@ class Page extends Controller
 		}
 	}
 	
-	public function show404(): void
-	{
-		header('HTTP/1.0 404 Not Found');
-		echo $this->twig->render('404.twig');
-	}
-	
-	public function forbidden(): void
-	{
-		header('HTTP/1.0 403 Forbidden');
-		echo $this->twig->render('forbidden.twig');
-	}
-	
+	/**
+	 * Render CGU page
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function showCgu(): void
 	{
 		echo $this->twig->render('cgu.twig');

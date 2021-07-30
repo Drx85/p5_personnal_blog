@@ -6,6 +6,9 @@ class AntiCsrf
 	private static $token = null;
 	
 	/**
+	 * Singleton
+	 * If token doesn't exist : create new uniq and unpredictable token, else : keep old token
+	 *
 	 * @return string|null
 	 */
 	public static function createToken(): string
@@ -19,6 +22,8 @@ class AntiCsrf
 	}
 	
 	/**
+	 * To know if asked task need a token or not
+	 *
 	 * @param string $task
 	 *
 	 * @return bool
@@ -39,6 +44,8 @@ class AntiCsrf
 	}
 	
 	/**
+	 * Validate token but if token doesn't exists : control if asked task is authorized without token
+	 *
 	 * @param string      $task
 	 * @param string|null $token
 	 *
@@ -53,6 +60,8 @@ class AntiCsrf
 	}
 	
 	/**
+	 * Determine if validate AntiCsrf or not, comparing sent token and existing token and verifying that token is not older than 15 min
+	 *
 	 * @param string $token
 	 *
 	 * @return bool|void

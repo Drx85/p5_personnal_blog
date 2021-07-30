@@ -10,6 +10,8 @@ class Comment extends Model
 	protected $table = 'comment';
 	
 	/**
+	 * Count number of comments for each post
+	 *
 	 * @return array
 	 */
 	public function count(): array
@@ -28,6 +30,8 @@ class Comment extends Model
 	}
 	
 	/**
+	 * Return all approved comments for asked post or return all unapproved comments
+	 *
 	 * @param bool     $approved
 	 * @param int|null $id_post
 	 *
@@ -52,6 +56,8 @@ class Comment extends Model
 	}
 	
 	/**
+	 * Create new comment, awaiting manual validation
+	 *
 	 * @param int    $id_post
 	 * @param string $pseudo
 	 * @param string $text
@@ -64,6 +70,8 @@ class Comment extends Model
 	}
 	
 	/**
+	 * Validate asked comment for it to be showed in public
+	 *
 	 * @param int $id
 	 *
 	 * @return int

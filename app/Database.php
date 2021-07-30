@@ -4,6 +4,8 @@
 class Database
 {
 	/**
+	 * Connection to DB
+	 *
 	 * @return PDO
 	 */
 	public static function dbConnect(): PDO

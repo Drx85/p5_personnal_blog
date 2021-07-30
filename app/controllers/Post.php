@@ -5,10 +5,17 @@ namespace Controllers;
 use Message;
 use Session;
 
-class Post extends Controller
+class Post extends BaseController
 {
 	protected $modelName = \Models\Post::class;
 	
+	/**
+	 * Ask model to find all posts and to count comments for each, then render posts page with comments number for each post + pages number
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function index(): void
 	{
 		$pages = new \Models\Page();
@@ -20,6 +27,13 @@ class Post extends Controller
 		echo $this->twig->render('posts.twig', compact('blog', 'comments_number', 'array_pages'));
 	}
 	
+	/**
+	 * Ask model to find asked post and its approved linked comments and show it in renderer post page
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function show(): void
 	{
 		$comment = new \Models\Comment();
@@ -28,6 +42,14 @@ class Post extends Controller
 		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
+	/**
+	 * Ask model to create new post and render homepage
+	 * Require admin or publisher role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function add(): void
 	{
 		if ($this->hasPermission()) {
@@ -42,6 +64,14 @@ class Post extends Controller
 		}
 	}
 	
+	/**
+	 * Ask model to edit asked post and render homepage
+	 * Require admin or publisher role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function edit(): void
 	{
 		if ($this->hasPermission()) {

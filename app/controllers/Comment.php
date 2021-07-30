@@ -5,16 +5,31 @@ namespace Controllers;
 use Message;
 use Session;
 
-class Comment extends Controller
+class Comment extends BaseController
 {
 	protected $modelName = \Models\Comment::class;
 	
+	/**
+	 * Ask model to send a comment to awaiting validation list, and render homepage
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function send(): void
 	{
 		$this->model->insert((int)filter_input(INPUT_GET, 'id_post'), Session::get('user')->getPseudo(), filter_input(INPUT_POST, 'user_comment'));
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_COMMENT]);
 	}
 	
+	/**
+	 * Render awaiting validation comments page
+	 * Require admin or publisher role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function showPending(): void
 	{
 		if ($this->hasPermission()) {
@@ -25,6 +40,14 @@ class Comment extends Controller
 		}
 	}
 	
+	/**
+	 * Ask model to validate asked comment for it to be showed in public, and render homepage
+	 * Require admin or publisher role
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function validate(): void
 	{
 		if ($this->hasPermission()) {

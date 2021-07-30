@@ -5,6 +5,8 @@ namespace Models;
 class Account extends Model
 {
 	/**
+	 * Create new account with member role
+	 *
 	 * @param string $pseudo
 	 * @param string $password
 	 * @param string $mail
@@ -19,6 +21,8 @@ class Account extends Model
 	}
 	
 	/**
+	 * Connect an user verifying its username and password
+	 *
 	 * @param string $password
 	 * @param string $pseudo
 	 *

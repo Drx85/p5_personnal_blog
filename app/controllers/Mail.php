@@ -4,10 +4,17 @@ namespace Controllers;
 
 use Message;
 
-class Mail extends Controller
+class Mail extends BaseController
 {
 	protected $modelName = \Models\Mail::class;
 	
+	/**
+	 * Ask model to send email from form contact and render homepage
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function submit(): void
 	{
 		$this->model->send(filter_input(INPUT_POST, 'surname'),

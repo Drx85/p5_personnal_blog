@@ -26,6 +26,6 @@ if (!$token) {
 try {
 	\Factory::process($controller, $action, $token);
 } catch (\Error $e) {
-	$controller = new Page();
+	$controller = new BaseController();
 	$controller->show404();
 }
