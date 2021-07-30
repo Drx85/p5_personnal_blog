@@ -5,16 +5,7 @@ namespace Controllers;
 
 use Message;
 use Session;
-use Twig\Environment;
-use Twig\Extension\DebugExtension;
-use Twig\Loader\FilesystemLoader;
-use Twig\Extra\String\StringExtension;
-use Twig\Extra\Markdown\MarkdownExtension;
-use Twig\Extra\Markdown\DefaultMarkdown;
-use Twig\Extra\Markdown\MarkdownRuntime;
-use Twig\RuntimeLoader\RuntimeLoaderInterface;
-use Twig\TwigFilter;
-use Twig\TwigFunction;
+
 
 require_once '../vendor/autoload.php';
 
@@ -26,7 +17,7 @@ abstract class Controller
 	protected $role;
 	
 	/**
-	 * Load linked Model + Load Twig and its extensions/functions/filters + Get user role
+	 * Load linked Model, load Twig, get user role
 	 */
 	public function __construct()
 	{
@@ -34,30 +25,8 @@ abstract class Controller
 			$this->model = new $this->modelName;
 		}
 		
-		$loader = new FilesystemLoader('views');
-		$this->twig = new Environment($loader, [
-			'cache' => false,
-			'debug' => true
-		]);
-		$this->twig->addGlobal('session', $_SESSION);
-		$this->twig->addExtension(new DebugExtension());
-		$this->twig->addExtension(new StringExtension());
-		$this->twig->addExtension(new MarkdownExtension());
-		$this->twig->addFilter(new TwigFilter('trans', function ($value) {
-			return \Translation::translate($value);
-		}));
-		$this->twig->addFunction(new TwigFunction('csrf_token', function () {
-			return \AntiCsrf::createToken();
-		}));
-		
-		$this->twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
-			public function load($class)
-			{
-				if (MarkdownRuntime::class === $class) {
-					return new MarkdownRuntime(new DefaultMarkdown());
-				}
-			}
-		});
+		$twig_loader = new  \TwigLoader();
+		$this->twig = $twig_loader->getTwig();
 		
 		if (Session::get('user')) {
 			$this->role = Session::get('user')->getRole();
