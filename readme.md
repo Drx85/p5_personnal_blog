@@ -57,7 +57,7 @@ https://docs.phpmyadmin.net/fr/latest/setup.html
 
 ### Installation
 
-1. *Instructions are waiting end of project to be written*
+1.  *Instructions are waiting end of project to be written*
 
 ## Usage
 

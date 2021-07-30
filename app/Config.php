@@ -7,6 +7,7 @@ class Config
 	public const DB_PORT = '3308';
 	public const DB_USERNAME = 'root';
 	public const DB_PASSWORD = '';
+	public const DB_NAME = 'blog';
 	
 	public const MAIL_HOST = 'mail.infomaniak.com';
 	public const MAIL_PORT = '465';

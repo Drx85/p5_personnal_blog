@@ -23,4 +23,9 @@ if (!$token) {
 	$token = \Factory::affectGlobal('token', 'POST', null);
 }
 
-\Factory::process($controller, $action, $token);
+try {
+	\Factory::process($controller, $action, $token);
+} catch (\Error $e) {
+	$controller = new Page();
+	$controller->show404();
+}

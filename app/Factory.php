@@ -15,22 +15,20 @@ class Factory
 	 */
 	public static function process(string $controller, string $action, string $token = null): void
 	{
-		try {
-			$controllerName = ucfirst($controller);
-			
-			$inflector = InflectorFactory::create()->build();
-			$task      = lcfirst($inflector->classify($action));
-			if (AntiCsrf::validate($task, $token) !== true) {
+		$controllerName = ucfirst($controller);
+		
+		$inflector = InflectorFactory::create()->build();
+		$task = lcfirst($inflector->classify($action));
+		if (AntiCsrf::validate($task, $token) !== true) {
 			$controller = new Page();
 			$controller->forbidden();
 			return;
-			}
-			
-			$controllerName = '\Controllers\\' . $controllerName;
+		}
+		$controllerName = '\Controllers\\' . $controllerName;
+		if (class_exists($controllerName, true)) {
 			$controller     = new $controllerName;
 			$controller->$task();
-		}
-		catch (Error $e) {
+		} else {
 			$controller = new Page();
 			$controller->show404();
 		}

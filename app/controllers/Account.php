@@ -9,6 +9,11 @@ class Account extends Controller
 {
 	protected $modelName = \Models\Account::class;
 	
+	/**
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function showRegister(): void
 	{
 		if (!Session::get('user')) {
@@ -18,6 +23,11 @@ class Account extends Controller
 		}
 	}
 	
+	/**
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function showConnection(): void
 	{
 		if (!Session::get('user')) {
@@ -27,6 +37,11 @@ class Account extends Controller
 		}
 	}
 	
+	/**
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function register(): void
 	{
 		$user = $this->model->create(filter_input(INPUT_POST, 'pseudo'),
@@ -40,6 +55,11 @@ class Account extends Controller
 		}
 	}
 	
+	/**
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function connect(): void
 	{
 		$user = $this->model->connect(filter_input(INPUT_POST, 'password'), filter_input(INPUT_POST, 'username'));
@@ -51,6 +71,11 @@ class Account extends Controller
 		}
 	}
 	
+	/**
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
 	public function disconnect(): void
 	{
 		session_unset();
