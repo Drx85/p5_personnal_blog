@@ -27,7 +27,7 @@ class TwigLoader
 			'cache' => false,
 			'debug' => true
 		]);
-		$this->twig->addGlobal('session', $_SESSION);
+		$this->twig->addGlobal('session', Session::getGlobalSession());
 		$this->twig->addExtension(new DebugExtension());
 		$this->twig->addExtension(new StringExtension());
 		$this->twig->addExtension(new MarkdownExtension());

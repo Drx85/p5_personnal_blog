@@ -37,4 +37,9 @@ class Session
 	{
 		unset($_SESSION[$key]);
 	}
+	
+	public static function getGlobalSession()
+	{
+		return $_SESSION;
+	}
 }
