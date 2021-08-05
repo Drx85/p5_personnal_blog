@@ -31,7 +31,7 @@
 						</p>
 						
 						{% if session.user.role is same as ('admin') or session.user.role is same as ('publisher') %}
-							<p><a class="btn btn-danger mt-2" href="index.php?controller=post&action=delete&id={{ post.id }}&token={{ csrf_token() }}">Supprimer</a>
+							<p><a class="btn btn-danger mt-2" href="index.php?controller=post&action=delete&id={{ post.id }}&token={{ csrf_token() }}" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
 								<a class="btn btn-secondary mt-2" href="index.php?controller=page&action=show_edit&id={{ post.id }}">Modifier</a></p>
 						{% endif %}
 						

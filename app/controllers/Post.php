@@ -7,6 +7,9 @@ use Session;
 
 class Post extends BaseController
 {
+	/**
+	 * @var string
+	 */
 	protected $modelName = \Models\Post::class;
 	
 	/**

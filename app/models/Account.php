@@ -28,9 +28,9 @@ class Account extends Model
 	 * @param string $password
 	 * @param string $pseudo
 	 *
-	 * @return \User
+	 * @return void|\User
 	 */
-	public function connect(string $password, string $pseudo): \User
+	public function connect(string $password, string $pseudo)
 	{
 		$q = $this->db->prepare('SELECT user.id as user_id, user.password as password, user_role.role as role
 									FROM user, user_role

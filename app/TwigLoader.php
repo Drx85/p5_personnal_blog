@@ -14,18 +14,20 @@ use Twig\TwigFunction;
 
 class TwigLoader
 {
-	public $twig;
 	/**
-	 * Loader Twig and its extensions/functions/filters
-	 *
-	 * @return Object $twig
+	 * @var Environment
+	 */
+	public $twig;
+	
+	/**
+	 * Load Twig and its extensions/functions/filters	 *
 	 */
 	public function __construct()
 	{
 		$loader = new FilesystemLoader('views');
 		$this->twig = new Environment($loader, [
-			'cache' => false,
-			'debug' => true
+			'cache' => Config::CACHE,
+			'debug' => Config::DEBUG
 		]);
 		$this->twig->addGlobal('session', Session::getGlobalSession());
 		$this->twig->addExtension(new DebugExtension());

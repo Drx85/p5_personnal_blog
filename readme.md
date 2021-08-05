@@ -70,12 +70,12 @@ https://docs.phpmyadmin.net/fr/latest/setup.html
 
 ### Config 
 
-1.  Open ***app/Config.php*** file, then replace all fields with your own information 
+1.  Open ***app/Config.php*** file, then replace Databse and SMTP fields with your own information 
 2.  If you are missing any information, please ask you webhost for SMTP and Database credentials
 
 ### Install all dependencies
-1.  Install Composer if you don't have it yet. 
-**See** [Composer Documentation](https://getcomposer.org/download/)
+1.  Install Composer if you don't have it yet. **See** [Composer Documentation](https://getcomposer.org/download/)
+
 2.  In your CMD, move on your project directory using cd command :
 ```sh
 cd your/directory
@@ -92,6 +92,10 @@ All dependencies should be installed in a vendor directory.
 ### Online example version
 
 Please see an hosted example version [**here**](http://deperne.fr/p5_personnal_blog/public/index.php)
+
+### Options
+
+You can choose the posts number showed per page and choose to enable/disable cache and debug (depending if you are in prod or dev for example) in the ***app/Config.php*** file
 
 ## Contact
 
