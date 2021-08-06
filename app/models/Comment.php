@@ -18,11 +18,11 @@ class Comment extends Model
 	{
 		$array = array();
 		$post = new Post();
-		$blog = $post->findAll();
+		$posts = $post->findAllByPage();
 		
-		foreach ($blog as $display_blog) {
+		foreach ($posts as $post) {
 			$q = $this->db->prepare('SELECT COUNT(id) AS number_of_comments FROM comment WHERE id_post= ? AND approved = 1');
-			$q->execute(array($display_blog['id']));
+			$q->execute(array($post['id']));
 			$comments_number = $q->fetch();
 			$array[] = $comments_number;
 		}

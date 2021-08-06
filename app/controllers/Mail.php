@@ -4,7 +4,7 @@ namespace Controllers;
 
 use Message;
 
-class Mail extends BaseController
+class Mail extends Controller
 {
 	protected $modelName = \Models\Mail::class;
 	

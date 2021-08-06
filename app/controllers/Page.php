@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-class Page extends BaseController
+class Page extends Controller
 {
 	/**
 	 * @var string
@@ -31,7 +31,7 @@ class Page extends BaseController
 	 */
 	public function showAdd(): void
 	{
-		if ($this->hasPermission()) {
+		if ($this->hasRoles(['admin', 'publisher'])) {
 			echo $this->twig->render('add_post.twig');
 		} else {
 			$this->forbidden();
@@ -48,7 +48,7 @@ class Page extends BaseController
 	 */
 	public function showEdit(): void
 	{
-		if ($this->hasPermission()) {
+		if ($this->hasRoles(['admin', 'publisher'])) {
 			$value = $this->model->getEditValues((int)filter_input(INPUT_GET, 'id'));
 			echo $this->twig->render('edit_post.twig', compact('value'));
 		} else {

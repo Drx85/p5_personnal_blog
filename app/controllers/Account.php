@@ -5,7 +5,7 @@ namespace Controllers;
 use Message;
 use Session;
 
-class Account extends BaseController
+class Account extends Controller
 {
 	protected $modelName = \Models\Account::class;
 	
@@ -101,7 +101,7 @@ class Account extends BaseController
 	 */
 	public function index(): void
 	{
-		if ($this->role === 'admin') {
+		if ($this->hasRoles('admin')) {
 			$users = $this->model->findAll();
 			echo $this->twig->render('users.twig', compact('users'));
 		} else {
@@ -119,7 +119,7 @@ class Account extends BaseController
 	 */
 	public function update(): void
 	{
-		if ($this->role === 'admin') {
+		if ($this->hasRoles('admin')) {
 			$updated = $this->model->update(filter_input(INPUT_GET, 'id'), filter_input(INPUT_GET, 'work'));
 			switch ($updated) {
 				case false :

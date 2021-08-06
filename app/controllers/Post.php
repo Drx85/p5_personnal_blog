@@ -5,7 +5,7 @@ namespace Controllers;
 use Message;
 use Session;
 
-class Post extends BaseController
+class Post extends Controller
 {
 	/**
 	 * @var string
@@ -13,7 +13,7 @@ class Post extends BaseController
 	protected $modelName = \Models\Post::class;
 	
 	/**
-	 * Ask model to find all posts and to count comments for each, then render posts page with comments number for each post + pages number
+	 * Ask model to find all posts by page and to count comments for each, then render posts page with comments number for each post + pages number
 	 *
 	 * @throws \Twig\Error\LoaderError
 	 * @throws \Twig\Error\RuntimeError
@@ -24,10 +24,10 @@ class Post extends BaseController
 		$pages = new \Models\Page();
 		$comment = new \Models\Comment();
 		
-		$blog = $this->model->findAll();
+		$posts = $this->model->findAllbyPage();
 		$array_pages = $pages->get();
 		$comments_number = $comment->count();
-		echo $this->twig->render('posts.twig', compact('blog', 'comments_number', 'array_pages'));
+		echo $this->twig->render('posts.twig', compact('posts', 'comments_number', 'array_pages'));
 	}
 	
 	/**
@@ -55,7 +55,7 @@ class Post extends BaseController
 	 */
 	public function add(): void
 	{
-		if ($this->hasPermission()) {
+		if ($this->hasRoles(['admin', 'publisher'])) {
 			$added = $this->model->insert(filter_input(INPUT_POST, 'title'), filter_input(INPUT_POST, 'post_content'), Session::get('user')->getPseudo());
 			if ($added) {
 				echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
@@ -77,7 +77,7 @@ class Post extends BaseController
 	 */
 	public function edit(): void
 	{
-		if ($this->hasPermission()) {
+		if ($this->hasRoles(['admin', 'publisher'])) {
 			$edited = $this->model->edit(filter_input(INPUT_POST, 'title'),
 				filter_input(INPUT_POST, 'message'),
 				filter_input(INPUT_POST, 'author'),

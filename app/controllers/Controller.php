@@ -43,7 +43,7 @@ abstract class Controller
 	 */
 	public function delete(): void
 	{
-		if ($this->hasPermission()) {
+		if ($this->hasRoles(['admin', 'publisher'])) {
 			$deleted = $this->model->delete((int)filter_input(INPUT_GET, 'id'));
 			if ($deleted) {
 				echo $this->twig->render('home.twig', ['message' => Message::DELETED_CONTENT]);
@@ -51,8 +51,50 @@ abstract class Controller
 				echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_CONTENT]);
 			}
 		} else {
-			$controller = new BaseController();
-			$controller->forbidden();
+			$this->forbidden();
 		}
+	}
+	
+	/**
+	 * Render forbidden page with status 403 Forbidden
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
+	public function forbidden(): void
+	{
+		header('HTTP/1.0 403 Forbidden');
+		echo $this->twig->render('forbidden.twig');
+	}
+	
+	/**
+	 * Render not found page with status 404 Not Found
+	 *
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 */
+	public function show404(): void
+	{
+		header('HTTP/1.0 404 Not Found');
+		echo $this->twig->render('404.twig');
+	}
+	
+	/**
+	 * To know if an user has the admin or publisher role
+	 *
+	 * @param array $roles
+	 *
+	 * @return bool
+	 */
+	protected function hasRoles($roles): bool
+	{
+		if (is_array($roles)) {
+			foreach ($roles as $role) {
+				if ($role === $this->role) return true;
+			}
+		} elseif ($roles === $this->role) return true;
+		return false;
 	}
 }

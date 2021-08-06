@@ -13,7 +13,7 @@ class Post extends Model
 	 *
 	 * @return array
 	 */
-	public function findAll(): array
+	public function findAllByPage(): array
 	{
 		$limit_page = $this->getLIMIT((int)filter_input(INPUT_GET, 'page'));
 		
