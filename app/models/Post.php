@@ -17,8 +17,8 @@ class Post extends Model
 	{
 		$limit_page = $this->getLIMIT((int)filter_input(INPUT_GET, 'page'));
 		
-		$q = $this->db->prepare('SELECT id, title, message, author, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
-                                   HOUR(post_time) AS hour_post_time, 
+		$q = $this->db->prepare('SELECT id, title, message, author, comments_nb, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS post_date,
+                                   HOUR(post_time) AS hour_post_time,
                                    MINUTE(post_time) AS minute_post_time,
                                    DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
 				                   FROM post ORDER BY ID DESC LIMIT :limit_page, :nb_posts');

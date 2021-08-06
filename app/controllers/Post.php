@@ -22,12 +22,9 @@ class Post extends Controller
 	public function index(): void
 	{
 		$pages = new \Models\Page();
-		$comment = new \Models\Comment();
-		
 		$posts = $this->model->findAllbyPage();
 		$array_pages = $pages->get();
-		$comments_number = $comment->count();
-		echo $this->twig->render('posts.twig', compact('posts', 'comments_number', 'array_pages'));
+		echo $this->twig->render('posts.twig', compact('posts','array_pages'));
 	}
 	
 	/**

@@ -52,10 +52,10 @@ class Comment extends Controller
 	{
 		if ($this->hasRoles(['admin', 'publisher'])) {
 			$validate = $this->model->validate((int)filter_input(INPUT_GET, 'id'));
-			if ($validate) {
+			if ($validate > 0) {
 				echo $this->twig->render('home.twig', ['message' => Message::VALIDATED_COMMENT]);
 			} else {
-				echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_COMMENT]);
+				echo $this->twig->render('home.twig', ['message' => Message::UNDEFINED_CONTENT]);
 			}
 		} else {
 			$this->forbidden();

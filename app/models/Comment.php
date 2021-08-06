@@ -8,27 +8,7 @@ class Comment extends Model
 	 * @var string
 	 */
 	protected $table = 'comment';
-	
-	/**
-	 * Count number of comments for each post
-	 *
-	 * @return array
-	 */
-	public function count(): array
-	{
-		$array = array();
-		$post = new Post();
-		$posts = $post->findAllByPage();
-		
-		foreach ($posts as $post) {
-			$q = $this->db->prepare('SELECT COUNT(id) AS number_of_comments FROM comment WHERE id_post= ? AND approved = 1');
-			$q->execute(array($post['id']));
-			$comments_number = $q->fetch();
-			$array[] = $comments_number;
-		}
-		return $array;
-	}
-	
+
 	/**
 	 * Return all approved comments for asked post or return all unapproved comments
 	 *
@@ -80,6 +60,13 @@ class Comment extends Model
 	{
 		$q = $this->db->prepare('UPDATE comment SET approved = 1 WHERE id = ?');
 		$q->execute(array($id));
+		
+		$q = $this->db->prepare('UPDATE post as p
+											JOIN comment as c ON c.id_post = p.id
+											SET p.comments_nb = p.comments_nb + 1
+											WHERE c.id = ?');
+		$q->execute(array($id));
+		
 		return $q->rowCount();
 	}
 }
