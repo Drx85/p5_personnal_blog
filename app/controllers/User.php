@@ -4,17 +4,20 @@ namespace Controllers;
 
 use Message;
 use Session;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
-class Account extends Controller
+class User extends Controller
 {
-	protected $modelName = \Models\Account::class;
+	protected $modelName = \Models\User::class;
 	
 	/**
 	 * Render the registration page
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function showRegister(): void
 	{
@@ -28,9 +31,9 @@ class Account extends Controller
 	/**
 	 * Render the connection page
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function showConnection(): void
 	{
@@ -44,17 +47,22 @@ class Account extends Controller
 	/**
 	 * Ask model to create new user with role "member", and render homepage
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function register(): void
 	{
-		$user = $this->model->create(filter_input(INPUT_POST, 'pseudo'),
-			filter_input(INPUT_POST, 'password'),
-			filter_input(INPUT_POST, 'mail'));
 		
-		if ($user) {
+		$pseudo = filter_input(INPUT_POST, 'pseudo');
+		$password = filter_input(INPUT_POST, 'password');
+		$mail = filter_input(INPUT_POST, 'mail');
+		$user = new \Entities\User();
+		$user->setPseudo($pseudo)
+			->setPassword($password)
+			->setMail($mail);
+		$user = $this->model->create($user);
+		if ($user === true) {
 			echo $this->twig->render('register.twig', ['message' => Message::CREATED]);
 		} else {
 			echo $this->twig->render('register.twig', ['message' => Message::ALREADY_TAKEN]);
@@ -64,14 +72,15 @@ class Account extends Controller
 	/**
 	 * Ask model to connect user, and render homepage
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function connect(): void
 	{
-		$user = $this->model->connect(filter_input(INPUT_POST, 'password'), filter_input(INPUT_POST, 'username'));
-		
+		$pseudo = filter_input(INPUT_POST, 'username');
+		$password = filter_input(INPUT_POST, 'password');
+		$user = $this->model->connect($password, $pseudo);
 		if ($user) {
 			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED, 'user' => $user]);
 		} else {
@@ -82,9 +91,9 @@ class Account extends Controller
 	/**
 	 * Unset the session and render homepage
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function disconnect(): void
 	{
@@ -95,9 +104,9 @@ class Account extends Controller
 	/**
 	 * Render a page with all users to manage them
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function index(): void
 	{
@@ -113,14 +122,19 @@ class Account extends Controller
 	 * Ask model to promote or demote an user
 	 * Require admin role
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function update(): void
 	{
 		if ($this->hasRoles('admin')) {
-			$updated = $this->model->update(filter_input(INPUT_GET, 'id'), filter_input(INPUT_GET, 'work'));
+			$id = filter_input(INPUT_GET, 'id');
+			$action = filter_input(INPUT_GET, 'work');
+			$user = new \Entities\User();
+			$user->setId($id);
+			
+			$updated = $this->model->update($user, $action);
 			switch ($updated) {
 				case false :
 					$this->show404();

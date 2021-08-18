@@ -2,24 +2,24 @@
 
 namespace Models;
 
-use Controllers\BaseController;
 
-class Account extends Model
+class User extends Model
 {
 	/**
 	 * Create new account with member role
 	 *
-	 * @param string $pseudo
-	 * @param string $password
-	 * @param string $mail
+	 * @param User $user
 	 *
 	 * @return bool
 	 */
-	public function create(string $pseudo, string $password, string $mail): bool
+	public function create(User $user): bool
 	{
-		$password = password_hash($password, PASSWORD_BCRYPT);
-		$user = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
-		return $user->execute(compact('pseudo', 'password', 'mail'));
+		$password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+		$q = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
+		$q->bindValue(':pseudo', $user->getPseudo());
+		$q->bindValue(':password', $password);
+		$q->bindValue(':mail', $user->getMail());
+		return $q->execute();
 	}
 	
 	/**
@@ -28,7 +28,7 @@ class Account extends Model
 	 * @param string $password
 	 * @param string $pseudo
 	 *
-	 * @return void|\User
+	 * @return void|User
 	 */
 	public function connect(string $password, string $pseudo)
 	{
@@ -40,7 +40,9 @@ class Account extends Model
 		$q = $q->fetch();
 		
 		if (password_verify($password, $q['password'])) {
-			$user = new \User($q['user_id'], $pseudo, $q['role']);
+			$user = new \Entities\User();
+			$user->setPseudo($pseudo)
+				->setRole($q['role']);
 			\Session::put('user', $user);
 			return $user;
 		}
@@ -58,31 +60,49 @@ class Account extends Model
 									WHERE (role = 'member' OR role = 'publisher')
 									AND user.id_role = user_role.id
 									ORDER BY role DESC");
-		return $q->fetchAll();
+		$users = $q->fetchAll();
+		$array_users = [];
+		$k = 0;
+		foreach ($users as $user) {
+			$id = $user['id'];
+			$pseudo = $user['pseudo'];
+			$role = $user['role'];
+			$mail = $user['mail'];
+			$user = new \Entities\User();
+			$user->setId($id)
+				->setPseudo($pseudo)
+				->setRole($role)
+				->setMail($mail);
+			$array_users[$k] = $user;
+			$k++;
+		}
+		return $array_users;
 	}
 	
 	/**
 	 * Promote or demote member or publisher
 	 *
-	 * @param int    $id
-	 * @param string $action
+	 * @param \Entities\User $user
+	 * @param string         $action
 	 *
 	 * @return false|int
 	 */
-	public function update(int $id, string $action)
+	public function update(\Entities\User $user, string $action)
 	{
 		switch ($action) {
 			case 'promote' :
-				$role = 2;
+				$user->setRole(2);
 				break;
 			case 'demote':
-				$role = 3;
+				$user->setRole(3);
 				break;
 			default :
 				return false;
 		}
-		$q = $this->db->prepare('UPDATE user SET id_role = ? WHERE id = ?');
-		$q->execute(array($role, $id));
+		$q = $this->db->prepare('UPDATE user SET id_role = :role WHERE id = :id');
+		$q->bindvalue(':role', $user->getRole());
+		$q->bindvalue(':id', $user->getId());
+		$q->execute();
 		return $q->rowCount();
 	}
 }

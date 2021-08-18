@@ -3,7 +3,7 @@
 
 class Message
 {
-	public const CREATED = 'Compte créé avec succès. Vous pouvez <a href = "index.php?controller=account&action=showConnection">Vous connecter</a>';
+	public const CREATED = 'Compte créé avec succès. Vous pouvez <a href = "index.php?controller=user&action=showConnection">Vous connecter</a>';
 	public const CONNECTED = 'Connection effectuée avec succès.';
 	public const DISCONNECTED = 'Déconnection effectuée avec succès.';
 	public const BAD_CREDENTIALS = 'Mauvais nom d\'utilisateur ou mot de passe.';

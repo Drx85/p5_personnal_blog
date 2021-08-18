@@ -42,26 +42,26 @@
 				</li>
 			{% if disconnected is not defined and user.role is same as ('admin') %}
 				<li>
-					<a class="nav-link" href="index.php?controller=account&action=index">Gérer les utilisateurs</a>
+					<a class="nav-link" href="index.php?controller=user&action=index">Gérer les utilisateurs</a>
 				</li>
 			{% endif %}
 			{% endif %}
 		</ul>
 		
 		<ul class="navbar-nav ms-auto">
-			{% if disconnected is not defined and user.id is defined %}
+			{% if disconnected is not defined and user.pseudo is defined %}
 				<span class="navbar-text text-white-50">
       			{{ user.pseudo }} ({{ user.role | trans }})
     		</span>
 				<li>
-					<a class="nav-link" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
+					<a class="nav-link" href="index.php?controller=user&action=disconnect">Se déconnecter</a>
 				</li>
 			{% else %}
 				<li>
-					<a class="nav-link" href="index.php?controller=account&action=show_register">Créer un compte</a>
+					<a class="nav-link" href="index.php?controller=user&action=show_register">Créer un compte</a>
 				</li>
 				<li>
-					<a class="nav-link" href="index.php?controller=account&action=show_connection">Se connecter</a>
+					<a class="nav-link" href="index.php?controller=user&action=show_connection">Se connecter</a>
 				</li>
 			{% endif %}
 		</ul>
@@ -112,19 +112,19 @@
 					<h5 class="text-uppercase mb-3">Compte</h5>
 					
 					<ul class="list-unstyled mb-0">
-						{% if disconnected is not defined and user.id is defined %}
+						{% if disconnected is not defined and user.pseudo is defined %}
 							<li class="text-muted">
 								Connecté en tant que {{ user.pseudo }}({{ user.role | trans }})
 							</li>
 							<li>
-								<a class="text-dark" href="index.php?controller=account&action=disconnect">Se déconnecter</a>
+								<a class="text-dark" href="index.php?controller=user&action=disconnect">Se déconnecter</a>
 							</li>
 						{% else %}
 							<li>
-								<a class="text-dark" href="index.php?controller=account&action=show_register">Créer un compte</a>
+								<a class="text-dark" href="index.php?controller=user&action=show_register">Créer un compte</a>
 							</li>
 							<li>
-								<a class="text-dark" href="index.php?controller=account&action=show_connection">Se connecter</a>
+								<a class="text-dark" href="index.php?controller=user&action=show_connection">Se connecter</a>
 							</li>
 						{% endif %}
 					</ul>
@@ -165,7 +165,7 @@
 							</li>
 						{% if disconnected is not defined and user.role is same as ('admin') %}
 							<li>
-								<a href="index.php?controller=account&action=index" class="text-dark">Gérer les utilisateurs</a>
+								<a href="index.php?controller=user&action=index" class="text-dark">Gérer les utilisateurs</a>
 							</li>
 						{% endif %}
 						{% endif %}

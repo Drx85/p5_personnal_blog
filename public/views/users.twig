@@ -16,11 +16,11 @@
 							<li>Email : {{ user.mail }}</li>
 						</ul>
 						{% if user.role is same as ('member') %}
-							<a class="btn btn-success mt-2" href="index.php?controller=account&action=update&work=promote&id={{ user.id }}&token={{ csrf_token() }}">Promouvoir en éditeur</a>
+							<a class="btn btn-success mt-2" href="index.php?controller=user&action=update&work=promote&id={{ user.id }}&token={{ csrf_token() }}">Promouvoir en éditeur</a>
 						{% endif %}
 						
 						{% if user.role is same as ('publisher') or user.role is same as ('admin') %}
-							<a class="btn btn-danger mt-2" href="index.php?controller=account&action=update&work=demote&id={{ user.id }}&token={{ csrf_token() }}">Rétrograder</a>
+							<a class="btn btn-danger mt-2" href="index.php?controller=user&action=update&work=demote&id={{ user.id }}&token={{ csrf_token() }}">Rétrograder</a>
 						{% endif %}
 					</div>
 				</div>

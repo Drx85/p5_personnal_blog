@@ -32,4 +32,11 @@ abstract class Model
 		$q->execute(array($id));
 		return $q->rowCount();
 	}
+	
+	public function findOneBy($criteria, $value)
+	{
+		$q = $this->db->prepare("SELECT * FROM {$this->table} WHERE :critera = :value");
+		$q->execute(compact('criteria', 'value'));
+		return $q->fetch();
+	}
 }
