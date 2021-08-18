@@ -27,7 +27,6 @@ class User
 	 */
 	private $mail;
 	
-	
 	public function hydrate(array $values)
 	{
 		foreach ($values as $key => $value) {

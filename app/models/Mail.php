@@ -11,14 +11,11 @@ class Mail extends Model
 	/**
 	 * Use PHPMailer to send email by SMTP
 	 *
-	 * @param string $surname
-	 * @param string $name
-	 * @param string $email
-	 * @param string $message
+	 * @param \Entities\Mail $userMail
 	 *
 	 * @throws Exception
 	 */
-	public function send(string $surname, string $name, string $email, string $message): void
+	public function send(\Entities\Mail $userMail)
 	{
 		$mail = new PHPMailer();
 		$mail->IsSMTP();
@@ -37,13 +34,14 @@ class Mail extends Model
 		$mail->smtpConnect();
 		$mail->From = \Config::MAIL_USERNAME;
 		
-		$mail->Subject = 'Nouveau message de ' . $surname . ' ' . $name;
+		$mail->Subject = 'Nouveau message de ' . $userMail->getSurname() . ' ' . $userMail->getName();
 		$mail->WordWrap = 50;
 		
-		$mail->MsgHTML('Prénom :' . $surname . '</br>
-								Nom :' . $name . '</br>
-								Mail :' . $email . '</br>
-								Message :' . $message . '</br>');
-		$mail->send();
+		$mail->MsgHTML('Prénom :' . $userMail->getSurname() . '</br>
+								Nom :' . $userMail->getName() . '</br>
+								Mail :' . $userMail->getEmail() . '</br>
+								Message :' . $userMail->getMessage() . '</br>');
+		if (!$mail->send()) return $mail->ErrorInfo;
+		return true;
 	}
 }

@@ -3,6 +3,9 @@
 namespace Controllers;
 
 use Message;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class Mail extends Controller
 {
@@ -11,16 +14,27 @@ class Mail extends Controller
 	/**
 	 * Ask model to send email from form contact and render homepage
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function submit(): void
 	{
-		$this->model->send(filter_input(INPUT_POST, 'surname'),
-			filter_input(INPUT_POST, 'name'),
-			filter_input(INPUT_POST, 'email'),
-			filter_input(INPUT_POST, 'message'));
-		echo $this->twig->render('home.twig', ['message' => Message::SENT_MAIL]);
+		$surname = filter_input(INPUT_POST, 'surname');
+		$name = filter_input(INPUT_POST, 'name');
+		$email = filter_input(INPUT_POST, 'email');
+		$message = filter_input(INPUT_POST, 'message');
+		
+		$mail = new \Entities\Mail();
+		$mail->setSurname($surname)
+			->setName($name)
+			->setEmail($email)
+			->setMessage($message);
+		$mail = $this->model->send($mail);
+		if ($mail === true) {
+			echo $this->twig->render('home.twig', ['message' => Message::SENT_MAIL]);
+		} else {
+			echo $this->twig->render('home.twig', ['message' => $mail]);
+		}
 	}
 }
