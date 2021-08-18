@@ -129,7 +129,7 @@ class User extends Controller
 	public function update(): void
 	{
 		if ($this->hasRoles('admin')) {
-			$id = filter_input(INPUT_GET, 'id');
+			$id = (int)filter_input(INPUT_GET, 'id');
 			$action = filter_input(INPUT_GET, 'work');
 			$user = new \Entities\User();
 			$user->setId($id);
