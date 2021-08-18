@@ -25,11 +25,11 @@ class Comment
 	/**
 	 * @var string
 	 */
-	private $commentDate;
+	private $date;
 	/**
 	 * @var string
 	 */
-	private $commentTime;
+	private $time;
 	/**
 	 * @var int
 	 */
@@ -135,30 +135,38 @@ class Comment
 	/**
 	 * @return string
 	 */
-	public function getCommentDate(): string
+	public function getDate(): string
 	{
-		return $this->commentDate;
+		return $this->date;
 	}
 	
 	/**
-	 * @param string $commentDate
+	 * @param string $date
 	 *
 	 * @return Comment
 	 */
-	public function setCommentDate(string $commentDate): Comment
+	public function setDate(string $date): Comment
 	{
-		$this->commentDate = $commentDate;
+		$this->date = $date;
 		return $this;
 	}
 	
 	/**
-	 * @param string $commentTime
+	 * @return string
+	 */
+	public function getTime(): string
+	{
+		return $this->time;
+	}
+	
+	/**
+	 * @param string $time
 	 *
 	 * @return Comment
 	 */
-	public function setCommentTime(string $commentTime): Comment
+	public function setTime(string $time): Comment
 	{
-		$this->commentTime = $commentTime;
+		$this->time = $time;
 		return $this;
 	}
 	

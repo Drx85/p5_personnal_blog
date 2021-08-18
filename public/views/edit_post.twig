@@ -7,18 +7,18 @@
 {% block content %}
 	
 	<div class="col-auto col-md-10 mt-4">
-		<form method="post" action="index.php?controller=post&action=edit&id={{ value.id }}">
+		<form method="post" action="index.php?controller=post&action=edit&id={{ post.id }}">
 			<div class="mb-3">
 				<label for="title" class="form-label">Titre</label>
-				<input type="text" class="form-control" name="title" value="{{ value.title }}" required/>
+				<input type="text" class="form-control" name="title" value="{{ post.title }}" required/>
 			</div>
 			<div class="mb-3">
 				<label for="author" class="form-label">Auteur</label>
-				<input type="text" class="form-control" name="author" value="{{ value.author }}" required/>
+				<input type="text" class="form-control" name="author" value="{{ post.author }}" required/>
 			</div>
 			<div class="mb-3">
 				<label for="message" class="form-label">Contenu du billet</label>
-				<textarea name="message" class="form-control" rows="15" required>{{ value.message }}</textarea>
+				<textarea name="message" class="form-control" rows="15" required>{{ post.message }}</textarea>
 			</div>
 			<input type="hidden" name="token" id="token" value="{{ csrf_token() }}"/>
 			<button type="submit" class="btn btn-primary">Valider</button>

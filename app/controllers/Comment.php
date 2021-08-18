@@ -28,8 +28,8 @@ class Comment extends Controller
 		$comment->setIdPost($id_post)
 			->setAuthor($author)
 			->setText($text)
-			->setCommentDate(date('Y-m-d'))
-			->setCommentTime(date('H:i:s'));
+			->setDate(date('Y-m-d'))
+			->setTime(date('H:i:s'));
 		$this->model->insert($comment);
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_COMMENT]);
 	}

@@ -13,6 +13,7 @@ class Mail extends Model
 	 *
 	 * @param \Entities\Mail $userMail
 	 *
+	 * @return bool|string
 	 * @throws Exception
 	 */
 	public function send(\Entities\Mail $userMail)

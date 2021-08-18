@@ -32,7 +32,7 @@ class Comment extends Model
 			$q = $this->db->prepare($sql);
 			$q->execute(array($approved));
 		}
-		return $q->fetchAll();
+		$comments = $q->fetchAll();
 		$array_comments = [];
 		$k = 0;
 		foreach ($comments as $comment) {
@@ -42,14 +42,14 @@ class Comment extends Model
 			$text = $comment['text'];
 			$date = $comment['c_date'];
 			$hour = $comment['c_hour'];
-			$minute = $comment['minute'];
+			$minute = $comment['c_minute'];
 
 			$comment = new \Entities\Comment();
 			$comment->setId($id)
 				->setIdPost($id_post)
 				->setAuthor($author)
 				->setText($text)
-				->setCommentDate($date)
+				->setDate($date)
 				->setHour($hour)
 				->setMinute($minute);
 			$array_comments[$k] = $comment;
@@ -66,12 +66,12 @@ class Comment extends Model
 	public function insert(\Entities\Comment $comment): void
 	{
 		$q = $this->db->prepare('INSERT INTO comment (id_post, author, text, comment_date, comment_time)
-												VALUES (:id_post, :author, :text, :comment_date, :comment_time)');
+												VALUES (:id_post, :author, :text, :c_date, :c_time)');
 		$q->bindValue(':id_post', $comment->getIdPost());
 		$q->bindValue(':author', $comment->getAuthor());
 		$q->bindValue(':text', $comment->getText());
-		$q->bindValue(':comment_date', $comment->getCommentDate());
-		$q->bindValue(':comment_time', $comment->getCommentTime());
+		$q->bindValue(':c_date', $comment->getDate());
+		$q->bindValue(':c_time', $comment->getTime());
 		$q->execute();
 	}
 	

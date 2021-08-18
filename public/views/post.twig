@@ -12,8 +12,8 @@
 	
 	<p class="mb-4 mt-3 fs-5 fw-light">
 		Posté le {{ post.date }} à {{ post.hour }}h{{ post.minute }}
-		{% if post.update_date %}
-			(dernière modification le {{ post.update_date }})
+		{% if post.updateDate %}
+			(dernière modification le {{ post.updateDate }})
 		{% endif %}
 		par : {{ post.author }}
 	</p>
@@ -24,7 +24,7 @@
 	
 	{% for comment in comments %}
 		
-		<p>Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</br>
+		<p>Commentaire du {{ comment.date }}, à {{ comment.hour }}h{{ comment.minute }} - par {{ comment.author }} :</br>
 			{{ comment.text }}</p>
 		
 		{% if user.role is same as ('admin') or user.role is same as ('publisher') %}

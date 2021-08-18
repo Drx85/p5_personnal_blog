@@ -18,10 +18,10 @@
 				<div class="card">
 					<div class="card-body">
 						<h3 class="card-title">{{ post.title }}</h3>
-						<h4 class="card-title mb-4">Posté le {{ post.post_date }} à {{ post.hour_post_time }}h{{ post.minute_post_time }}
+						<h4 class="card-title mb-4">Posté le {{ post.date }} à {{ post.hour }}h{{ post.minute }}
 							
-							{% if post.update_date %}
-								(dernière modification le {{ post.update_date }}),
+							{% if post.updateDate %}
+								(dernière modification le {{ post.updateDate }}),
 							{% endif %}
 							par : {{ post.author }}
 						</h4>
@@ -35,8 +35,8 @@
 								<a class="btn btn-secondary mt-2" href="index.php?controller=page&action=show_edit&id={{ post.id }}">Modifier</a></p>
 						{% endif %}
 						
-						{% if post.comments_nb %}
-							<p><a href="index.php?controller=post&action=show&id={{ post.id }}" class="text-decoration-none">Voir les commentaires ({{ post.comments_nb }})</a></p>
+						{% if post.commentsNb %}
+							<p><a href="index.php?controller=post&action=show&id={{ post.id }}" class="text-decoration-none">Voir les commentaires ({{ post.commentsNb }})</a></p>
 						{% else %}
 							<p><a href="index.php?controller=post&action=show&id={{ post.id }}" class="text-decoration-none">Il n'y a pas de commentaire sur ce billet. Cliquez ici pour en ajouter
 									un.</a></p>

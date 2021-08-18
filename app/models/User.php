@@ -28,7 +28,7 @@ class User extends Model
 	 * @param string $password
 	 * @param string $pseudo
 	 *
-	 * @return void|User
+	 * @return void|\Entities\User
 	 */
 	public function connect(string $password, string $pseudo)
 	{
@@ -87,7 +87,7 @@ class User extends Model
 	 *
 	 * @return false|int
 	 */
-	public function update(\Entities\User $user, string $action)
+	public function update(\Entities\User $user, string $action): int
 	{
 		switch ($action) {
 			case 'promote' :

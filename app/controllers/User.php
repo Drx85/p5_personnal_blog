@@ -53,7 +53,6 @@ class User extends Controller
 	 */
 	public function register(): void
 	{
-		
 		$pseudo = filter_input(INPUT_POST, 'pseudo');
 		$password = filter_input(INPUT_POST, 'password');
 		$mail = filter_input(INPUT_POST, 'mail');

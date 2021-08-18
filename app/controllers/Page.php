@@ -49,8 +49,11 @@ class Page extends Controller
 	public function showEdit(): void
 	{
 		if ($this->hasRoles(['admin', 'publisher'])) {
-			$value = $this->model->getEditValues((int)filter_input(INPUT_GET, 'id'));
-			echo $this->twig->render('edit_post.twig', compact('value'));
+			$id = (int)filter_input(INPUT_GET, 'id');
+			$post = new \Entities\Post();
+			$post->setId($id);
+			$post = $this->model->getEditValues($post);
+			echo $this->twig->render('edit_post.twig', compact('post'));
 		} else {
 			$this->forbidden();
 		}
