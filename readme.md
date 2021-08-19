@@ -46,7 +46,7 @@ To get a copy up and running follow these simple steps.
 
 ### PREREQUISITES
 
-*   PHP 7.4.9
+*   PHP > 7.4.9
 
 *   SMTP server with mailing service or XAMPP/WAMP for local use (mails will not work in local)
 
