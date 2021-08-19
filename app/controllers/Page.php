@@ -2,6 +2,10 @@
 
 namespace Controllers;
 
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+
 class Page extends Controller
 {
 	/**
@@ -12,9 +16,9 @@ class Page extends Controller
 	/**
 	 * Render homepage
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function showHome(): void
 	{
@@ -25,9 +29,9 @@ class Page extends Controller
 	 * Render Add new post form
 	 * Require admin or publisher role
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function showAdd(): void
 	{
@@ -42,9 +46,9 @@ class Page extends Controller
 	 * Render Edit post form
 	 * Require admin or publisher role
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function showEdit(): void
 	{
@@ -62,12 +66,24 @@ class Page extends Controller
 	/**
 	 * Render CGU page
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function showCgu(): void
 	{
 		echo $this->twig->render('cgu.twig');
+	}
+	
+	/**
+	 * Render Sitemap page
+	 *
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
+	 */
+	public function showSitemap(): void
+	{
+		echo $this->twig->render('sitemap.twig');
 	}
 }

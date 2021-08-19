@@ -1,0 +1,38 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+	Plan du site
+{% endblock title %}
+
+{% block content %}
+	
+	<h2>Public</h2>
+	<ul>
+		<li class="lpage"><a href="index.php" title="Accueil">Accueil</a></li>
+		<li class="lpage"><a href="index.php?controller=post&action=index" title="Blog">Blog</a></li>
+		<li class="lpage"><a href="index.php?controller=account&action=show_register" title="Inscription">Inscription</a></li>
+		<li class="lpage"><a href="index.php?controller=account&action=show_connection" title="Connection">Connection</a></li>
+		<li class="lpage"><a href="index.php?controller=user&action=disconnect" title="Déconnection">Déconnection</a></li>
+		<li class="lpage"><a href="index.php?controller=page&action=show_cgu" title="CGU">CGU</a></li>
+		<li class="lpage"><a href="index.php?controller=post&action=show&id=1" title="Détails du billet">Détails d'un billet</a></li>
+	</ul>
+	
+	{% if disconnected is not defined and user.role is same as ('publisher') or user.role is same as ('admin') %}
+		<h2>Editeur</h2>
+		<ul>
+			<li class="lpage"><a href="index.php?controller=comment&action=show_pending" title="Commentaires en attente de validation">Commentaires en
+					attente de
+					validation</a></li>
+			<li class="lpage"><a href="index.php?controller=page&action=show_add" title="Nouveau billet">Ajouter un billet</a></li>
+		
+		</ul>
+	{% endif %}
+	
+	{% if disconnected is not defined and user.role is same as ('admin') %}
+		<h2>Administrateur</h2>
+		<ul>
+			<li class="lpage"><a href="index.php?controller=user&action=index" title="Gérer les membres">Gérer les membres</a></li>
+		</ul>
+	{% endif %}
+
+{% endblock content %}
