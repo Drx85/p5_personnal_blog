@@ -56,7 +56,7 @@ class Post extends Manager
 		$date = $pdoPost['date'];
 		$hour = $pdoPost['hour'];
 		$minute = $pdoPost['minute'];
-		$updateDate = $pdoPost['update_date'];
+		$updateDate = $pdoPost['updateDate'];
 		$post->setTitle($title)
 			->setMessage($message)
 			->setAuthor($author)

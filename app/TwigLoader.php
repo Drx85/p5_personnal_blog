@@ -21,7 +21,7 @@ class TwigLoader
 	public $twig;
 	
 	/**
-	 * Load Twig and its extensions/functions/filters	 *
+	 * Load Twig and its extensions/functions/filters
 	 */
 	public function __construct()
 	{

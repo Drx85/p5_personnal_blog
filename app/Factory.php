@@ -40,10 +40,9 @@ class Factory
 		if (class_exists($controllerName, true)) {
 			$controller     = new $controllerName;
 			$controller->$task();
-		} else {
-			$controller = new BaseController();
-			$controller->show404();
 		}
+		$controller = new BaseController();
+		$controller->show404();
 	}
 	
 	/**

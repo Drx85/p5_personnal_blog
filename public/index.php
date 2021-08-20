@@ -17,7 +17,6 @@ if (!$token) {
 try {
 	\Factory::process($controller, $action, $token);
 } catch (\Error $e) {
-	echo $e->getMessage(); die;
 	$controller = new BaseController();
 	$controller->show404();
 }
