@@ -43,7 +43,7 @@ class Post extends BaseEntity
 	 */
 	private $updateDate;
 	/**
-	 * @var int
+	 * @var int|null
 	 */
 	private $commentsNb;
 	
@@ -219,9 +219,9 @@ class Post extends BaseEntity
 	}
 	
 	/**
-	 * @return int
+	 * @return int|null
 	 */
-	public function getCommentsNb(): int
+	public function getCommentsNb(): ?int
 	{
 		return $this->commentsNb;
 	}

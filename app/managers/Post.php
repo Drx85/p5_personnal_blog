@@ -28,30 +28,8 @@ class Post extends Manager
 		$q->execute();
 		$posts = $q->fetchAll();
 		$arrayPosts = [];
-		$k = 0;
 		foreach ($posts as $post) {
-			$id = $post['id'];
-			$title = $post['title'];
-			$message = $post['message'];
-			$author = $post['author'];
-			$commentsNb = $post['comments_nb'];
-			$date = $post['date'];
-			$hour = $post['hour'];
-			$minute = $post['minute'];
-			$updateDate = $post['update_date'];
-			
-			$post = new \Entities\Post();
-			$post->setId($id)
-				->setTitle($title)
-				->setMessage($message)
-				->setAuthor($author)
-				->setCommentsNb($commentsNb)
-				->setDate($date)
-				->setHour($hour)
-				->setMinute($minute)
-				->setUpdateDate($updateDate);
-			$arrayPosts[$k] = $post;
-			$k++;
+			$arrayPosts[] = new \Entities\Post($post);
 		}
 		return $arrayPosts;
 	}

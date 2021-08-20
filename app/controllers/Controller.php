@@ -97,7 +97,8 @@ abstract class Controller
 			foreach ($roles as $role) {
 				if ($role === $this->role) return true;
 			}
-		} elseif ($roles === $this->role) return true;
+		}
+		if ($roles === $this->role) return true;
 		return false;
 	}
 }
