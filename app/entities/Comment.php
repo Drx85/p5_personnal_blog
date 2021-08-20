@@ -4,7 +4,7 @@
 namespace Entities;
 
 
-class Comment
+class Comment extends BaseEntity
 {
 	/**
 	 * @var int
@@ -13,7 +13,7 @@ class Comment
 	/**
 	 * @var int
 	 */
-	private $id_post;
+	private $idPost;
 	/**
 	 * @var string
 	 */
@@ -43,19 +43,6 @@ class Comment
 	 */
 	private $approved;
 	
-	public function hydrate(array $values)
-	{
-		foreach ($values as $key => $value) {
-			$method = 'set' . ucfirst($key);
-			if (method_exists($this, $method)) $this->$method($value);
-		}
-	}
-	
-	public function __construct($values = [])
-	{
-		if (!empty($values)) $this->hydrate($values);
-	}
-	
 	/**
 	 * @return int
 	 */
@@ -80,17 +67,17 @@ class Comment
 	 */
 	public function getIdPost(): int
 	{
-		return $this->id_post;
+		return $this->idPost;
 	}
 	
 	/**
-	 * @param int $id_post
+	 * @param int $idPost
 	 *
 	 * @return Comment
 	 */
-	public function setIdPost(int $id_post): Comment
+	public function setIdPost(int $idPost): Comment
 	{
-		$this->id_post = $id_post;
+		$this->idPost = $idPost;
 		return $this;
 	}
 	
@@ -135,7 +122,7 @@ class Comment
 	/**
 	 * @return string
 	 */
-	public function getDate(): string
+	public function getDate(): ?string
 	{
 		return $this->date;
 	}
@@ -192,7 +179,7 @@ class Comment
 	/**
 	 * @return int
 	 */
-	public function getHour(): int
+	public function getHour(): ?int
 	{
 		return $this->hour;
 	}
@@ -211,7 +198,7 @@ class Comment
 	/**
 	 * @return int
 	 */
-	public function getMinute(): int
+	public function getMinute(): ?int
 	{
 		return $this->minute;
 	}

@@ -1,6 +1,7 @@
 <?php
 
 
+use Service\Translation;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Extra\Markdown\DefaultMarkdown;
@@ -34,9 +35,9 @@ class TwigLoader
 		$this->twig->addExtension(new StringExtension());
 		$this->twig->addExtension(new MarkdownExtension());
 		$this->twig->addFilter(new TwigFilter('trans', function ($value) {
-			return \Translation::translate($value);
+			return Translation::translate($value);
 		}));
-		$this->twig->addFunction(new TwigFunction('csrf_token', function () {
+		$this->twig->addFunction(new TwigFunction('csrfToken', function () {
 			return \AntiCsrf::createToken();
 		}));
 		

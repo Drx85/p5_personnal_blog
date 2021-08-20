@@ -13,10 +13,10 @@ class Post extends Controller
 	/**
 	 * @var string
 	 */
-	protected $modelName = \Models\Post::class;
+	protected $managerName = \Managers\Post::class;
 	
 	/**
-	 * Ask model to find all posts by page and to count comments for each, then render posts page with comments number for each post + pages number
+	 * Ask manager to find all posts by page and to count comments for each, then render posts page with comments number for each post + pages number
 	 *
 	 * @throws LoaderError
 	 * @throws RuntimeError
@@ -24,14 +24,14 @@ class Post extends Controller
 	 */
 	public function index(): void
 	{
-		$pages = new \Models\Page();
-		$posts = $this->model->findAllbyPage();
-		$array_pages = $pages->get();
-		echo $this->twig->render('posts.twig', compact('posts', 'array_pages'));
+		$pages = new \Managers\Page();
+		$posts = $this->manager->findAllbyPage();
+		$arrayPages = $pages->get();
+		echo $this->twig->render('posts.twig', compact('posts', 'arrayPages'));
 	}
 	
 	/**
-	 * Ask model to find asked post and its approved linked comments and show it in renderer post page
+	 * Ask manager to find asked post and its approved linked comments and show it in renderer post page
 	 *
 	 * @throws LoaderError
 	 * @throws RuntimeError
@@ -39,17 +39,16 @@ class Post extends Controller
 	 */
 	public function show(): void
 	{
-		$comment = new \Models\Comment();
+		$comment = new \Managers\Comment();
 		$id = (int)filter_input(INPUT_GET, 'id');
-		$post = new \Entities\Post();
-		$post->setId($id);
-		$post = $this->model->find($post);
+		$post = new \Entities\Post(compact('id'));
+		$post = $this->manager->find($post);
 		$comments = $comment->findAllByPost(1, (int)filter_input(INPUT_GET, 'id'));
 		echo $this->twig->render('post.twig', compact('post', 'comments'));
 	}
 	
 	/**
-	 * Ask model to create new post and render homepage
+	 * Ask manager to create new post and render homepage
 	 * Require admin or publisher role
 	 *
 	 * @throws LoaderError
@@ -61,12 +60,10 @@ class Post extends Controller
 		if ($this->hasRoles(['admin', 'publisher'])) {
 			$title = filter_input(INPUT_POST, 'title');
 			$message = filter_input(INPUT_POST, 'post_content');
-			$post = new \Entities\Post();
-			$post->setTitle($title)
-				->setMessage($message)
-				->setDate(date('Y-m-d'))
+			$post = new \Entities\Post(compact('title', 'message'));
+			$post->setDate(date('Y-m-d'))
 				->setTime(date('H:i:s'));
-			$added = $this->model->insert($post, Session::get('user')->getPseudo());
+			$added = $this->manager->insert($post, Session::get('user')->getPseudo());
 			if ($added) {
 				echo $this->twig->render('home.twig', ['message' => Message::ADDED]);
 			} else {
@@ -78,7 +75,7 @@ class Post extends Controller
 	}
 	
 	/**
-	 * Ask model to edit asked post and render homepage
+	 * Ask manager to edit asked post and render homepage
 	 * Require admin or publisher role
 	 *
 	 * @throws LoaderError
@@ -92,13 +89,8 @@ class Post extends Controller
 			$title = filter_input(INPUT_POST, 'title');
 			$message = filter_input(INPUT_POST, 'message');
 			$author = filter_input(INPUT_POST, 'author');
-			$post = new \Entities\Post();
-			$post->setId($id)
-				->setTitle($title)
-				->setMessage($message)
-				->setAuthor($author);
-			
-			$edited = $this->model->edit($post);
+			$post = new \Entities\Post(compact('id', 'title', 'message', 'author'));
+			$edited = $this->manager->edit($post);
 			if ($edited) {
 				echo $this->twig->render('home.twig', ['message' => Message::EDITED]);
 			} else {

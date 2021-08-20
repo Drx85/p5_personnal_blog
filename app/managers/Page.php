@@ -1,8 +1,8 @@
 <?php
 
-namespace Models;
+namespace Managers;
 
-class Page extends Model
+class Page extends Manager
 {
 	/**
 	 * Count all posts, then calculate and return how many pages are needed, depending of wanted NB_POSTS_PER_PAGE set in Config file

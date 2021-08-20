@@ -10,7 +10,7 @@ use Twig\Error\SyntaxError;
 
 class User extends Controller
 {
-	protected $modelName = \Models\User::class;
+	protected $managerName = \Managers\User::class;
 	
 	/**
 	 * Render the registration page
@@ -45,7 +45,7 @@ class User extends Controller
 	}
 	
 	/**
-	 * Ask model to create new user with role "member", and render homepage
+	 * Ask manager to create new user with role "member", and render homepage
 	 *
 	 * @throws LoaderError
 	 * @throws RuntimeError
@@ -56,12 +56,9 @@ class User extends Controller
 		$pseudo = filter_input(INPUT_POST, 'pseudo');
 		$password = filter_input(INPUT_POST, 'password');
 		$mail = filter_input(INPUT_POST, 'mail');
-		$user = new \Entities\User();
-		$user->setPseudo($pseudo)
-			->setPassword($password)
-			->setMail($mail);
-		$user = $this->model->create($user);
-		if ($user === true) {
+		$user = new \Entities\User(compact('pseudo', 'password', 'mail'));
+		$success = $this->manager->create($user);
+		if ($success === true) {
 			echo $this->twig->render('register.twig', ['message' => Message::CREATED]);
 		} else {
 			echo $this->twig->render('register.twig', ['message' => Message::ALREADY_TAKEN]);
@@ -69,7 +66,7 @@ class User extends Controller
 	}
 	
 	/**
-	 * Ask model to connect user, and render homepage
+	 * Ask manager to connect user, and render homepage
 	 *
 	 * @throws LoaderError
 	 * @throws RuntimeError
@@ -79,7 +76,7 @@ class User extends Controller
 	{
 		$pseudo = filter_input(INPUT_POST, 'username');
 		$password = filter_input(INPUT_POST, 'password');
-		$user = $this->model->connect($password, $pseudo);
+		$user = $this->manager->connect($password, $pseudo);
 		if ($user) {
 			echo $this->twig->render('home.twig', ['message' => Message::CONNECTED, 'user' => $user]);
 		} else {
@@ -110,7 +107,7 @@ class User extends Controller
 	public function index(): void
 	{
 		if ($this->hasRoles('admin')) {
-			$users = $this->model->findAll();
+			$users = $this->manager->findAll();
 			echo $this->twig->render('users.twig', compact('users'));
 		} else {
 			$this->forbidden();
@@ -118,7 +115,7 @@ class User extends Controller
 	}
 	
 	/**
-	 * Ask model to promote or demote an user
+	 * Ask manager to promote or demote an user
 	 * Require admin role
 	 *
 	 * @throws LoaderError
@@ -130,10 +127,8 @@ class User extends Controller
 		if ($this->hasRoles('admin')) {
 			$id = (int)filter_input(INPUT_GET, 'id');
 			$action = filter_input(INPUT_GET, 'work');
-			$user = new \Entities\User();
-			$user->setId($id);
-			
-			$updated = $this->model->update($user, $action);
+			$user = new \Entities\User(compact('id'));
+			$updated = $this->manager->update($user, $action);
 			switch ($updated) {
 				case false :
 					$this->show404();

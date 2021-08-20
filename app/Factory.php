@@ -1,8 +1,10 @@
 <?php
 
 use Controllers\BaseController;
-use Controllers\Page;
 use Doctrine\Inflector\InflectorFactory;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 require_once '../vendor/autoload.php';
 
@@ -17,9 +19,9 @@ class Factory
 	 * @param string      $action
 	 * @param string|null $token
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 *
 	 * @return void
 	 */
@@ -47,16 +49,16 @@ class Factory
 	/**
 	 * Create and return new asked SuperGlobal
 	 *
-	 * @param string      $var_name
+	 * @param string      $varName
 	 * @param string      $method
 	 * @param string|null $default
 	 *
 	 * @return string|null
 	 */
-	public static function affectGlobal(string $var_name, string $method, ?string $default): ?string
+	public static function affectGlobal(string $varName, string $method, ?string $default): ?string
 	{
 		$type = constant('INPUT_' . $method);
-		$global = filter_input($type, $var_name);
+		$global = filter_input($type, $varName);
 		return $global = ($global) ? $global : $default;
 	}
 }

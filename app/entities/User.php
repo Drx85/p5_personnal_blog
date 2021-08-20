@@ -4,7 +4,7 @@
 namespace Entities;
 
 
-class User
+class User extends BaseEntity
 {
 	/**
 	 * @var int
@@ -26,19 +26,6 @@ class User
 	 * @var string
 	 */
 	private $mail;
-	
-	public function hydrate(array $values)
-	{
-		foreach ($values as $key => $value) {
-			$method = 'set' . ucfirst($key);
-			if (method_exists($this, $method)) $this->$method($value);
-		}
-	}
-	
-	public function __construct($values = [])
-	{
-		if (!empty($values)) $this->hydrate($values);
-	}
 	
 	/**
 	 * @return string
@@ -134,6 +121,4 @@ class User
 		$this->id = $id;
 		return $this;
 	}
-	
-	
 }

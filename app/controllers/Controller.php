@@ -5,24 +5,27 @@ namespace Controllers;
 
 use Message;
 use Session;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 
 require_once '../vendor/autoload.php';
 
 abstract class Controller
 {
-	protected $model;
-	protected $modelName;
+	protected $manager;
+	protected $managerName;
 	protected $twig;
 	protected $role;
 	
 	/**
-	 * Load linked Model, load Twig, get user role
+	 * Load linked Manager, load Twig, get user role
 	 */
 	public function __construct()
 	{
-		if ($this->modelName) {
-			$this->model = new $this->modelName;
+		if ($this->managerName) {
+			$this->manager = new $this->managerName;
 		}
 		
 		$twig_loader = new  \TwigLoader();
@@ -34,17 +37,17 @@ abstract class Controller
 	}
 	
 	/**
-	 * Ask model to delete asked item, and render homepage
+	 * Ask manager to delete asked item, and render homepage
 	 * Require admin or publisher role
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function delete(): void
 	{
 		if ($this->hasRoles(['admin', 'publisher'])) {
-			$deleted = $this->model->delete((int)filter_input(INPUT_GET, 'id'));
+			$deleted = $this->manager->delete((int)filter_input(INPUT_GET, 'id'));
 			if ($deleted) {
 				echo $this->twig->render('home.twig', ['message' => Message::DELETED_CONTENT]);
 			} else {
@@ -58,9 +61,9 @@ abstract class Controller
 	/**
 	 * Render forbidden page with status 403 Forbidden
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function forbidden(): void
 	{
@@ -71,9 +74,9 @@ abstract class Controller
 	/**
 	 * Render not found page with status 404 Not Found
 	 *
-	 * @throws \Twig\Error\LoaderError
-	 * @throws \Twig\Error\RuntimeError
-	 * @throws \Twig\Error\SyntaxError
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function show404(): void
 	{

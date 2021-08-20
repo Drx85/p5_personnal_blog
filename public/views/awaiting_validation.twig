@@ -15,8 +15,8 @@
 		<p class="mt-5">Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
 		{{ comment.text }}
 		
-		<p><a class="btn btn-danger mt-sm-4 mt-2" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrf_token() }}" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
-			<a class="btn btn-success mt-sm-4 mt-2" href="index.php?controller=comment&action=validate&id={{ comment.id }}&token={{ csrf_token() }}">Valider et publier</a></p>
+		<p><a class="btn btn-danger mt-sm-4 mt-2" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrfToken() }}" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+			<a class="btn btn-success mt-sm-4 mt-2" href="index.php?controller=comment&action=validate&id={{ comment.id }}&token={{ csrfToken() }}">Valider et publier</a></p>
 	
 	{% endfor %}
 

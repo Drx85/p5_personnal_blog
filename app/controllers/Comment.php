@@ -10,10 +10,10 @@ use Twig\Error\SyntaxError;
 
 class Comment extends Controller
 {
-	protected $modelName = \Models\Comment::class;
+	protected $managerName = \Managers\Comment::class;
 	
 	/**
-	 * Ask model to send a comment to awaiting validation list, and render homepage
+	 * Ask manager to send a comment to awaiting validation list, and render homepage
 	 *
 	 * @throws LoaderError
 	 * @throws RuntimeError
@@ -21,16 +21,13 @@ class Comment extends Controller
 	 */
 	public function send(): void
 	{
-		$id_post = (int)filter_input(INPUT_GET, 'id_post');
+		$idPost = (int)filter_input(INPUT_GET, 'id_post');
 		$author = Session::get('user')->getPseudo();
 		$text = filter_input(INPUT_POST, 'user_comment');
-		$comment = new \Entities\Comment();
-		$comment->setIdPost($id_post)
-			->setAuthor($author)
-			->setText($text)
-			->setDate(date('Y-m-d'))
+		$comment = new \Entities\Comment(compact('idPost', 'author', 'text'));
+		$comment->setDate(date('Y-m-d'))
 			->setTime(date('H:i:s'));
-		$this->model->insert($comment);
+		$this->manager->insert($comment);
 		echo $this->twig->render('home.twig', ['message' => Message::SENT_COMMENT]);
 	}
 	
@@ -45,7 +42,7 @@ class Comment extends Controller
 	public function showPending(): void
 	{
 		if ($this->hasRoles(['admin', 'publisher'])) {
-			$comments = $this->model->findAllByPost(0);
+			$comments = $this->manager->findAllByPost(0);
 			echo $this->twig->render('awaiting_validation.twig', compact('comments'));
 		} else {
 			$this->forbidden();
@@ -53,7 +50,7 @@ class Comment extends Controller
 	}
 	
 	/**
-	 * Ask model to validate asked comment for it to be showed in public, and render homepage
+	 * Ask manager to validate asked comment for it to be showed in public, and render homepage
 	 * Require admin or publisher role
 	 *
 	 * @throws LoaderError
@@ -64,9 +61,8 @@ class Comment extends Controller
 	{
 		if ($this->hasRoles(['admin', 'publisher'])) {
 			$id = (int)filter_input(INPUT_GET, 'id');
-			$comment = new \Entities\Comment();
-			$comment->setId($id);
-			$validated = $this->model->validate($comment);
+			$comment = new \Entities\Comment(compact('id'));
+			$validated = $this->manager->validate($comment);
 			if ($validated > 0) {
 				echo $this->twig->render('home.twig', ['message' => Message::VALIDATED_COMMENT]);
 			} else {

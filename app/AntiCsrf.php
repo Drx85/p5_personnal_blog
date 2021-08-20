@@ -16,7 +16,7 @@ class AntiCsrf
 		if (self::$token === null) {
 			self::$token = uniqid(rand(), true);
 			Session::put('token', self::$token);
-			Session::put('token_time', time());
+			Session::put('tokenTime', time());
 		}
 		return self::$token;
 	}
@@ -69,10 +69,10 @@ class AntiCsrf
 	 */
 	public static function validateToken(string $token)
 	{
-		if (Session::get('token') && Session::get('token_time')) {
-			$expired_timestamp = time() - (15 * 60);
+		if (Session::get('token') && Session::get('tokenTime')) {
+			$expiredTimestamp = time() - (15 * 60);
 			
-			if (Session::get('token') == $token && Session::get('token_time') >= $expired_timestamp) {
+			if (Session::get('token') == $token && Session::get('tokenTime') >= $expiredTimestamp) {
 				return true;
 			}
 		}

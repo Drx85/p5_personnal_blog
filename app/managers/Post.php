@@ -1,10 +1,10 @@
 <?php
 
-namespace Models;
+namespace Managers;
 
 use PDO;
 
-class Post extends Model
+class Post extends Manager
 {
 	protected $table = 'post';
 	
@@ -15,7 +15,7 @@ class Post extends Model
 	 */
 	public function findAllByPage(): array
 	{
-		$limit_page = $this->getLIMIT((int)filter_input(INPUT_GET, 'page'));
+		$limitPage = $this->getLIMIT((int)filter_input(INPUT_GET, 'page'));
 		
 		$q = $this->db->prepare('SELECT id, title, message, author, comments_nb, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS date,
                                    HOUR(post_time) AS hour,
@@ -23,11 +23,11 @@ class Post extends Model
                                    DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
 				                   FROM post ORDER BY ID DESC LIMIT :limit_page, :nb_posts');
 		
-		$q->bindValue('limit_page', $limit_page, PDO::PARAM_INT);
+		$q->bindValue('limit_page', $limitPage, PDO::PARAM_INT);
 		$q->bindValue('nb_posts', \Config::NB_POSTS_PER_PAGE, PDO::PARAM_INT);
 		$q->execute();
 		$posts = $q->fetchAll();
-		$array_posts = [];
+		$arrayPosts = [];
 		$k = 0;
 		foreach ($posts as $post) {
 			$id = $post['id'];
@@ -50,10 +50,10 @@ class Post extends Model
 				->setHour($hour)
 				->setMinute($minute)
 				->setUpdateDate($updateDate);
-			$array_posts[$k] = $post;
+			$arrayPosts[$k] = $post;
 			$k++;
 		}
-		return $array_posts;
+		return $arrayPosts;
 	}
 	
 	/**
@@ -98,12 +98,12 @@ class Post extends Model
 	 */
 	private function getLIMIT(int $page): int
 	{
-		$limit_page = 0;
+		$limitPage = 0;
 		
 		for ($i = 0; $i < $page - 1; $i++) {
-			$limit_page = $limit_page + \Config::NB_POSTS_PER_PAGE;
+			$limitPage = $limitPage + \Config::NB_POSTS_PER_PAGE;
 		}
-		return $limit_page;
+		return $limitPage;
 	}
 	
 	/**

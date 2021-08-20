@@ -1,8 +1,8 @@
 <?php
 
-namespace Models;
+namespace Managers;
 
-abstract class Model
+abstract class Manager
 {
 	protected $db;
 	protected $table;
@@ -31,12 +31,5 @@ abstract class Model
 		$q = $this->db->prepare("DELETE FROM {$this->table} WHERE id = ?");
 		$q->execute(array($id));
 		return $q->rowCount();
-	}
-	
-	public function findOneBy($criteria, $value)
-	{
-		$q = $this->db->prepare("SELECT * FROM {$this->table} WHERE :critera = :value");
-		$q->execute(compact('criteria', 'value'));
-		return $q->fetch();
 	}
 }

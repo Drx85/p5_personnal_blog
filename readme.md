@@ -75,7 +75,6 @@ https://docs.phpmyadmin.net/fr/latest/setup.html
 
 ### Install all dependencies
 1.  Install Composer if you don't have it yet. **See** [Composer Documentation](https://getcomposer.org/download/)
-
 2.  In your CMD, move on your project directory using cd command :
 ```sh
 cd your/directory

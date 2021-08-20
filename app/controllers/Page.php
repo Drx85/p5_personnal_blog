@@ -11,7 +11,7 @@ class Page extends Controller
 	/**
 	 * @var string
 	 */
-	protected $modelName = \Models\Post::class;
+	protected $managerName = \Managers\Post::class;
 	
 	/**
 	 * Render homepage
@@ -54,9 +54,8 @@ class Page extends Controller
 	{
 		if ($this->hasRoles(['admin', 'publisher'])) {
 			$id = (int)filter_input(INPUT_GET, 'id');
-			$post = new \Entities\Post();
-			$post->setId($id);
-			$post = $this->model->getEditValues($post);
+			$post = new \Entities\Post(compact('id'));
+			$post = $this->manager->getEditValues($post);
 			echo $this->twig->render('edit_post.twig', compact('post'));
 		} else {
 			$this->forbidden();

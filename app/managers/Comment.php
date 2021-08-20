@@ -1,8 +1,8 @@
 <?php
 
-namespace Models;
+namespace Managers;
 
-class Comment extends Model
+class Comment extends Manager
 {
 	/**
 	 * @var string
@@ -34,26 +34,8 @@ class Comment extends Model
 		}
 		$comments = $q->fetchAll();
 		$array_comments = [];
-		$k = 0;
 		foreach ($comments as $comment) {
-			$id = $comment['id'];
-			$id_post = $comment['id_post'];
-			$author = $comment['author'];
-			$text = $comment['text'];
-			$date = $comment['c_date'];
-			$hour = $comment['c_hour'];
-			$minute = $comment['c_minute'];
-
-			$comment = new \Entities\Comment();
-			$comment->setId($id)
-				->setIdPost($id_post)
-				->setAuthor($author)
-				->setText($text)
-				->setDate($date)
-				->setHour($hour)
-				->setMinute($minute);
-			$array_comments[$k] = $comment;
-			$k++;
+			$array_comments[] = new \Entities\Comment($comment);
 		}
 		return $array_comments;
 	}

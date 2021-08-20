@@ -1,22 +1,34 @@
 <?php
 
-namespace Models;
+namespace Service;
 
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 
-class Mail extends Model
+class Mail
 {
+	private $surname;
+	private $name;
+	private $email;
+	private $message;
+	
+	public function __construct($surname, $name, $email, $message)
+	{
+		$this->surname = $surname;
+		$this->name = $name;
+		$this->email = $email;
+		$this->message = $message;
+		var_dump($this->send()); die;
+	}
+	
 	/**
 	 * Use PHPMailer to send email by SMTP
-	 *
-	 * @param \Entities\Mail $userMail
 	 *
 	 * @return bool|string
 	 * @throws Exception
 	 */
-	public function send(\Entities\Mail $userMail)
+	public function send()
 	{
 		$mail = new PHPMailer();
 		$mail->IsSMTP();
@@ -35,13 +47,13 @@ class Mail extends Model
 		$mail->smtpConnect();
 		$mail->From = \Config::MAIL_USERNAME;
 		
-		$mail->Subject = 'Nouveau message de ' . $userMail->getSurname() . ' ' . $userMail->getName();
+		$mail->Subject = 'Nouveau message de ' . $this->surname . ' ' . $this->name;
 		$mail->WordWrap = 50;
 		
-		$mail->MsgHTML('Prénom :' . $userMail->getSurname() . '</br>
-								Nom :' . $userMail->getName() . '</br>
-								Mail :' . $userMail->getEmail() . '</br>
-								Message :' . $userMail->getMessage() . '</br>');
+		$mail->MsgHTML('Prénom :' . $this->surname . '</br>
+								Nom :' . $this->name . '</br>
+								Mail :' . $this->email . '</br>
+								Message :' . $this->message . '</br>');
 		if (!$mail->send()) return $mail->ErrorInfo;
 		return true;
 	}

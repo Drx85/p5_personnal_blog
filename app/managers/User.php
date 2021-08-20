@@ -1,18 +1,18 @@
 <?php
 
-namespace Models;
+namespace Managers;
 
 
-class User extends Model
+class User extends Manager
 {
 	/**
 	 * Create new account with member role
 	 *
-	 * @param User $user
+	 * @param \Entities\User $user
 	 *
 	 * @return bool
 	 */
-	public function create(User $user): bool
+	public function create(\Entities\User $user): bool
 	{
 		$password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
 		$q = $this->db->prepare('INSERT INTO user (pseudo, password, mail) VALUES (:pseudo, :password, :mail)');
@@ -61,22 +61,11 @@ class User extends Model
 									AND user.id_role = user_role.id
 									ORDER BY role DESC");
 		$users = $q->fetchAll();
-		$array_users = [];
-		$k = 0;
+		$arrayUsers = [];
 		foreach ($users as $user) {
-			$id = $user['id'];
-			$pseudo = $user['pseudo'];
-			$role = $user['role'];
-			$mail = $user['mail'];
-			$user = new \Entities\User();
-			$user->setId($id)
-				->setPseudo($pseudo)
-				->setRole($role)
-				->setMail($mail);
-			$array_users[$k] = $user;
-			$k++;
+			$arrayUsers[] = new \Entities\User($user);
 		}
-		return $array_users;
+		return $arrayUsers;
 	}
 	
 	/**
