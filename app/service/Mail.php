@@ -12,6 +12,7 @@ class Mail
 	private $name;
 	private $email;
 	private $message;
+	private $success = true;
 	
 	public function __construct($surname, $name, $email, $message)
 	{
@@ -19,7 +20,7 @@ class Mail
 		$this->name = $name;
 		$this->email = $email;
 		$this->message = $message;
-		var_dump($this->send()); die;
+		$this->send();
 	}
 	
 	/**
@@ -54,7 +55,14 @@ class Mail
 								Nom :' . $this->name . '</br>
 								Mail :' . $this->email . '</br>
 								Message :' . $this->message . '</br>');
-		if (!$mail->send()) return $mail->ErrorInfo;
-		return true;
+		if (!$mail->send()) $this->success = $mail->ErrorInfo;
+	}
+	
+	/**
+	 * @return bool|string
+	 */
+	public function isSuccess()
+	{
+		return $this->success;
 	}
 }

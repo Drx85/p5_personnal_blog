@@ -16,19 +16,18 @@ class Mail extends Controller
 	 * @throws LoaderError
 	 * @throws RuntimeError
 	 * @throws SyntaxError
-	 * @throws Exception
 	 */
 	public function submit(): void
 	{
-		$success = new \Service\Mail(filter_input(INPUT_POST, 'surname'),
+		$mail = new \Service\Mail(filter_input(INPUT_POST, 'surname'),
 			filter_input(INPUT_POST, 'name'),
 			filter_input(INPUT_POST, 'email'),
 			filter_input(INPUT_POST, 'message'));
 
-		if ($success === true) {
+		if ($mail->isSuccess() === true) {
 			echo $this->twig->render('home.twig', ['message' => Message::SENT_MAIL]);
 		} else {
-			echo $this->twig->render('home.twig', ['message' => $success]);
+			echo $this->twig->render('home.twig', ['message' => $mail->isSuccess()]);
 		}
 	}
 }
