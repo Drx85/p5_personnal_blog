@@ -29,12 +29,12 @@ class Page extends Manager
 		$roundedNumber = $this->count();
 		$page = 1;
 		
-		$array_page = array();
+		$arrayPage = array();
 		
 		for ($i = 0; $i < $roundedNumber; $i++) {
-			$array_page[] = $page;
+			$arrayPage[] = $page;
 			$page++;
 		}
-		return $array_page;
+		return $arrayPage;
 	}
 }

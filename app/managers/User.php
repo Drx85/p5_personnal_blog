@@ -32,7 +32,7 @@ class User extends Manager
 	 */
 	public function connect(string $password, string $pseudo)
 	{
-		$q = $this->db->prepare('SELECT user.id as user_id, user.password as password, user_role.role as role
+		$q = $this->db->prepare('SELECT user.id as id, user.password as password, user_role.role as role
 									FROM user, user_role
 									WHERE user.pseudo = ?
 									AND user.id_role = user_role.id');

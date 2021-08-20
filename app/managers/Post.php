@@ -17,10 +17,10 @@ class Post extends Manager
 	{
 		$limitPage = $this->getLIMIT((int)filter_input(INPUT_GET, 'page'));
 		
-		$q = $this->db->prepare('SELECT id, title, message, author, comments_nb, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS date,
+		$q = $this->db->prepare('SELECT id, title, message, author, comments_nb AS commentsNb, DATE_FORMAT(post_date, \'%d/%m/%Y\') AS date,
                                    HOUR(post_time) AS hour,
                                    MINUTE(post_time) AS minute,
-                                   DATE_FORMAT(update_date, \'%d/%m/%Y\') AS update_date
+                                   DATE_FORMAT(update_date, \'%d/%m/%Y\') AS updateDate
 				                   FROM post ORDER BY ID DESC LIMIT :limit_page, :nb_posts');
 		
 		$q->bindValue('limit_page', $limitPage, PDO::PARAM_INT);
@@ -46,7 +46,7 @@ class Post extends Manager
 		$q = $this->db->prepare("SELECT id, title, message, author, DATE_FORMAT(post_date, '%d/%m/%Y') AS date,
                                    HOUR(post_time) AS hour,
                                    MINUTE(post_time) AS minute,
-                                   DATE_FORMAT(update_date, '%d/%m/%Y') AS update_date FROM post WHERE id = :id");
+                                   DATE_FORMAT(update_date, '%d/%m/%Y') AS updateDate FROM post WHERE id = :id");
 		$q->bindValue(':id', $post->getId());
 		$q->execute();
 		$pdoPost = $q->fetch();

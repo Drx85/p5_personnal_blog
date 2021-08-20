@@ -13,31 +13,31 @@ class Comment extends Manager
 	 * Return all approved comments for asked post or return all unapproved comments
 	 *
 	 * @param bool     $approved
-	 * @param int|null $id_post
+	 * @param int|null $idPost
 	 *
 	 * @return array
 	 */
-	public function findAllByPost(bool $approved, ?int $id_post = null): array
+	public function findAllByPost(bool $approved, ?int $idPost = null): array
 	{
-		if ($id_post) {
-			$sql = "SELECT id, id_post, author, text, DATE_FORMAT(comment_date, '%d/%m/%Y') AS c_date,
-                                      HOUR(comment_time) AS c_hour, MINUTE(comment_time) AS c_minute
+		if ($idPost) {
+			$sql = "SELECT id, id_post AS idPost, author, text, DATE_FORMAT(comment_date, '%d/%m/%Y') AS date,
+                                      HOUR(comment_time) AS hour, MINUTE(comment_time) AS minute
 				                      FROM comment WHERE id_post = ? AND approved = ? ORDER BY ID";
 			$q = $this->db->prepare($sql);
-			$q->execute(array($id_post, $approved));
+			$q->execute(array($idPost, $approved));
 		} else {
-			$sql = "SELECT id, id_post, author, text, DATE_FORMAT(comment_date, '%d/%m/%Y') AS c_date,
-                                      HOUR(comment_time) AS c_hour, MINUTE(comment_time) AS c_minute
+			$sql = "SELECT id, id_post AS idPost, author, text, DATE_FORMAT(comment_date, '%d/%m/%Y') AS date,
+                                      HOUR(comment_time) AS hour, MINUTE(comment_time) AS minute
 				                      FROM comment WHERE approved = ? ORDER BY ID";
 			$q = $this->db->prepare($sql);
 			$q->execute(array($approved));
 		}
 		$comments = $q->fetchAll();
-		$array_comments = [];
+		$arrayComments = [];
 		foreach ($comments as $comment) {
-			$array_comments[] = new \Entities\Comment($comment);
+			$arrayComments[] = new \Entities\Comment($comment);
 		}
-		return $array_comments;
+		return $arrayComments;
 	}
 	
 	/**

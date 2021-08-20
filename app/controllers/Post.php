@@ -25,7 +25,7 @@ class Post extends Controller
 	public function index(): void
 	{
 		$pages = new \Managers\Page();
-		$posts = $this->manager->findAllbyPage();
+		$posts = $this->manager->findAllbyPage(); foreach ($posts as $post)
 		$arrayPages = $pages->get();
 		echo $this->twig->render('posts.twig', compact('posts', 'arrayPages'));
 	}

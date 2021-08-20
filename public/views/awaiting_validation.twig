@@ -12,7 +12,7 @@
 	
 	{% for comment in comments %}
 		
-		<p class="mt-5">Commentaire du {{ comment.c_date }}, à {{ comment.c_hour }}h{{ comment.c_minute }} - par {{ comment.author }} :</p>
+		<p class="mt-5">Commentaire du {{ comment.date }}, à {{ comment.hour }}h{{ comment.minute }} - par {{ comment.author }} :</p>
 		{{ comment.text }}
 		
 		<p><a class="btn btn-danger mt-sm-4 mt-2" href="index.php?controller=comment&action=delete&id={{ comment.id }}&token={{ csrfToken() }}" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
