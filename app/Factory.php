@@ -19,11 +19,11 @@ class Factory
 	 * @param string      $action
 	 * @param string|null $token
 	 *
-	 * @throws LoaderError
+	 * @return void
 	 * @throws RuntimeError
 	 * @throws SyntaxError
 	 *
-	 * @return void
+	 * @throws LoaderError
 	 */
 	public static function process(string $controller, string $action, string $token = null): void
 	{
@@ -38,11 +38,12 @@ class Factory
 		}
 		$controllerName = '\Controllers\\' . $controllerName;
 		if (class_exists($controllerName, true)) {
-			$controller     = new $controllerName;
+			$controller = new $controllerName;
 			$controller->$task();
+		} else {
+			$controller = new BaseController();
+			$controller->show404();
 		}
-		$controller = new BaseController();
-		$controller->show404();
 	}
 	
 	/**
